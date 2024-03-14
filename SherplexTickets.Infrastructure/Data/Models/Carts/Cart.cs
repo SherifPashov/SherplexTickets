@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SherplexTickets.Infrastructure.Data.Models.Carts
 {
-    public class Card
+    public class Cart
     {
         [Key]
         public int Id { get; set; }

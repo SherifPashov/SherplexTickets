@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using SherplexTickets.Infrastructure.Data.Models.Books;
+using SherplexTickets.Infrastructure.Data.Models.Carts;
 
 namespace SherplexTickets.Infrastructure.Data.Models.Mappings.BookMapping
 {

@@ -28,20 +28,16 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
         public string URLImage { get; set; } = string.Empty;
 
         [Required]
-        [Comment("The current Movie's ReleaseDate")]
-        public DateTime ReleaseDate { get; set; }
+        [Comment("The date on which the curent Movie was published")]
+        public DateTime YearPublished { get; set; }
 
         [Required]
-        [Comment("The current Movie's DateViewed")]
-        public DateTime DateViewed { get; set; }
+        [Comment("The date on which the movie will be watched")]
+        public DateTime DateViewedMovie { get; set; }
 
         [Required]
         [Comment("The current Movie's Movie Watch Time")]
         public DateTime MovieWhatchTime { get; set; }
-
-        [Required]
-        [Comment("The current Movie's Movie Rating")]
-        public double Rating { get; set; }
 
         public ICollection<ActorMovie> ActorsMovies { get; set; } = new List<ActorMovie>();
 

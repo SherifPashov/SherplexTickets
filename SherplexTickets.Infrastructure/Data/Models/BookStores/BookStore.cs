@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SherplexTickets.Infrastructure.Data.Models.Mappings.BookMapping;
 using System.ComponentModel.DataAnnotations;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.BookStoreConstants;
 
-namespace SherplexTickets.Infrastructure.Data.Models.Books
+namespace SherplexTickets.Infrastructure.Data.Models.BookStores
 {
-    public class BookBookStore
+    public class BookStore
     {
         [Key]
         [Comment("The current BookStore's Identifier")]

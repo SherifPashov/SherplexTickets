@@ -38,6 +38,6 @@ namespace SherplexTickets.Infrastructure.Data.Models.MovieTheaters
         [Comment("The current MovieTheater's Image Url")]
         public string ImageUrl { get; set; } = null!;
 
-        public ICollection<MovieMovieTeater> MoviesMoviesTeaters { get; set; } = new List<MovieMovieTeater>();
+        public ICollection<MovieMovieTheater> MoviesMoviesTheaters { get; set; } = new List<MovieMovieTheater>();
     }
 }

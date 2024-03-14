@@ -1,32 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
+using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 {
-    public class MovieMovieTeater
+    public class MovieMovieTheater
     {
         [Required]
         [Comment("The current Movie's Identifier")]
         public int MovieId { get; set; }
 
         [ForeignKey(nameof(MovieId))]
-        [Comment("The current Book")]
+        [Comment("The current Movie")]
         public Movie Movie { get; set; } = null!;
 
 
         [Required]
-        [Comment("The current MovieTeater's Identifier")]
-        public int MovieTeaterId { get; set; }
+        [Comment("The current MovieTheater's Identifier")]
+        public int MovieTheaterId { get; set; }
 
-        [ForeignKey(nameof(MovieTeaterId))]
-        [Comment("The current MovieTeater")]
-        public MovieMovieTeater MovieTeater { get; set; } = null!;
+        [ForeignKey(nameof(MovieTheaterId))]
+        [Comment("The current MovieTheater")]
+        public MovieTheater MovieTheater { get; set; } = null!;
     }
 }

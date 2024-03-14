@@ -18,6 +18,10 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
         //Range Error Message
         public const string RangeErrorMessage = "{0} must be a number between {1} and {2}!";
 
+
+        /// <summary>
+        /// Movie All constants
+        /// </summary>
         public static class MovieConstants 
         {
             // Title
@@ -88,9 +92,80 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
             public const int MovieTheaterImageUrlMaxLength = 500;
         }
 
-        
+        /// <summary>
+        /// Book All constants
+        /// </summary>
 
-        
+        public static class BookConstants
+        {
+            //Title
+            public const int BookTitleMinLength = 1;
+            public const int BookTitleMaxLength = 100;
+
+            //Author
+            public const int BookAuthorMinLength = 4;
+            public const int BookAuthorMaxLength = 70;
+
+            //Description
+            public const int BookDescriptionMinLength = 200;
+            public const int BookDescriptionMaxLength = 5000;
+
+            //Price
+            public const string BookPriceMinValue = "1";
+            public const string BookPriceMaxValue = "10000";
+
+            //Page
+            public const double BookPageMinValue = 1;
+            public const double BookPageMaxValue = 10000;
+
+            //PublishingHouse
+            public const int BookPublishingHouseMinLength = 1;
+            public const int BookPublishingHouseMaxLength = 70;
+
+            //YearPublished
+            public const int BookYearPublishedMinRange = 1;
+            public const int BookYearPublishedMaxRange = 2024;
+
+            //ImageUrl
+            public const int BookImageUrlMinLength = 5;
+            public const int BookImageUrlMaxLength = 200;
+        }
+
+        public static class BookReviewConstants
+        {
+            //Title
+            public const int BookReviewTitleMinLength = 1;
+            public const int BookReviewTitleMaxLength = 50;
+
+            //Description
+            public const int BookReviewDescriptionMinLength = 15;
+            public const int BookReviewDescriptionMaxLength = 8000;
+
+            //Description
+            public const int BookReviewRateMinRange = 1;
+            public const int BookReviewRateMaxRange = 10;
+        }
+
+        public static class BookStoreConstants
+        {
+            public const string DateTimeBookStoreFormat = "HH:mm";
+
+            //Name
+            public const int BookStoreNameMaxLength = 100;
+
+            //Location
+            public const int BookStoreLocationMinLength = 10;
+            public const int BookStoreLocationMaxLength = 100;
+
+            //Contact
+            public const string BookStoreContactRegex = @"^(?:\\+359\\d{9}|\\d{10})$";
+
+            //ImageUrl
+            public const int BookStoreImageUrlMinLength = 5;
+            public const int BookStoreImageUrlMaxLength = 500;
+        }
+
+
 
     }
 }

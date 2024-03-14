@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
-using SherplexTickets.Infrastructure.Data.Models.Mappings;
+using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.ActorConstants;
 
 namespace SherplexTickets.Infrastructure.Data.Models.Movies

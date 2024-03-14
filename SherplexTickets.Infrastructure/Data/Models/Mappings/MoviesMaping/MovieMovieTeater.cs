@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 
-namespace SherplexTickets.Infrastructure.Data.Models.Mappings
+namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 {
     public class MovieMovieTeater
     {

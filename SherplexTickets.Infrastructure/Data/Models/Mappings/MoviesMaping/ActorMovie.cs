@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 
-namespace SherplexTickets.Infrastructure.Data.Models.Mappings
+namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 {
     public class ActorMovie
     {

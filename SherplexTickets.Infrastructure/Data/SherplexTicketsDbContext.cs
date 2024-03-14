@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Infrastructure.Data.Models;
-using SherplexTickets.Infrastructure.Data.Models.Mappings;
+using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 
 namespace SherplexTickets.Infrastructure.Data

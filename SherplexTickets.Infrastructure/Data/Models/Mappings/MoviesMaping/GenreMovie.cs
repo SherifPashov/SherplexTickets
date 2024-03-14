@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SherplexTickets.Infrastructure.Data.Models;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SherplexTickets.Infrastructure.Data.Models.Mappings
+namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 {
     public class GenreMovie
     {

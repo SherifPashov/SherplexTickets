@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Infrastructure.Data.Models;
+using SherplexTickets.Infrastructure.Data.Models.Mappings;
+using SherplexTickets.Infrastructure.Data.Models.Movies;
 
 namespace SherplexTickets.Infrastructure.Data
 {
@@ -11,11 +13,12 @@ namespace SherplexTickets.Infrastructure.Data
         }
 
         public DbSet<Actor> Actors { get; set; } = null!;
-        public DbSet<Comment> Comments { get; set; } = null!;
+        public DbSet<MovieReview> Comments { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
         public DbSet<Movie> Movies { get; set; } = null!;
         public DbSet<Ticket> Tickets { get; set; } = null!;
         public DbSet<ActorMovie> ActorsMovies { get; set; } = null!;
+        public DbSet<GenreMovie> GenresMovies { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

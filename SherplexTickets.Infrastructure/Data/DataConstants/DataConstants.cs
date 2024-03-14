@@ -8,32 +8,50 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
 {
     public static class DataConstants
     {
-        //Movie Title
-        public const int MovieTitleMinLength = 2;
-        public const int MovieTitleMaxLength = 150;
+        public static class MovieConstants 
+        {
+            //Movie Title
+            public const int MovieTitleMinLength = 2;
+            public const int MovieTitleMaxLength = 150;
 
-        //Movie Discription
-        public const int MovieDiscriptionMinLength = 5;
-        public const int MovieDiscriptionMaxLength = 4000;
+            //Movie Discription
+            public const int MovieDiscriptionMinLength = 5;
+            public const int MovieDiscriptionMaxLength = 4000;
+        }
+        public static class  MovieReviewConstants
+        {
+            //MovieReview Title
+            public const int MovieReviewTitleMinLength = 5;
+            public const int MovieReviewTitleMaxLength = 50;
 
-        //Actor First Name
-        public const int ActorFirstNameMinLength = 2;
-        public const int ActorFirstNameMaxLength = 50;
+            //Comment Content
+            public const int MovieReviewDescriptionMinLength = 15;
+            public const int MovieReviewDescriptionMaxLength = 5000;
+        }
+        public static class ActorConstants
+        {
+            //Actor First Name
+            public const int ActorFirstNameMinLength = 2;
+            public const int ActorFirstNameMaxLength = 50;
 
-        //Actor Last Name
-        public const int ActorLastNameMinLength = 2;
-        public const int ActorLastNameMaxLength = 50;
+            //Actor Last Name
+            public const int ActorLastNameMinLength = 2;
+            public const int ActorLastNameMaxLength = 50;
+        }
 
-        //Comment Content
-        public const int CommentContentMinLength = 5;
-        public const int CommentContentMaxLength = 5000;
+       public static class GenreConstants
+        {
+            //Ganre Name
+            public const int GenreNameMaxLength = 50;
+            public const int GenreNameMinLength = 3;
 
-        //Ganre Name
-        public const int GanreNameMaxLength = 50;
-        public const int GanreNameMinLength = 3;
+            //Data Format
+            public const string DataFormat = "dd/mm/yyyy HH:mm";
+        }
 
-        //Data Format
-        public const string DataFormat = "dd/mm/yyyy HH:mm";
+        
+
+        
 
     }
 }

@@ -1,18 +1,14 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SherplexTickets.Infrastructure.Data;
+using SherplexTickets.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<SherplexTicketsDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddApplicationDbContext(builder.Configuration);
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<SherplexTicketsDbContext>();
+builder.Services.AddApplicationIdentity(builder.Configuration);
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

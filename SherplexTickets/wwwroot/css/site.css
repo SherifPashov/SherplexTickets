@@ -16,3 +16,45 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.container-fluid {
+    background-color: #007bff; /* Син бекграунд */
+    color: #000; /* Черен цвят на буквите */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-toggler {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+.navbar-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .navbar-nav .nav-item {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+.navbar-brand {
+    margin-right: auto; /* Преместване на логото в ляво */
+    display: flex;
+    align-items: center;
+    color: #000; /* Черен цвят на буквите */
+    text-decoration: none;
+}
+
+    .navbar-brand img {
+        margin-right: 10px; /* Разстояние между логото и текста */
+    }

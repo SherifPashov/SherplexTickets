@@ -3,6 +3,7 @@ using SherplexTickets.Infrastructure.Data.Models.Books;
 using SherplexTickets.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Core.ViewModels.BookView;
+using SherplexTickets.Infrastructure.Data.Models.Movies;
 
 namespace SherplexTickets.Core.Services
 {
@@ -33,35 +34,74 @@ namespace SherplexTickets.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<BookAllViewModel>> SearchAsync(string input)
+        public async Task<IEnumerable<CoverTypeViewModel>> AllCoverTypesAsync()
         {
-            var searchedBooks = await repository
-                .AllReadonly<Book>()
-                .Where(b => input.ToLower().Contains(b.Title.ToLower())
-                || input.ToLower().Contains(b.Author.ToLower())
-                || input.ToLower().Contains(b.PublishingHouse.ToLower())
-                || input.ToLower().Contains(b.Genre.Name.ToLower())
-                || input.ToLower().Contains(b.CoverType.Name.ToLower())
-
-                || b.Title.ToLower().Contains(input.ToLower())
-                || b.Author.ToLower().Contains(input.ToLower())
-                || b.PublishingHouse.ToLower().Contains(input.ToLower())
-                || b.Genre.Name.ToLower().Contains(input.ToLower())
-                || b.CoverType.Name.ToLower().Contains(input.ToLower()))
-                .Select(b => new BookAllViewModel()
+            return await repository.AllReadonly<CoverType>()
+                .Select(ct => new CoverTypeViewModel()
                 {
-                    Id = b.Id,
-                    Title = b.Title,
-                    Author = b.Author,
-                    Price = b.Price,
-                    ImageUrl = b.ImageUrl,
-                    Pages = b.Pages,
-                    PublishingHouse = b.PublishingHouse,
-                    YearPublished = b.YearPublished
+                    Id = ct.Id,
+                    Name = ct.Name
                 })
                 .ToListAsync();
+        }
 
-            return searchedBooks;
+        public async Task<IEnumerable<GenreViewModel>> AllGenresAsync()
+        {
+            return await repository.AllReadonly<Genre>()
+                .Select(ct => new GenreViewModel()
+                {
+                    Id = ct.Id,
+                    Name = ct.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task<bool> BookExistsAsync(int bookId)
+        {
+            return await repository.AllReadonly<Book>()
+                .AnyAsync(b => b.Id == bookId);
+        }
+
+        public async Task<bool> GenreExistsAsync(int genreId)
+        {
+            return await repository.AllReadonly<Genre>()
+                .AnyAsync(g => g.Id == genreId);
+        }
+
+        public async Task<bool> CoverTypeExistsAsync(int coverTypeId)
+        {
+            return await repository.AllReadonly<CoverType>()
+                .AnyAsync(ct => ct.Id == coverTypeId);
+        }
+
+        public async Task<BookViewModel> DetailsAsync(int bookId)
+        {
+            Book? currentBook = await repository.AllReadonly<Book>()
+                .FirstOrDefaultAsync(b => b.Id == bookId);
+
+
+            Genre? currentGenre = await repository.AllReadonly<Genre>()
+                .FirstOrDefaultAsync(g => g.Id == currentBook.GenreId);
+
+            CoverType? currentCoverType = await repository.AllReadonly<CoverType>()
+                .FirstOrDefaultAsync(ct => ct.Id == currentBook.CoverTypeId);
+
+            var currentBookDetails = new BookViewModel()
+            {
+                Id = currentBook.Id,
+                Title = currentBook.Title,
+                Author = currentBook.Author,
+                Genre = currentGenre.Name,
+                Description = currentBook.Description,
+                Pages = currentBook.Pages,
+                PublishingHouse = currentBook.PublishingHouse,
+                YearPublished = currentBook.YearPublished,
+                CoverType = currentCoverType.Name,
+                Price = currentBook.Price,
+                ImageUrl = currentBook.ImageUrl
+            };
+
+            return currentBookDetails;
         }
     }
 }

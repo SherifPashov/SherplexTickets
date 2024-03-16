@@ -8,16 +8,12 @@ using System.Threading.Tasks;
 
 namespace SherplexTickets.Core.ViewModels.MovieView
 {
-    public class MovieAllViewModel
+    public class ActorViewModel
     {
         public int Id { get; set; }
 
-        public string Title { get; set; } = string.Empty;
+        [Required]
+        public string FullName { get; set; } = string.Empty;
 
-        public string URLImage { get; set; } = string.Empty;
-
-        public string YearPublished { get; set; } = string.Empty;
-
-        public string MovieWhatchTime { get; set; } = string.Empty;
     }
 }

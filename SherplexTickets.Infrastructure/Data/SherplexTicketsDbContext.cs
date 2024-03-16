@@ -20,8 +20,8 @@ namespace SherplexTickets.Infrastructure.Data
 
         //Movie
         public DbSet<Actor> Actors { get; set; } = null!;
-        public DbSet<MovieReview> Comments { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
+        public DbSet<Director> Directors { get; set; } = null!;
         public DbSet<Movie> Movies { get; set; } = null!;
         public DbSet<Ticket> Tickets { get; set; } = null!;
 
@@ -30,7 +30,7 @@ namespace SherplexTickets.Infrastructure.Data
         public DbSet<MovieMovieTheater> MoviesMoviesTheaters { get; set; } = null!;
 
         //Book
-        
+
         public DbSet<Book> Books { get; set; } = null!;
         public DbSet<BookReview> BookReviews { get; set; } = null!;
         public DbSet<CoverType> CoverTypes { get; set; } = null!;

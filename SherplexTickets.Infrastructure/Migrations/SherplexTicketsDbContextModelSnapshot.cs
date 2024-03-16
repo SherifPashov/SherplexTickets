@@ -27,12 +27,12 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Property<int>("GenresId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MoviesMovieID")
+                    b.Property<int>("MoviesId")
                         .HasColumnType("int");
 
-                    b.HasKey("GenresId", "MoviesMovieID");
+                    b.HasKey("GenresId", "MoviesId");
 
-                    b.HasIndex("MoviesMovieID");
+                    b.HasIndex("MoviesId");
 
                     b.ToTable("GenreMovie");
                 });
@@ -526,20 +526,33 @@ namespace SherplexTickets.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)")
                         .HasComment("The current Actor's FirstName");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("The current Actor's LastName");
 
                     b.HasKey("Id");
 
                     b.ToTable("Actors");
+                });
+
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Director", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Directors");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Genre", b =>
@@ -553,8 +566,8 @@ namespace SherplexTickets.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)")
                         .HasComment("The current Genre's Name");
 
                     b.HasKey("Id");
@@ -564,16 +577,12 @@ namespace SherplexTickets.Infrastructure.Migrations
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", b =>
                 {
-                    b.Property<int>("MovieID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasComment("The current Movie's Identifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovieID"), 1L, 1);
-
-                    b.Property<DateTime>("DateViewedMovie")
-                        .HasColumnType("datetime2")
-                        .HasComment("The date on which the movie will be watched");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -581,8 +590,12 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .HasColumnType("nvarchar(4000)")
                         .HasComment("The current Movie's Description");
 
-                    b.Property<DateTime>("MovieWhatchTime")
-                        .HasColumnType("datetime2")
+                    b.Property<int>("DirectorId")
+                        .HasColumnType("int")
+                        .HasComment("The current Movie's Director Identifier");
+
+                    b.Property<int>("MovieWhatchTime")
+                        .HasColumnType("int")
                         .HasComment("The current Movie's Movie Watch Time");
 
                     b.Property<string>("Title")
@@ -600,50 +613,11 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("The date on which the curent Movie was published");
 
-                    b.HasKey("MovieID");
-
-                    b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.MovieReview", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("The current Movie Review's Identifier");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(5000)
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("The current Movie Review's Description");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int")
-                        .HasComment("The current Movie's Identifier");
-
-                    b.Property<int>("Rate")
-                        .HasColumnType("int")
-                        .HasComment("The current Movie Review's Rate");
-
-                    b.Property<string>("Title")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("The current Movie Review's Title");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasComment("The current User's Identifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("DirectorId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", b =>
@@ -729,7 +703,7 @@ namespace SherplexTickets.Infrastructure.Migrations
 
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", null)
                         .WithMany()
-                        .HasForeignKey("MoviesMovieID")
+                        .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -929,23 +903,15 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("MovieTheater");
                 });
 
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.MovieReview", b =>
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", b =>
                 {
-                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", "Movie")
-                        .WithMany("Comments")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Director", "Director")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("DirectorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Movie");
-
-                    b.Navigation("User");
+                    b.Navigation("Director");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Ticket", b =>
@@ -991,8 +957,6 @@ namespace SherplexTickets.Infrastructure.Migrations
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", b =>
                 {
                     b.Navigation("ActorsMovies");
-
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", b =>

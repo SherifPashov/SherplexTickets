@@ -17,8 +17,24 @@ namespace SherplexTickets.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var allBooks = await movieService.AllAsync();
-            return View(allBooks);
+            var allMovies = await movieService.AllAsync();
+
+
+            return View(allMovies);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (!await movieService.MovieExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var currentBook = await movieService.DetailsAsync(id);
+
+            return View(currentBook);
         }
     }
 }

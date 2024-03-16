@@ -12,14 +12,10 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(ActorFirstNameMaxLength)]
+        [MaxLength(ActorFullNameMinLength)]
         [Comment("The current Actor's FirstName")]
-        public string FirstName { get; set; } = string.Empty;
+        public string FullName { get; set; } = string.Empty;
 
-        [Required]
-        [MinLength(ActorLastNameMaxLength)]
-        [Comment("The current Actor's LastName")]
-        public string LastName { get; set; } = string.Empty;
 
         public ICollection<ActorMovie> ActorsMovies { get; set; } = new List<ActorMovie>();
     }

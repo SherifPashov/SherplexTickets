@@ -24,8 +24,4 @@
     <ProjectReference Include="..\SherplexTickets.Core\SherplexTickets.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Movie\" />
-  </ItemGroup>
-
 </Project>

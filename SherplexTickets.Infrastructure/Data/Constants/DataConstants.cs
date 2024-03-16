@@ -56,20 +56,25 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
         }
         public static class ActorConstants
         {
-            // First Name
-            public const int ActorFirstNameMinLength = 2;
-            public const int ActorFirstNameMaxLength = 50;
+            //Name
+            public const int ActorFullNameMinLength = 2;
+            public const int ActorFirstNameMaxLength = 60;
 
-            // Last Name
-            public const int ActorLastNameMinLength = 2;
-            public const int ActorLastNameMaxLength = 50;
         }
 
         public static class GenreConstants
         {
             // Name
-            public const int GenreNameMaxLength = 50;
             public const int GenreNameMinLength = 3;
+            public const int GenreNameMaxLength = 70;
+
+        }
+
+        public static class DirectorConstants
+        {
+            // Name
+            public const int DirectorNameMinLength = 3;
+            public const int DirectorNameMaxLength = 70;
 
         }
 

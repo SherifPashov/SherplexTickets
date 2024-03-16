@@ -34,23 +34,5 @@ namespace SherplexTickets.Controllers
             return View(currentBook);
         }
 
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> Search(string input)
-        {
-            if (input == null)
-            {
-                return RedirectToAction(nameof(All));
-            }
-
-            var searchedBooks = await bookService.SearchAsync(input);
-
-            if (searchedBooks == null)
-            {
-                return RedirectToAction(nameof(All));
-            }
-
-            return View(searchedBooks);
-        }
     }
 }

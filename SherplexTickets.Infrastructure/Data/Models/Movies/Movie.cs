@@ -10,7 +10,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
     {
         [Key]
         [Comment("The current Movie's Identifier")]
-        public int MovieID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(MovieTitleMaxLength)]

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.Services;
+using SherplexTickets.Infrastructure.Common;
 using SherplexTickets.Infrastructure.Data;
 
 namespace SherplexTickets.Extensions
@@ -14,6 +15,8 @@ namespace SherplexTickets.Extensions
 
             services.AddDbContext<SherplexTicketsDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddScoped<IRepository, Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SherplexTickets.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using SherplexTickets.Infrastructure.Data;
 namespace SherplexTickets.Infrastructure.Migrations
 {
     [DbContext(typeof(SherplexTicketsDbContext))]
-    partial class SherplexTicketsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240316181249_RefacturingAndAddSeed")]
+    partial class RefacturingAndAddSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,8 +296,8 @@ namespace SherplexTickets.Infrastructure.Migrations
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasMaxLength(400)
-                        .HasColumnType("nvarchar(400)")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
                         .HasComment("The current Book's cover image url");
 
                     b.Property<int>("Pages")
@@ -327,7 +329,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 1,
                             CoverTypeId = 1,
                             Description = "Романът „Тютюн“ разказва за страстите, сблъсъците и разочарованията на тютюневите фермери в България през края на 19-и началото на 20 век. Главният герой, Тодор Гълъбов, се опитва да се пребори с лошата дола на съдбата и да изгради бъдеще за семейството си в условията на социални и икономически проблеми.",
-                            ImageUrl = "https://www.musalabooks.bg/image/cache/catalog/IMG_4733-500x650.JPG",
+                            ImageUrl = "@---",
                             Pages = 400,
                             Title = "Тютюн",
                             YearPublished = 1951
@@ -338,7 +340,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 2,
                             CoverTypeId = 1,
                             Description = "„Под игото“ е роман от Иван Вазов, който разказва за борбата на българския народ за свобода от османско владичество. Книгата проследява историята на героите в едно село през времето на Априлското въстание.",
-                            ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/400x498/a4e40ebdc3e371adff845072e1c73f37/p/o/a9bb78972c12abadb60050742887fe9b/pod-igoto-30.jpg",
+                            ImageUrl = "@---",
                             Pages = 280,
                             Title = "Под игото",
                             YearPublished = 1888
@@ -349,7 +351,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 3,
                             CoverTypeId = 2,
                             Description = "„История славянобългарска“ е творба на Паисий Хилендарски, която се смята за първата българска историографска книга. В нея се описва историята и културното развитие на българския народ.",
-                            ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/400x498/a4e40ebdc3e371adff845072e1c73f37/i/s/8357898131e0945b7bb43a6b6e15cee3/istoriya-slavyanobalgarska-uchilishtna-biblioteka---damyan-yakov-30.jpg",
+                            ImageUrl = "@---",
                             Pages = 150,
                             Title = "История славянобългарска",
                             YearPublished = 1762
@@ -360,7 +362,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 4,
                             CoverTypeId = 1,
                             Description = "„Железният светилник“ е роман на Димитър Талев, който разказва за историята на едно българско село във времето на Освобождението. Книгата проследява събитията и промените, които преминава селото и неговите обитатели.",
-                            ImageUrl = "https://hermesbooks.bg/media/catalog/product/cache/e533a3e3438c08fe7c51cedd0cbec189/j/e/jelezniat_svetilnik_hrm_2_20200901160342.jpg",
+                            ImageUrl = "@---",
                             Pages = 320,
                             Title = "Железният светилник",
                             YearPublished = 1937
@@ -371,7 +373,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 5,
                             CoverTypeId = 1,
                             Description = "„Бай Ганьо“ е сатиричен роман на Алеко Константинов, който разказва за приключенията на българина Бай Ганьо в ранните години на 20 век. Книгата представлява портрет на типичния българин от тоя период - обаятелен, амбициозен, но и смешен поради своите недостатъци и характеристични черти на поведение.",
-                            ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/a/c5986df39a28a57f97d1598df42c7f45/bay-ganyo-pan-30.jpg",
+                            ImageUrl = "@---",
                             Pages = 240,
                             Title = "Бай Ганьо",
                             YearPublished = 1895

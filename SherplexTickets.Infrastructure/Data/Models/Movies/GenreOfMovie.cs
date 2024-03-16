@@ -3,17 +3,17 @@ using System.ComponentModel.DataAnnotations;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.GenreConstants;
 namespace SherplexTickets.Infrastructure.Data.Models.Movies
 {
-    public class Genre
+    public class GenreOfMovie
     {
         [Key]
-        [Comment("The current Genre's Identifier")]
+        [Comment("The current Movie Genre's Identifier")]
         public int Id { get; set; }
 
         [Required]
         [MaxLength(GenreNameMaxLength)]
-        [Comment("The current Genre's Name")]
+        [Comment("The current Movie Genre's Name")]
         public string Name { get; set; } = null!;
 
-        public ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
+        public ICollection<GenreOfMovie> GenresMovies { get; set; } = new HashSet<GenreOfMovie>();
     }
 }

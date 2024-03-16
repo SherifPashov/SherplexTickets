@@ -24,7 +24,6 @@ namespace SherplexTickets.Infrastructure.Data.Models.Books
         [Comment("The current Book Review's Rate")]
         public int Rate { get; set; }
 
-
         [Required]
         [Comment("The current Book's Identifier")]
         public int BookId { get; set; }

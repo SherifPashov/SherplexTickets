@@ -38,7 +38,7 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
 
             //ImageUrl
             public const int BookImageUrlMinLength = 5;
-            public const int BookImageUrlMaxLength = 200;
+            public const int BookImageUrlMaxLength = 400;
         }
         public static class  MovieReviewConstants
         {
@@ -107,10 +107,6 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
             public const int BookTitleMinLength = 1;
             public const int BookTitleMaxLength = 100;
 
-            //Author
-            public const int BookAuthorMinLength = 4;
-            public const int BookAuthorMaxLength = 70;
-
             //Description
             public const int BookDescriptionMinLength = 200;
             public const int BookDescriptionMaxLength = 5000;
@@ -133,7 +129,13 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
 
             //ImageUrl
             public const int BookImageUrlMinLength = 5;
-            public const int BookImageUrlMaxLength = 200;
+            public const int BookImageUrlMaxLength = 400;
+        }
+        public static class AuthorConstants
+        {
+            //Name
+            public const int AuthorNameMinLength = 2;
+            public const int AuthorNameMaxLength = 50;
         }
 
         public static class BookReviewConstants

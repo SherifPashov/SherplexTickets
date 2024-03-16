@@ -19,17 +19,12 @@ namespace SherplexTickets.Infrastructure.Data.Models.Books
         public string Title { get; set; } = null!;
 
         [Required]
-        [MaxLength(BookAuthorMaxLength)]
+        [Comment("The current Book's Author Identifier")]
+        public int AuthorId { get; set; }
+
+        [ForeignKey(nameof(AuthorId))]
         [Comment("The current Book's Author")]
-        public string Author { get; set; } = null!;
-
-        [Required]
-        [Comment("The current Book's Genre's Identifier")]
-        public int GenreId { get; set; }
-
-        [ForeignKey(nameof(GenreId))]
-        [Comment("The current Book's Genre")]
-        public Genre Genre { get; set; } = null!;
+        public Author Author { get; set; } = null!;
 
         [Required]
         [MaxLength(BookDescriptionMaxLength)]
@@ -39,11 +34,6 @@ namespace SherplexTickets.Infrastructure.Data.Models.Books
         [Required]
         [Comment("The current Book's Pages Count")]
         public int Pages { get; set; }
-
-        [Required]
-        [MaxLength(BookPublishingHouseMaxLength)]
-        [Comment("The current Book's Publishing House")]
-        public string PublishingHouse { get; set; } = null!;
 
         [Required]
         [Comment("The date on which the curent Book was published")]
@@ -58,16 +48,13 @@ namespace SherplexTickets.Infrastructure.Data.Models.Books
         public CoverType CoverType { get; set; } = null!;
 
         [Required]
-        [Comment("The current Book's Price")]
-        public decimal Price { get; set; }
-
-        [Required]
         [MaxLength(BookImageUrlMaxLength)]
         [Comment("The current Book's cover image url")]
         public string ImageUrl { get; set; } = null!;
 
-        public ICollection<BookBookStore> BooksBookStores { get; set; } = new HashSet<BookBookStore>();
-        public ICollection<BookReview> Reviews { get; set; } = new HashSet<BookReview>();
-        public ICollection<BookCart> BooksCarts { get; set; } = new HashSet<BookCart>();
+        public ICollection<BookBookStore> BooksBookStores { get; set; } = new List<BookBookStore>();
+        public ICollection<GenreGenreOfBook> GenresGenresOfBooks { get; set; } = new List<GenreGenreOfBook>();
+        public ICollection<BookReview> Reviews { get; set; } = new List<BookReview>();
+        public ICollection<BookCart> BooksCarts { get; set; } = new List<BookCart>();
     }
 }

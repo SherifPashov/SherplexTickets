@@ -35,7 +35,7 @@ namespace SherplexTickets.Core.Services
 
         public async Task<IEnumerable<GenreViewModel>> AllGenresAsync()
         {
-            return await repository.AllReadonly<Genre>()
+            return await repository.AllReadonly<GenreOfMovie>()
                 .Select(ct => new GenreViewModel()
                 {
                     Id = ct.Id,
@@ -65,7 +65,7 @@ namespace SherplexTickets.Core.Services
 
         public async Task<IEnumerable<GenreViewModel>> AllGenreAsync(int movieId)
         {
-            return await repository.AllReadonly<GenreMovie>()
+            return await repository.AllReadonly<GenreGenreOfMovie>()
                 .Where(g=>g.MovieId == movieId)
                 .Select(g=>new GenreViewModel()
                 {

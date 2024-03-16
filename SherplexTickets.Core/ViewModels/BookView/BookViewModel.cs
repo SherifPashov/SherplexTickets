@@ -26,8 +26,6 @@ namespace SherplexTickets.Core.ViewModels.BookView
 
         public string CoverType { get; set; } = null!;
 
-        public decimal Price { get; set; }
-
         public string ImageUrl { get; set; } = null!;
     }
 }

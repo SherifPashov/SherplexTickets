@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\DataSeeding\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

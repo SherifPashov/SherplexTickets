@@ -4,6 +4,7 @@ using SherplexTickets.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Core.ViewModels.BookView;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
+using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 
 namespace SherplexTickets.Core.Services
 {
@@ -18,20 +19,21 @@ namespace SherplexTickets.Core.Services
 
         public async Task<IEnumerable<BookAllViewModel>> AllAsync()
         {
-            return await repository
+            var all = await repository.AllReadonly<Book>().ToListAsync();
+
+            var result = await repository
                 .AllReadonly<Book>()
                 .Select(b => new BookAllViewModel()
                 {
                     Id = b.Id,
                     Title = b.Title,
-                    Author = b.Author,
-                    Price = b.Price,
+                    Author = b.Author.FullName,
                     ImageUrl = b.ImageUrl,
                     Pages = b.Pages,
-                    PublishingHouse = b.PublishingHouse,
                     YearPublished = b.YearPublished
                 })
                 .ToListAsync();
+            return result;
         }
 
         public async Task<IEnumerable<CoverTypeViewModel>> AllCoverTypesAsync()
@@ -47,7 +49,7 @@ namespace SherplexTickets.Core.Services
 
         public async Task<IEnumerable<GenreViewModel>> AllGenresAsync()
         {
-            return await repository.AllReadonly<Genre>()
+            return await repository.AllReadonly<GenreOfMovie>()
                 .Select(ct => new GenreViewModel()
                 {
                     Id = ct.Id,
@@ -64,7 +66,7 @@ namespace SherplexTickets.Core.Services
 
         public async Task<bool> GenreExistsAsync(int genreId)
         {
-            return await repository.AllReadonly<Genre>()
+            return await repository.AllReadonly<GenreOfMovie>()
                 .AnyAsync(g => g.Id == genreId);
         }
 
@@ -78,10 +80,7 @@ namespace SherplexTickets.Core.Services
         {
             Book? currentBook = await repository.AllReadonly<Book>()
                 .FirstOrDefaultAsync(b => b.Id == bookId);
-
-
-            Genre? currentGenre = await repository.AllReadonly<Genre>()
-                .FirstOrDefaultAsync(g => g.Id == currentBook.GenreId);
+            
 
             CoverType? currentCoverType = await repository.AllReadonly<CoverType>()
                 .FirstOrDefaultAsync(ct => ct.Id == currentBook.CoverTypeId);
@@ -90,14 +89,11 @@ namespace SherplexTickets.Core.Services
             {
                 Id = currentBook.Id,
                 Title = currentBook.Title,
-                Author = currentBook.Author,
-                Genre = currentGenre.Name,
+                Author = currentBook.Author.FullName,
                 Description = currentBook.Description,
                 Pages = currentBook.Pages,
-                PublishingHouse = currentBook.PublishingHouse,
                 YearPublished = currentBook.YearPublished,
                 CoverType = currentCoverType.Name,
-                Price = currentBook.Price,
                 ImageUrl = currentBook.ImageUrl
             };
 

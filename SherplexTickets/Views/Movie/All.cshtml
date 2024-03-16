@@ -2,7 +2,7 @@
 @model IEnumerable<MovieAllViewModel>
 
 @{
-    ViewBag.Title = "Всички Книги";
+    ViewBag.Title = "Всички Филми";
 }
 
 <h2 class="text-center mt-4 mb-3">@ViewBag.Title</h2>
@@ -26,7 +26,7 @@
                     <button type="submit" class="btn btn-warning mr-2">Търси</button>
                 </div>
                 <div class="form-group">
-                    <a asp-controller="Book" asp-action="All" class="btn btn-secondary ml-2">Изчисти</a>
+                    <a asp-controller="Movie" asp-action="All" class="btn btn-secondary ml-2">Изчисти</a>
                 </div>
             </div>
         </form>
@@ -45,9 +45,9 @@
                             <p class="card-text"><strong>Година:</strong> @movie.YearPublished</p>
                             <p class="card-text"><strong>Време:</strong> @movie.MovieWhatchTime мин.</p>
                         </div>
-                        <a asp-controller="Book" asp-action="Details" asp-route-id="@movie.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж Повече</a>
+                        <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж Повече</a>
 
-                        <a asp-controller="Book" asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-primary mb-1 w-100 p-3 fw-bold">Редактирай</a>
+                        <a asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-primary mb-1 w-100 p-3 fw-bold">Редактирай</a>
                     </div>
                 </div>
             }

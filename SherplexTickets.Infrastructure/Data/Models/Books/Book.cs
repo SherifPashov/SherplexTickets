@@ -22,6 +22,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Books
         [Comment("The current Book's Author Identifier")]
         public int AuthorId { get; set; }
 
+        [Required]
         [ForeignKey(nameof(AuthorId))]
         [Comment("The current Book's Author")]
         public Author Author { get; set; } = null!;

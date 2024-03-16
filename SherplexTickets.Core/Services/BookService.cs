@@ -1,10 +1,10 @@
-﻿using SherplexTickets.Core.Contracts;
-using SherplexTickets.Infrastructure.Data.Models.Books;
-using SherplexTickets.Infrastructure.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.BookView;
+using SherplexTickets.Infrastructure.Common;
+using SherplexTickets.Infrastructure.Data.Models.Books;
+using SherplexTickets.Infrastructure.Data.Models.Mappings.BookMapping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
-using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 
 namespace SherplexTickets.Core.Services
 {
@@ -19,9 +19,7 @@ namespace SherplexTickets.Core.Services
 
         public async Task<IEnumerable<BookAllViewModel>> AllAsync()
         {
-            var all = await repository.AllReadonly<Book>().ToListAsync();
-
-            var result = await repository
+            return await repository
                 .AllReadonly<Book>()
                 .Select(b => new BookAllViewModel()
                 {
@@ -33,7 +31,6 @@ namespace SherplexTickets.Core.Services
                     YearPublished = b.YearPublished
                 })
                 .ToListAsync();
-            return result;
         }
 
         public async Task<IEnumerable<CoverTypeViewModel>> AllCoverTypesAsync()
@@ -47,13 +44,14 @@ namespace SherplexTickets.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<GenreViewModel>> AllGenresAsync()
+        public async Task<IEnumerable<GenreViewModel>> AllGenresOfBookAsync(int bookId)
         {
-            return await repository.AllReadonly<GenreOfMovie>()
+            return await repository.AllReadonly<GenreGenreOfBook>()
+                .Where(g=>g.BookId == bookId)
                 .Select(ct => new GenreViewModel()
                 {
-                    Id = ct.Id,
-                    Name = ct.Name
+                    Id = ct.GenreId,
+                    Name = ct.Genre.Name
                 })
                 .ToListAsync();
         }
@@ -69,6 +67,7 @@ namespace SherplexTickets.Core.Services
             return await repository.AllReadonly<GenreOfMovie>()
                 .AnyAsync(g => g.Id == genreId);
         }
+        
 
         public async Task<bool> CoverTypeExistsAsync(int coverTypeId)
         {
@@ -80,7 +79,8 @@ namespace SherplexTickets.Core.Services
         {
             Book? currentBook = await repository.AllReadonly<Book>()
                 .FirstOrDefaultAsync(b => b.Id == bookId);
-            
+
+            var genres = await AllGenresOfBookAsync(bookId); 
 
             CoverType? currentCoverType = await repository.AllReadonly<CoverType>()
                 .FirstOrDefaultAsync(ct => ct.Id == currentBook.CoverTypeId);
@@ -89,12 +89,12 @@ namespace SherplexTickets.Core.Services
             {
                 Id = currentBook.Id,
                 Title = currentBook.Title,
-                Author = currentBook.Author.FullName,
                 Description = currentBook.Description,
                 Pages = currentBook.Pages,
                 YearPublished = currentBook.YearPublished,
                 CoverType = currentCoverType.Name,
-                ImageUrl = currentBook.ImageUrl
+                ImageUrl = currentBook.ImageUrl,
+                Genre = genres.Any()? string.Join(", ", genres.Select(g=>g.Name)):"Няма информация"
             };
 
             return currentBookDetails;

@@ -12,7 +12,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(ActorFullNameMinLength)]
+        [MaxLength(ActorFullNameMaxLength)]
         [Comment("The current Actor's FirstName")]
         public string FullName { get; set; } = string.Empty;
 

@@ -20,8 +20,6 @@ namespace SherplexTickets.Core.ViewModels.BookView
 
         public int Pages { get; set; }
 
-        public string PublishingHouse { get; set; } = null!;
-
         public int YearPublished { get; set; }
 
         public string CoverType { get; set; } = null!;

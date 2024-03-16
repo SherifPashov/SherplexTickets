@@ -69,12 +69,17 @@ namespace SherplexTickets.Infrastructure.Data
 
             //Configuration (Data Seeding)
             builder.ApplyConfiguration(new GenreOfBookConfiguration());
-            builder.ApplyConfiguration(new GenreOfMovieConfiguration());
             builder.ApplyConfiguration(new CoverTypeConfiguration());
             builder.ApplyConfiguration(new AuthorConfiguration());
             builder.ApplyConfiguration(new BookConfiguration());
             builder.ApplyConfiguration(new GenreGenreOfBookConfiguration());
 
+            builder.ApplyConfiguration(new GenreOfMovieConfiguration());
+            builder.ApplyConfiguration(new DirectorConfiguration());
+            builder.ApplyConfiguration(new ActorConfiguration());
+            builder.ApplyConfiguration(new MovieConfiguration());
+            builder.ApplyConfiguration(new ActorMovieConfiguration());
+            builder.ApplyConfiguration(new GenreGenreOfMovieConfiguration());
         }
     }
 }

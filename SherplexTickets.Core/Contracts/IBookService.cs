@@ -11,7 +11,7 @@ namespace SherplexTickets.Core.Contracts
     {
         Task<IEnumerable<BookAllViewModel>> AllAsync();
         Task<IEnumerable<CoverTypeViewModel>> AllCoverTypesAsync();
-        Task<IEnumerable<GenreViewModel>> AllGenresAsync();
+        Task<IEnumerable<GenreViewModel>> AllGenresOfBookAsync(int bookId);
         Task<bool> BookExistsAsync(int bookId);
         Task<bool> GenreExistsAsync(int genreId);
         Task<bool> CoverTypeExistsAsync(int coverTypeId);

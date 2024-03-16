@@ -58,7 +58,7 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
         {
             //Name
             public const int ActorFullNameMinLength = 2;
-            public const int ActorFirstNameMaxLength = 60;
+            public const int ActorFullNameMaxLength = 60;
 
         }
 

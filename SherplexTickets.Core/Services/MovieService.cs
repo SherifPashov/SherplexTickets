@@ -78,7 +78,8 @@ namespace SherplexTickets.Core.Services
         {
             Movie? currentMovie = await repository.AllReadonly<Movie>()
                 .FirstOrDefaultAsync(m => m.Id == movieId);
-
+            var currentDirector = await repository.AllReadonly<Director>()
+                .FirstOrDefaultAsync(d => d.Id == currentMovie.DirectorId);
 
             var genres = await AllGenreAsync (movieId);
 
@@ -93,9 +94,9 @@ namespace SherplexTickets.Core.Services
                 URLImage = currentMovie.URLImage,
                 YearPublished = currentMovie.YearPublished.Year.ToString(),
                 MovieWhatchTime = currentMovie.MovieWhatchTime.ToString(),
-                DirectorName = currentMovie.Director.FullName,
-                ActorsName = actors.Any() ? string.Join(", ", actors) : "Няма информация",
-                GenresName = genres.Any() ? string.Join(", ", genres) : "Няма информация",
+                DirectorName = currentDirector.FullName,
+                ActorsName = actors.Any() ? string.Join(", ", actors.Select(a=>a.FullName)) : "Няма информация",
+                GenresName = genres.Any() ? string.Join(", ", genres.Select(g=>g.Name)): "Няма информация",
         };
 
             return currentMovieDetails;

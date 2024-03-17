@@ -1453,7 +1453,7 @@ namespace SherplexTickets.Infrastructure.Migrations
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Books.Book", b =>
                 {
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Books.Author", "Author")
-                        .WithMany()
+                        .WithMany("Books")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1627,7 +1627,7 @@ namespace SherplexTickets.Infrastructure.Migrations
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", b =>
                 {
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Director", "Director")
-                        .WithMany()
+                        .WithMany("Movies")
                         .HasForeignKey("DirectorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1644,6 +1644,11 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Books.Author", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Books.Book", b =>
@@ -1680,6 +1685,11 @@ namespace SherplexTickets.Infrastructure.Migrations
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Actor", b =>
                 {
                     b.Navigation("ActorsMovies");
+                });
+
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Director", b =>
+                {
+                    b.Navigation("Movies");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.GenreOfMovie", b =>

@@ -8,6 +8,7 @@ using SherplexTickets.Infrastructure.Data.Models.Carts;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.BookMapping;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
+using System.Reflection.Emit;
 
 namespace SherplexTickets.Infrastructure.Data
 {
@@ -55,6 +56,12 @@ namespace SherplexTickets.Infrastructure.Data
             builder.Entity<MovieMovieTheater>()
                 .HasKey(ac => new { ac.MovieId, ac.MovieTheaterId });
 
+            builder.Entity<Movie>()
+                .HasOne(m => m.Director)
+                .WithMany(a => a.Movies)
+                .HasForeignKey(b => b.DirectorId)
+                .IsRequired();
+
             //Book
             builder.Entity<BookBookStore>()
                 .HasKey(ac => new { ac.BookId, ac.BookStoreId });
@@ -64,6 +71,16 @@ namespace SherplexTickets.Infrastructure.Data
 
             builder.Entity<GenreGenreOfBook>()
                 .HasKey(ac => new { ac.GenreId, ac.BookId });
+
+            builder.Entity<Book>()
+                .HasOne(b => b.Author)
+                .WithMany(a => a.Books)
+                .HasForeignKey(b => b.AuthorId)
+                .IsRequired();
+
+            builder.Entity<Ticket>()
+                .Property(t => t.Price)
+                .HasPrecision(18, 2);
 
             base.OnModelCreating(builder);
 

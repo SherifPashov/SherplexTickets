@@ -9,5 +9,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
         [Required]
         [MaxLength(DirectorNameMaxLength)]
         public string FullName { get; set; } = string.Empty;
+
+        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
     }
 }

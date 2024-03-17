@@ -14,5 +14,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Books
         [MaxLength(AuthorNameMaxLength)]
         [Comment("The current Authot's Full Name")]
         public string FullName { get; set; } = string.Empty;
+
+        public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }

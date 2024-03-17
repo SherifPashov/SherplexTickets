@@ -80,16 +80,34 @@ namespace SherplexTickets.Core.Services
             Book? currentBook = await repository.AllReadonly<Book>()
                 .FirstOrDefaultAsync(b => b.Id == bookId);
 
-            var genres = await AllGenresOfBookAsync(bookId); 
+            if (currentBook == null)
+            {
+                return new BookViewModel();
+            }
+            var genres = await AllGenresOfBookAsync(bookId);
+
+            var currentAuthor = await repository.AllReadonly<Author>()
+                .FirstOrDefaultAsync(ct => ct.Id == currentBook.AuthorId);
+
+            if (currentAuthor == null)
+            {
+                return new BookViewModel();
+            }
 
             CoverType? currentCoverType = await repository.AllReadonly<CoverType>()
                 .FirstOrDefaultAsync(ct => ct.Id == currentBook.CoverTypeId);
+
+            if (currentCoverType == null)
+            {
+                return new BookViewModel();
+            }
 
             var currentBookDetails = new BookViewModel()
             {
                 Id = currentBook.Id,
                 Title = currentBook.Title,
                 Description = currentBook.Description,
+                Author = currentAuthor.FullName,
                 Pages = currentBook.Pages,
                 YearPublished = currentBook.YearPublished,
                 CoverType = currentCoverType.Name,

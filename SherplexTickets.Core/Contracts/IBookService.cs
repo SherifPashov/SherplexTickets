@@ -10,12 +10,20 @@ namespace SherplexTickets.Core.Contracts
     public interface IBookService
     {
         Task<IEnumerable<BookAllViewModel>> AllAsync();
+
         Task<IEnumerable<CoverTypeViewModel>> AllCoverTypesAsync();
+
         Task<IEnumerable<GenreViewModel>> AllGenresOfBookAsync(int bookId);
+
         Task<bool> BookExistsAsync(int bookId);
+
         Task<bool> GenreExistsAsync(int genreId);
+
         Task<bool> CoverTypeExistsAsync(int coverTypeId);
+
         Task<BookViewModel> DetailsAsync(int bookId);
+
+        Task<IEnumerable<BookAllViewModel>> SearchAsync(string input);
 
 
     }

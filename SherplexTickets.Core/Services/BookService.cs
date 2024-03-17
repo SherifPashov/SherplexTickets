@@ -117,5 +117,31 @@ namespace SherplexTickets.Core.Services
 
             return currentBookDetails;
         }
+
+        public async Task<IEnumerable<BookAllViewModel>> SearchAsync(string input)
+        {
+            var lowercaseInput = input.ToLower();
+
+            var searchedBooks = await repository
+                .AllReadonly<Book>()
+                .Where(b =>
+                    b.Title.ToLower().Contains(lowercaseInput)
+                    || b.Author.FullName.ToLower().Contains(lowercaseInput)
+                    || b.GenresGenresOfBooks.Any(ggb => ggb.Genre.Name.ToLower().Contains(lowercaseInput))
+                    || b.CoverType.Name.ToLower().Contains(lowercaseInput))
+                .Select(b => new BookAllViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Author = b.Author.FullName,
+                    ImageUrl = b.ImageUrl,
+                    Pages = b.Pages,
+                    YearPublished = b.YearPublished
+                })
+                .ToListAsync();
+
+            return searchedBooks;
+        }
+
     }
 }

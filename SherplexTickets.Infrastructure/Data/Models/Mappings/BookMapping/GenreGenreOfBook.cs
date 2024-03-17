@@ -5,7 +5,6 @@ namespace SherplexTickets.Infrastructure.Data.Models.Mappings.BookMapping
 {
     public class GenreGenreOfBook
     {
-        
         public int GenreId { get; set; }
 
         [ForeignKey(nameof(GenreId))]

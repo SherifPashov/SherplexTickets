@@ -47,7 +47,8 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
 
         public ICollection<ActorMovie> ActorsMovies { get; set; } = new List<ActorMovie>();
 
-        public ICollection<GenreOfMovie> Genres { get; set; } = new List<GenreOfMovie>();
+        public ICollection<GenreGenreOfMovie> Genres { get; set; } = new List<GenreGenreOfMovie>();
+        public ICollection<MovieMovieTheater> MovieTheaters { get; set; } = new List<MovieMovieTheater>();
 
     }
 }

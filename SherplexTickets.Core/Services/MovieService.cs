@@ -3,6 +3,7 @@ using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.BookView;
 using SherplexTickets.Core.ViewModels.MovieView;
 using SherplexTickets.Infrastructure.Common;
+using SherplexTickets.Infrastructure.Data.Models.Books;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 
@@ -101,6 +102,30 @@ namespace SherplexTickets.Core.Services
 
             return currentMovieDetails;
         }
+
+        public async Task<IEnumerable<MovieAllViewModel>> SearchAsync(string input)
+        {
+            var lowercaseInput = input.ToLower();
+
+            var searchedMovies = await repository.AllReadonly<Movie>()
+                .Where(m =>
+                    m.Title.ToLower().Contains(lowercaseInput)
+                    || m.Description.ToLower().Contains(lowercaseInput) 
+                    || m.Genres.Any(ggb => ggb.Genre.Name.ToLower().Contains(lowercaseInput))
+                    || m.Director.FullName.ToLower().Contains(lowercaseInput))
+                .Select(b => new MovieAllViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    URLImage = b.URLImage,
+                    MovieWhatchTime = b.MovieWhatchTime.ToString(),
+                    YearPublished = b.YearPublished.Year.ToString(),
+                })
+                .ToListAsync();
+
+            return searchedMovies;
+        }
+
 
     }
 }

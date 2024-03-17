@@ -18,6 +18,9 @@ namespace SherplexTickets.Core.Contracts
 
         Task<IEnumerable<GenreViewModel>> AllGenreAsync(int movieId);
         Task<MovieViewModel> DetailsAsync(int movieId);
+        Task<IEnumerable<MovieAllViewModel>> SearchAsync(string input);
+
+
 
     }
 }

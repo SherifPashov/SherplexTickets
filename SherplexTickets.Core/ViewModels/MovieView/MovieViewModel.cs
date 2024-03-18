@@ -20,7 +20,7 @@ namespace SherplexTickets.Core.ViewModels.MovieView
 
         public string DateViewedMovie { get; set; } = string.Empty;
 
-        public string MovieWhatchTime { get; set; } = string.Empty;
+        public string Duration { get; set; } = string.Empty;
         public string DirectorName { get; set; } = string.Empty;
 
         public string? ActorsName { get; set; } 

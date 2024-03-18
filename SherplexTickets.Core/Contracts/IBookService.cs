@@ -15,11 +15,15 @@ namespace SherplexTickets.Core.Contracts
 
         Task<IEnumerable<GenreViewModel>> AllGenresOfBookAsync(int bookId);
 
+        Task<IEnumerable<GenreViewModel>> AllGenresAsync();
+
         Task<bool> BookExistsAsync(int bookId);
 
         Task<bool> GenreExistsAsync(int genreId);
 
         Task<bool> CoverTypeExistsAsync(int coverTypeId);
+
+        Task<int> AddAsync(BookAddViewModel bookForm);
 
         Task<BookViewModel> DetailsAsync(int bookId);
 

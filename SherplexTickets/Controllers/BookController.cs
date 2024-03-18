@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
+using SherplexTickets.Core.ViewModels.BookView;
 
 namespace SherplexTickets.Controllers
 {
@@ -32,6 +33,43 @@ namespace SherplexTickets.Controllers
             var currentBook = await bookService.DetailsAsync(id);
 
             return View(currentBook);
+        }
+        [HttpGet]
+        //Only Admine
+        public async Task<IActionResult> Add()
+        {
+
+            var bookForm = new BookAddViewModel()
+            {
+                Genres = await bookService.AllGenresAsync(),
+                CoverTypes = await bookService.AllCoverTypesAsync(),
+            };
+
+            return View(bookForm);
+        }
+
+        [HttpPost]
+        //Only Admine
+        public async Task<IActionResult> Add(BookAddViewModel bookForm)
+        {
+            if (await bookService.GenreExistsAsync(bookForm.GenreId) == false)
+            {
+                ModelState.AddModelError(nameof(bookForm.GenreId), "Genre does not exist!");
+            }
+            else if (await bookService.CoverTypeExistsAsync(bookForm.CoverTypeId) == false)
+            {
+                ModelState.AddModelError(nameof(bookForm.CoverTypeId), "Cover Type does not exist!");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                bookForm.Genres = await bookService.AllGenresAsync();
+                bookForm.CoverTypes = await bookService.AllCoverTypesAsync();
+                return View(bookForm);
+            }
+
+            int newBookId = await bookService.AddAsync(bookForm);
+            return RedirectToAction(nameof(Details),new { id = newBookId });
         }
 
         [AllowAnonymous]

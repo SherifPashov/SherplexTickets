@@ -3,6 +3,7 @@ using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieConstants;
+using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
 
 
 namespace SherplexTickets.Infrastructure.Data.Models.Movies
@@ -36,14 +37,17 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
         [ForeignKey(nameof(DirectorId))]
         public Director Director { get; set; } = null!;
 
-
         [Required]
-        [Comment("The date on which the curent Movie was published")]
-        public DateTime YearPublished { get; set; }
+        [Display(Name = "Release Date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = DateTimeDefaultFormat, ApplyFormatInEditMode = true)]
+        [Comment("The date on which the curent Movie release")]
+        public DateTime ReleaseDate { get; set; }
+        
 
         [Required]
         [Comment("The current Movie's Movie Watch Time")]
-        public int MovieWhatchTime { get; set; }
+        public int Duration { get; set; }
 
         public ICollection<ActorMovie> ActorsMovies { get; set; } = new List<ActorMovie>();
 

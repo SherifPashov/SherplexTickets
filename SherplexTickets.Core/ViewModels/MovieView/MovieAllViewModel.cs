@@ -18,6 +18,6 @@ namespace SherplexTickets.Core.ViewModels.MovieView
 
         public string YearPublished { get; set; } = string.Empty;
 
-        public string MovieWhatchTime { get; set; } = string.Empty;
+        public string Duration { get; set; } = string.Empty;
     }
 }

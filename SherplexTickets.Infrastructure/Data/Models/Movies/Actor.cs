@@ -14,7 +14,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
         [Required]
         [MaxLength(ActorFullNameMaxLength)]
         [Comment("The current Actor's FirstName")]
-        public string FullName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
 
         public ICollection<ActorMovie> ActorsMovies { get; set; } = new List<ActorMovie>();

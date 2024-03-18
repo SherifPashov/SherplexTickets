@@ -10,7 +10,7 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
     {
 
         //Data Time Delaflt Format
-        public const string DateTimeDefaultFormat = "dd/mm/yyyy HH:mm";
+        public const string DateTimeDefaultFormat = "dd.MM.yyyy";
 
         //Length Error Message
         public const string LengthErrorMessage = "{0} must be between {2} and {1} characters long!";
@@ -32,13 +32,10 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
             public const int MovieDiscriptionMinLength = 5;
             public const int MovieDiscriptionMaxLength = 4000;
 
-            // Price
-            public const string BookPriceMinValue = "1";
-            public const string BookPriceMaxValue = "10000";
 
             //ImageUrl
-            public const int BookImageUrlMinLength = 5;
-            public const int BookImageUrlMaxLength = 400;
+            public const int MovieImageUrlMinLength = 5;
+            public const int MovieImageUrlMaxLength = 400;
         }
         public static class  MovieReviewConstants
         {
@@ -51,14 +48,14 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
             public const int MovieReviewDescriptionMaxLength = 5000;
 
             //Rate
-            public const int BookReviewRateMinRange = 1;
-            public const int BookReviewRateMaxRange = 10;
+            public const int MovieReviewRateMinRange = 1;
+            public const int MovieReviewRateMaxRange = 10;
         }
         public static class ActorConstants
         {
             //Name
             public const int ActorFullNameMinLength = 2;
-            public const int ActorFullNameMaxLength = 60;
+            public const int ActorFullNameMaxLength = 80;
 
         }
 

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.Services;
+using SherplexTickets.Core.ViewModels.BookView;
+using SherplexTickets.Core.ViewModels.MovieView;
 
 namespace SherplexTickets.Controllers
 {
@@ -56,5 +58,32 @@ namespace SherplexTickets.Controllers
 
             return View(searchedMovies);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            var bookForm = new MovieAddViewModel()
+            {
+                Genres = await movieService.AllGenresAsync(),
+            };
+
+            return View(bookForm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(MovieAddViewModel movieForm)
+        {
+
+            if (!ModelState.IsValid || !movieForm.GenreIds.Any())
+            {
+                movieForm.Genres = await movieService.AllGenresAsync();
+                return View(movieForm);
+            }
+
+            int newMovieId = await movieService.AddAsync(movieForm);
+
+            return RedirectToAction(nameof(Details),new { Id = newMovieId });
+        }
+
     }
 }

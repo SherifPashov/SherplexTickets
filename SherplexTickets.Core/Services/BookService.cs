@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.BookView;
 using SherplexTickets.Infrastructure.Common;
@@ -47,13 +48,24 @@ namespace SherplexTickets.Core.Services
         public async Task<IEnumerable<GenreViewModel>> AllGenresOfBookAsync(int bookId)
         {
             return await repository.AllReadonly<GenreGenreOfBook>()
-                .Where(g=>g.BookId == bookId)
-                .Select(ct => new GenreViewModel()
+                .Where(gb=>gb.BookId == bookId)
+                .Select(gb => new GenreViewModel()
                 {
-                    Id = ct.GenreId,
-                    Name = ct.Genre.Name
+                    Id = gb.GenreId,
+                    Name = gb.Genre.Name
                 })
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<GenreViewModel>> AllGenresAsync()
+        {
+            return await repository.AllReadonly<GenreViewModel>()
+                .Select(g => new GenreViewModel()
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                })
+                .ToArrayAsync();
         }
 
         public async Task<bool> BookExistsAsync(int bookId)
@@ -116,6 +128,43 @@ namespace SherplexTickets.Core.Services
             };
 
             return currentBookDetails;
+        }
+
+        public async Task<int> AddAsync(BookAddViewModel bookForm)
+        {
+            Author author = new Author();
+            if (repository.AllReadonly<Author>().Any(a=>a.FullName == bookForm.Author))
+            {
+                author = await repository.AllReadonly<Author>().FirstOrDefaultAsync(a=>a.FullName == bookForm.Author);
+            }
+            else
+            {
+                author = new Author() { FullName = bookForm.Author};
+            }
+            Book book = new Book()
+            {
+                Title = bookForm.Title,
+                Author = author,
+                Description = bookForm.Description,
+                Pages = bookForm.Pages,
+                YearPublished = bookForm.YearPublished,
+                ImageUrl = bookForm.ImageUrl,
+                CoverTypeId = bookForm.CoverTypeId,
+            };
+
+            GenreGenreOfBook genreGenreOfBook = new GenreGenreOfBook() 
+            {
+                BookId = book.Id,
+                GenreId = bookForm.GenreId
+            };
+
+            await repository.AddAsync(book);
+
+            await repository.AddAsync(genreGenreOfBook);
+
+            await repository.SaveChangesAsync();
+
+            return book.Id;
         }
 
         public async Task<IEnumerable<BookAllViewModel>> SearchAsync(string input)

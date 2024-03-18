@@ -204,11 +204,11 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
         {
             return new List<Director>()
             {
-                new Director { Id = 1, FullName = "Джон Фавро" }, // Режисьор на "Железният човек"
-                new Director { Id = 2, FullName = "Джос Уидън" }, // Режисьор на "Отмъстителите"
-                new Director { Id = 3, FullName = "Джеймс Гън" }, // Режисьор на "Стражите на Галактиката"
-                new Director { Id = 4, FullName = "Райън Куглър" }, // Режисьор на "Черна пантера"
-                new Director { Id = 5, FullName = "Тайка Уайтити" } // Режисьор на "Тор: Рагнарок"
+                new Director { Id = 1, Name = "Джон Фавро" }, // Режисьор на "Железният човек"
+                new Director { Id = 2, Name = "Джос Уидън" }, // Режисьор на "Отмъстителите"
+                new Director { Id = 3, Name = "Джеймс Гън" }, // Режисьор на "Стражите на Галактиката"
+                new Director { Id = 4, Name = "Райън Куглър" }, // Режисьор на "Черна пантера"
+                new Director { Id = 5, Name = "Тайка Уайтити" } // Режисьор на "Тор: Рагнарок"
             };
         }
 
@@ -219,29 +219,29 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             return new List<Actor>()
             {
                 // За "Железният човек"
-                new Actor { Id = 1, FullName = "Робърт Дауни мл." },
-                new Actor { Id = 2, FullName = "Гуинет Полтроу" },
-                new Actor { Id = 3, FullName = "Джеф Бриджис" },
+                new Actor { Id = 1, Name = "Робърт Дауни мл." },
+                new Actor { Id = 2, Name = "Гуинет Полтроу" },
+                new Actor { Id = 3, Name = "Джеф Бриджис" },
 
                 // За "Отмъстителите"
-                new Actor { Id = 4, FullName = "Крис Евънс" },
-                new Actor { Id = 5, FullName = "Скарлет Йохансън" },
-                new Actor { Id = 6, FullName = "Марк Ръфало" },
+                new Actor { Id = 4, Name = "Крис Евънс" },
+                new Actor { Id = 5, Name = "Скарлет Йохансън" },
+                new Actor { Id = 6, Name = "Марк Ръфало" },
 
                 // За "Стражите на Галактиката"
-                new Actor { Id = 7, FullName = "Крис Прат" },
-                new Actor { Id = 8, FullName = "Зоуи Салдана" },
-                new Actor { Id = 9, FullName = "Дейв Батиста" },
+                new Actor { Id = 7, Name = "Крис Прат" },
+                new Actor { Id = 8, Name = "Зоуи Салдана" },
+                new Actor { Id = 9, Name = "Дейв Батиста" },
 
                 // За "Черна пантера"
-                new Actor { Id = 10, FullName = "Чедуик Боузман" },
-                new Actor { Id = 11, FullName = "Майкъл Б. Джордан" },
-                new Actor { Id = 12, FullName = "Лупита Нионго" },
+                new Actor { Id = 10, Name = "Чедуик Боузман" },
+                new Actor { Id = 11, Name = "Майкъл Б. Джордан" },
+                new Actor { Id = 12, Name = "Лупита Нионго" },
 
                 // За "Тор: Рагнарок"
-                new Actor { Id = 13, FullName = "Крис Хемсуърт" },
-                new Actor { Id = 14, FullName = "Том Хидълстън" },
-                new Actor { Id = 15, FullName = "Кейт Бланшет" }
+                new Actor { Id = 13, Name = "Крис Хемсуърт" },
+                new Actor { Id = 14, Name = "Том Хидълстън" },
+                new Actor { Id = 15, Name = "Кейт Бланшет" }
             };
         }
 
@@ -256,8 +256,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Description = "\"Iron Man\" представя историята на Тони Старк, гений инженер и милиардер, който живее двойствен живот като супергерой. Филмът разкрива как Тони Старк, след като бива отвлечен и ранен в Афганистан, разработва високотехнологичен брониран костюм, който му позволява да се превърне в Желязният Човек. Той използва този костюм, за да се изправи срещу злодеи и престъпници, като същевременно се бори с вътрешни конфликти и дилеми. Филмът е пълен с екшън и напрежение, като зрителите са изправени пред въпроси за морал, отговорност и справедливост.",
                     URLImage = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/80C64C0B63382CD3ED2653356125F275F63D036028A77D38DC3286AD851A6833/scale?width=1200&amp;aspectRatio=1.78&amp;format=webp",
                     DirectorId = 1,
-                    YearPublished = new DateTime(2008, 5, 2),
-                    MovieWhatchTime = 126,
+                    ReleaseDate = new DateTime(2008, 5, 2),
+                    Duration = 126,
                     
                 },
                 new Movie()
@@ -267,8 +267,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Description = "В епичния филм \"The Avengers\", Ник Фюри от S.H.I.E.L.D. събира екип от суперхора, за да формира отбора \"Мъстителите\", с цел да помогне за спасяването на Земята от Локи и неговата армия. Локи, братът на Тор и бивш бог на азгардската митология, пристига на Земята със зловещ план за завладяване на света и подчиняване на човечеството.\r\n\r\nФюри, разбирайки сериозността на заплахата, събира най-мощните супергерои от света, включително Желязният Човек (Тони Старк), Капитан Америка (Стив Роджърс), Тор, Хълк (Брус Банър), Блек Уидоу (Наташа Романоф) и Хоукай (Клинт Бартън). Заедно те формират отбора \"Мъстителите\", който трябва да се обедини и да се противопостави на Локи и неговите войски.\r\n\r\nФилмът предлага впечатляваща комбинация от екшън, вълнуващи битки, забавни диалози и емоционални моменти. \"Мъстителите\" не само представя единствено изключителния състав от супергерои, но и демонстрира тяхната способност да работят заедно, дори когато са различни по характери и мотивации.",
                     URLImage = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/B6981BDF339764E6C56626C9DE0820CEF297EAF069F62F244E0F50061219F069/scale?width=1200&aspectRatio=1.78&format=webp",
                     DirectorId = 2, 
-                    YearPublished = new DateTime(2012, 4, 11),
-                    MovieWhatchTime = 143,
+                    ReleaseDate = new DateTime(2012, 4, 11),
+                    Duration = 143,
                     
                 },
                 new Movie()
@@ -278,8 +278,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Description = "A group of intergalactic criminals must pull together to stop a fanatical warrior with plans to purge the universe.",
                     URLImage = "https://m.media-amazon.com/images/M/MV5BNDIzMTk4NDYtMjg5OS00ZGI0LWJhZDYtMzdmZGY1YWU5ZGNkXkEyXkFqcGdeQXVyMTI5NzUyMTIz._V1_.jpg",
                     DirectorId = 3,
-                    YearPublished = new DateTime(2014, 7, 21),
-                    MovieWhatchTime = 121,
+                    ReleaseDate = new DateTime(2014, 7, 21),
+                    Duration = 121,
                 },
                 new Movie()
                 {
@@ -288,8 +288,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Description = "В \"Черният пантер\" (Black Panther), наследникът на скритото кралство Уаканда, Т'Чала, трябва да изпълни своето предназначение и да въведе своя народ в ново бъдеще, докато се изправя срещу предизвикателство от миналото на своята страна.\r\n\r\nСлед смъртта на баща си, крал Т'Чака, Т'Чала се връща в Уаканда, за да поеме своята правителствена отговорност като новият крал. Той обаче е изправен пред сериозни предизвикателства, когато мистериозния войник Ерик Килмонгър, познат също като Килмонгър, се появява, за да оспори неговото място като правител.\r\n\r\nТ'Чала се изправя срещу вътрешни и външни конфликти, докато се опитва да преодолее препятствията пред Уаканда и да гарантира мира и стабилността на своя народ. Разкрива се сложна интрига, която разкрива теми за власт, наследство и самоопределяне, като Т'Чала трябва да преодолее своите собствени съмнения и грешки, за да стане истинският герой, който Уаканда се нуждае.",
                     URLImage = "https://m.media-amazon.com/images/I/91+GjGet65L._AC_UF894,1000_QL80_.jpg",
                     DirectorId = 4, 
-                    YearPublished = new DateTime(2018, 2, 16),
-                    MovieWhatchTime = 134,
+                    ReleaseDate = new DateTime(2018, 2, 16),
+                    Duration = 134,
                    
                 },
                 new Movie()
@@ -299,8 +299,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Description = "В \"Тор: Рагнарок\" (Thor: Ragnarok), Тор е затворен на планетата Сакаар и трябва да се състезава с времето, за да се върне в Асгард и да спре Рагнарок - разрушението на света му, на ръцете на могъщата и безмилостната злодейка Хела.\r\n\r\nСлед като е отведен отнасящата го в Сакаар, Тор се озовава в плен на тиранина Грандмастър, който го принуждава да участва в смъртоносни състезания. В този хаос той открива, че неговият стар враг, братът му Локи, също е в тези нещастия.\r\n\r\nТор и Локи се обединяват, за да победят своя общ враг - Хела, която се оказва могъща асгардианка, бягнала от затвора си, за да поеме контрол над своето родно кралство. Сблъсъкът е неизбежен, а Тор и Локи трябва да обединят силите си с нови съюзници, за да спасят Асгард от сигурната му гибел.",
                     URLImage = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p12402331_p_v10_ax.jpg",
                     DirectorId = 5,
-                    YearPublished = new DateTime(2017, 10, 24),
-                    MovieWhatchTime = 130,
+                    ReleaseDate = new DateTime(2017, 10, 24),
+                    Duration = 130,
                     
                 }
 

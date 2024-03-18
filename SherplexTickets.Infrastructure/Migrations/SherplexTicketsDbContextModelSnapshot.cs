@@ -989,10 +989,10 @@ namespace SherplexTickets.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)")
                         .HasComment("The current Actor's FirstName");
 
                     b.HasKey("Id");
@@ -1003,77 +1003,77 @@ namespace SherplexTickets.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            FullName = "Робърт Дауни мл."
+                            Name = "Робърт Дауни мл."
                         },
                         new
                         {
                             Id = 2,
-                            FullName = "Гуинет Полтроу"
+                            Name = "Гуинет Полтроу"
                         },
                         new
                         {
                             Id = 3,
-                            FullName = "Джеф Бриджис"
+                            Name = "Джеф Бриджис"
                         },
                         new
                         {
                             Id = 4,
-                            FullName = "Крис Евънс"
+                            Name = "Крис Евънс"
                         },
                         new
                         {
                             Id = 5,
-                            FullName = "Скарлет Йохансън"
+                            Name = "Скарлет Йохансън"
                         },
                         new
                         {
                             Id = 6,
-                            FullName = "Марк Ръфало"
+                            Name = "Марк Ръфало"
                         },
                         new
                         {
                             Id = 7,
-                            FullName = "Крис Прат"
+                            Name = "Крис Прат"
                         },
                         new
                         {
                             Id = 8,
-                            FullName = "Зоуи Салдана"
+                            Name = "Зоуи Салдана"
                         },
                         new
                         {
                             Id = 9,
-                            FullName = "Дейв Батиста"
+                            Name = "Дейв Батиста"
                         },
                         new
                         {
                             Id = 10,
-                            FullName = "Чедуик Боузман"
+                            Name = "Чедуик Боузман"
                         },
                         new
                         {
                             Id = 11,
-                            FullName = "Майкъл Б. Джордан"
+                            Name = "Майкъл Б. Джордан"
                         },
                         new
                         {
                             Id = 12,
-                            FullName = "Лупита Нионго"
+                            Name = "Лупита Нионго"
                         },
                         new
                         {
                             Id = 13,
-                            FullName = "Крис Хемсуърт"
+                            Name = "Крис Хемсуърт"
                         },
                         new
                         {
                             Id = 14,
-                            FullName = "Том Хидълстън"
+                            Name = "Том Хидълстън"
                         },
                         new
                         {
                             Id = 15,
-                            FullName = "Кейт Бланшет"
+                            Name = "Кейт Бланшет"
                         });
                 });
 
@@ -1085,7 +1085,7 @@ namespace SherplexTickets.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
@@ -1098,27 +1098,27 @@ namespace SherplexTickets.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            FullName = "Джон Фавро"
+                            Name = "Джон Фавро"
                         },
                         new
                         {
                             Id = 2,
-                            FullName = "Джос Уидън"
+                            Name = "Джос Уидън"
                         },
                         new
                         {
                             Id = 3,
-                            FullName = "Джеймс Гън"
+                            Name = "Джеймс Гън"
                         },
                         new
                         {
                             Id = 4,
-                            FullName = "Райън Куглър"
+                            Name = "Райън Куглър"
                         },
                         new
                         {
                             Id = 5,
-                            FullName = "Тайка Уайтити"
+                            Name = "Тайка Уайтити"
                         });
                 });
 
@@ -1134,9 +1134,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Property<int?>("GenreOfMovieId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(70)
@@ -1146,8 +1143,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("GenreOfMovieId");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Genres");
 
@@ -1248,9 +1243,13 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("The current Movie's Director Identifier");
 
-                    b.Property<int>("MovieWhatchTime")
+                    b.Property<int>("Duration")
                         .HasColumnType("int")
                         .HasComment("The current Movie's Movie Watch Time");
+
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("datetime2")
+                        .HasComment("The date on which the curent Movie release");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -1262,10 +1261,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasComment("The current Movie's URLImage");
-
-                    b.Property<DateTime>("YearPublished")
-                        .HasColumnType("datetime2")
-                        .HasComment("The date on which the curent Movie was published");
 
                     b.HasKey("Id");
 
@@ -1279,50 +1274,50 @@ namespace SherplexTickets.Infrastructure.Migrations
                             Id = 1,
                             Description = "\"Iron Man\" представя историята на Тони Старк, гений инженер и милиардер, който живее двойствен живот като супергерой. Филмът разкрива как Тони Старк, след като бива отвлечен и ранен в Афганистан, разработва високотехнологичен брониран костюм, който му позволява да се превърне в Желязният Човек. Той използва този костюм, за да се изправи срещу злодеи и престъпници, като същевременно се бори с вътрешни конфликти и дилеми. Филмът е пълен с екшън и напрежение, като зрителите са изправени пред въпроси за морал, отговорност и справедливост.",
                             DirectorId = 1,
-                            MovieWhatchTime = 126,
+                            Duration = 126,
+                            ReleaseDate = new DateTime(2008, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Iron Man",
-                            URLImage = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/80C64C0B63382CD3ED2653356125F275F63D036028A77D38DC3286AD851A6833/scale?width=1200&amp;aspectRatio=1.78&amp;format=webp",
-                            YearPublished = new DateTime(2008, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            URLImage = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/80C64C0B63382CD3ED2653356125F275F63D036028A77D38DC3286AD851A6833/scale?width=1200&amp;aspectRatio=1.78&amp;format=webp"
                         },
                         new
                         {
                             Id = 2,
                             Description = "В епичния филм \"The Avengers\", Ник Фюри от S.H.I.E.L.D. събира екип от суперхора, за да формира отбора \"Мъстителите\", с цел да помогне за спасяването на Земята от Локи и неговата армия. Локи, братът на Тор и бивш бог на азгардската митология, пристига на Земята със зловещ план за завладяване на света и подчиняване на човечеството.\r\n\r\nФюри, разбирайки сериозността на заплахата, събира най-мощните супергерои от света, включително Желязният Човек (Тони Старк), Капитан Америка (Стив Роджърс), Тор, Хълк (Брус Банър), Блек Уидоу (Наташа Романоф) и Хоукай (Клинт Бартън). Заедно те формират отбора \"Мъстителите\", който трябва да се обедини и да се противопостави на Локи и неговите войски.\r\n\r\nФилмът предлага впечатляваща комбинация от екшън, вълнуващи битки, забавни диалози и емоционални моменти. \"Мъстителите\" не само представя единствено изключителния състав от супергерои, но и демонстрира тяхната способност да работят заедно, дори когато са различни по характери и мотивации.",
                             DirectorId = 2,
-                            MovieWhatchTime = 143,
+                            Duration = 143,
+                            ReleaseDate = new DateTime(2012, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Avengers",
-                            URLImage = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/B6981BDF339764E6C56626C9DE0820CEF297EAF069F62F244E0F50061219F069/scale?width=1200&aspectRatio=1.78&format=webp",
-                            YearPublished = new DateTime(2012, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            URLImage = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/B6981BDF339764E6C56626C9DE0820CEF297EAF069F62F244E0F50061219F069/scale?width=1200&aspectRatio=1.78&format=webp"
                         },
                         new
                         {
                             Id = 3,
                             Description = "A group of intergalactic criminals must pull together to stop a fanatical warrior with plans to purge the universe.",
                             DirectorId = 3,
-                            MovieWhatchTime = 121,
+                            Duration = 121,
+                            ReleaseDate = new DateTime(2014, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Guardians of the Galaxy",
-                            URLImage = "https://m.media-amazon.com/images/M/MV5BNDIzMTk4NDYtMjg5OS00ZGI0LWJhZDYtMzdmZGY1YWU5ZGNkXkEyXkFqcGdeQXVyMTI5NzUyMTIz._V1_.jpg",
-                            YearPublished = new DateTime(2014, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            URLImage = "https://m.media-amazon.com/images/M/MV5BNDIzMTk4NDYtMjg5OS00ZGI0LWJhZDYtMzdmZGY1YWU5ZGNkXkEyXkFqcGdeQXVyMTI5NzUyMTIz._V1_.jpg"
                         },
                         new
                         {
                             Id = 4,
                             Description = "В \"Черният пантер\" (Black Panther), наследникът на скритото кралство Уаканда, Т'Чала, трябва да изпълни своето предназначение и да въведе своя народ в ново бъдеще, докато се изправя срещу предизвикателство от миналото на своята страна.\r\n\r\nСлед смъртта на баща си, крал Т'Чака, Т'Чала се връща в Уаканда, за да поеме своята правителствена отговорност като новият крал. Той обаче е изправен пред сериозни предизвикателства, когато мистериозния войник Ерик Килмонгър, познат също като Килмонгър, се появява, за да оспори неговото място като правител.\r\n\r\nТ'Чала се изправя срещу вътрешни и външни конфликти, докато се опитва да преодолее препятствията пред Уаканда и да гарантира мира и стабилността на своя народ. Разкрива се сложна интрига, която разкрива теми за власт, наследство и самоопределяне, като Т'Чала трябва да преодолее своите собствени съмнения и грешки, за да стане истинският герой, който Уаканда се нуждае.",
                             DirectorId = 4,
-                            MovieWhatchTime = 134,
+                            Duration = 134,
+                            ReleaseDate = new DateTime(2018, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Black Panther",
-                            URLImage = "https://m.media-amazon.com/images/I/91+GjGet65L._AC_UF894,1000_QL80_.jpg",
-                            YearPublished = new DateTime(2018, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            URLImage = "https://m.media-amazon.com/images/I/91+GjGet65L._AC_UF894,1000_QL80_.jpg"
                         },
                         new
                         {
                             Id = 5,
                             Description = "В \"Тор: Рагнарок\" (Thor: Ragnarok), Тор е затворен на планетата Сакаар и трябва да се състезава с времето, за да се върне в Асгард и да спре Рагнарок - разрушението на света му, на ръцете на могъщата и безмилостната злодейка Хела.\r\n\r\nСлед като е отведен отнасящата го в Сакаар, Тор се озовава в плен на тиранина Грандмастър, който го принуждава да участва в смъртоносни състезания. В този хаос той открива, че неговият стар враг, братът му Локи, също е в тези нещастия.\r\n\r\nТор и Локи се обединяват, за да победят своя общ враг - Хела, която се оказва могъща асгардианка, бягнала от затвора си, за да поеме контрол над своето родно кралство. Сблъсъкът е неизбежен, а Тор и Локи трябва да обединят силите си с нови съюзници, за да спасят Асгард от сигурната му гибел.",
                             DirectorId = 5,
-                            MovieWhatchTime = 130,
+                            Duration = 130,
+                            ReleaseDate = new DateTime(2017, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Thor: Ragnarok",
-                            URLImage = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p12402331_p_v10_ax.jpg",
-                            YearPublished = new DateTime(2017, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            URLImage = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p12402331_p_v10_ax.jpg"
                         });
                 });
 
@@ -1385,6 +1380,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .HasComment("The current Movie's Identifier");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)")
                         .HasComment("The current Ticket's Price");
 
@@ -1584,7 +1580,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", "Movie")
-                        .WithMany()
+                        .WithMany("Genres")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1597,7 +1593,7 @@ namespace SherplexTickets.Infrastructure.Migrations
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.MovieMovieTheater", b =>
                 {
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", "Movie")
-                        .WithMany()
+                        .WithMany("MovieTheaters")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1618,10 +1614,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.GenreOfMovie", null)
                         .WithMany("GenresMovies")
                         .HasForeignKey("GenreOfMovieId");
-
-                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("MovieId");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", b =>
@@ -1702,6 +1694,8 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("ActorsMovies");
 
                     b.Navigation("Genres");
+
+                    b.Navigation("MovieTheaters");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", b =>

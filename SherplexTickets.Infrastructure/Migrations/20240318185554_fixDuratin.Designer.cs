@@ -12,8 +12,8 @@ using SherplexTickets.Infrastructure.Data;
 namespace SherplexTickets.Infrastructure.Migrations
 {
     [DbContext(typeof(SherplexTicketsDbContext))]
-    [Migration("20240316181249_RefacturingAndAddSeed")]
-    partial class RefacturingAndAddSeed
+    [Migration("20240318185554_fixDuratin")]
+    partial class fixDuratin
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -230,14 +230,16 @@ namespace SherplexTickets.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasComment("The current Authot's Identifier");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("The current Authot's Full Name");
 
                     b.HasKey("Id");
 
@@ -296,8 +298,8 @@ namespace SherplexTickets.Infrastructure.Migrations
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)")
                         .HasComment("The current Book's cover image url");
 
                     b.Property<int>("Pages")
@@ -329,7 +331,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 1,
                             CoverTypeId = 1,
                             Description = "Романът „Тютюн“ разказва за страстите, сблъсъците и разочарованията на тютюневите фермери в България през края на 19-и началото на 20 век. Главният герой, Тодор Гълъбов, се опитва да се пребори с лошата дола на съдбата и да изгради бъдеще за семейството си в условията на социални и икономически проблеми.",
-                            ImageUrl = "@---",
+                            ImageUrl = "https://www.musalabooks.bg/image/cache/catalog/IMG_4733-500x650.JPG",
                             Pages = 400,
                             Title = "Тютюн",
                             YearPublished = 1951
@@ -340,7 +342,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 2,
                             CoverTypeId = 1,
                             Description = "„Под игото“ е роман от Иван Вазов, който разказва за борбата на българския народ за свобода от османско владичество. Книгата проследява историята на героите в едно село през времето на Априлското въстание.",
-                            ImageUrl = "@---",
+                            ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/400x498/a4e40ebdc3e371adff845072e1c73f37/p/o/a9bb78972c12abadb60050742887fe9b/pod-igoto-30.jpg",
                             Pages = 280,
                             Title = "Под игото",
                             YearPublished = 1888
@@ -351,7 +353,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 3,
                             CoverTypeId = 2,
                             Description = "„История славянобългарска“ е творба на Паисий Хилендарски, която се смята за първата българска историографска книга. В нея се описва историята и културното развитие на българския народ.",
-                            ImageUrl = "@---",
+                            ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/400x498/a4e40ebdc3e371adff845072e1c73f37/i/s/8357898131e0945b7bb43a6b6e15cee3/istoriya-slavyanobalgarska-uchilishtna-biblioteka---damyan-yakov-30.jpg",
                             Pages = 150,
                             Title = "История славянобългарска",
                             YearPublished = 1762
@@ -362,7 +364,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 4,
                             CoverTypeId = 1,
                             Description = "„Железният светилник“ е роман на Димитър Талев, който разказва за историята на едно българско село във времето на Освобождението. Книгата проследява събитията и промените, които преминава селото и неговите обитатели.",
-                            ImageUrl = "@---",
+                            ImageUrl = "https://hermesbooks.bg/media/catalog/product/cache/e533a3e3438c08fe7c51cedd0cbec189/j/e/jelezniat_svetilnik_hrm_2_20200901160342.jpg",
                             Pages = 320,
                             Title = "Железният светилник",
                             YearPublished = 1937
@@ -373,7 +375,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             AuthorId = 5,
                             CoverTypeId = 1,
                             Description = "„Бай Ганьо“ е сатиричен роман на Алеко Константинов, който разказва за приключенията на българина Бай Ганьо в ранните години на 20 век. Книгата представлява портрет на типичния българин от тоя период - обаятелен, амбициозен, но и смешен поради своите недостатъци и характеристични черти на поведение.",
-                            ImageUrl = "@---",
+                            ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/a/c5986df39a28a57f97d1598df42c7f45/bay-ganyo-pan-30.jpg",
                             Pages = 240,
                             Title = "Бай Ганьо",
                             YearPublished = 1895
@@ -810,6 +812,83 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("ActorsMovies");
+
+                    b.HasData(
+                        new
+                        {
+                            ActorId = 1,
+                            MovieId = 1
+                        },
+                        new
+                        {
+                            ActorId = 2,
+                            MovieId = 1
+                        },
+                        new
+                        {
+                            ActorId = 3,
+                            MovieId = 1
+                        },
+                        new
+                        {
+                            ActorId = 4,
+                            MovieId = 2
+                        },
+                        new
+                        {
+                            ActorId = 5,
+                            MovieId = 2
+                        },
+                        new
+                        {
+                            ActorId = 6,
+                            MovieId = 2
+                        },
+                        new
+                        {
+                            ActorId = 7,
+                            MovieId = 3
+                        },
+                        new
+                        {
+                            ActorId = 8,
+                            MovieId = 3
+                        },
+                        new
+                        {
+                            ActorId = 9,
+                            MovieId = 3
+                        },
+                        new
+                        {
+                            ActorId = 10,
+                            MovieId = 4
+                        },
+                        new
+                        {
+                            ActorId = 11,
+                            MovieId = 4
+                        },
+                        new
+                        {
+                            ActorId = 12,
+                            MovieId = 4
+                        },
+                        new
+                        {
+                            ActorId = 13,
+                            MovieId = 5
+                        },
+                        new
+                        {
+                            ActorId = 14,
+                            MovieId = 5
+                        },
+                        new
+                        {
+                            ActorId = 15,
+                            MovieId = 5
+                        });
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.GenreGenreOfMovie", b =>
@@ -827,6 +906,63 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("GenresMovies");
+
+                    b.HasData(
+                        new
+                        {
+                            GenreId = 1,
+                            MovieId = 1
+                        },
+                        new
+                        {
+                            GenreId = 7,
+                            MovieId = 1
+                        },
+                        new
+                        {
+                            GenreId = 1,
+                            MovieId = 2
+                        },
+                        new
+                        {
+                            GenreId = 7,
+                            MovieId = 2
+                        },
+                        new
+                        {
+                            GenreId = 1,
+                            MovieId = 3
+                        },
+                        new
+                        {
+                            GenreId = 7,
+                            MovieId = 3
+                        },
+                        new
+                        {
+                            GenreId = 1,
+                            MovieId = 4
+                        },
+                        new
+                        {
+                            GenreId = 6,
+                            MovieId = 4
+                        },
+                        new
+                        {
+                            GenreId = 1,
+                            MovieId = 5
+                        },
+                        new
+                        {
+                            GenreId = 6,
+                            MovieId = 5
+                        },
+                        new
+                        {
+                            GenreId = 7,
+                            MovieId = 5
+                        });
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.MovieMovieTheater", b =>
@@ -857,13 +993,90 @@ namespace SherplexTickets.Infrastructure.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)")
                         .HasComment("The current Actor's FirstName");
 
                     b.HasKey("Id");
 
                     b.ToTable("Actors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FullName = "Робърт Дауни мл."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FullName = "Гуинет Полтроу"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FullName = "Джеф Бриджис"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FullName = "Крис Евънс"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FullName = "Скарлет Йохансън"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            FullName = "Марк Ръфало"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            FullName = "Крис Прат"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            FullName = "Зоуи Салдана"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            FullName = "Дейв Батиста"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            FullName = "Чедуик Боузман"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            FullName = "Майкъл Б. Джордан"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            FullName = "Лупита Нионго"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            FullName = "Крис Хемсуърт"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            FullName = "Том Хидълстън"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            FullName = "Кейт Бланшет"
+                        });
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Director", b =>
@@ -882,6 +1095,33 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Directors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FullName = "Джон Фавро"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FullName = "Джос Уидън"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FullName = "Джеймс Гън"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FullName = "Райън Куглър"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FullName = "Тайка Уайтити"
+                        });
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.GenreOfMovie", b =>
@@ -896,9 +1136,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Property<int?>("GenreOfMovieId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(70)
@@ -908,8 +1145,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("GenreOfMovieId");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Genres");
 
@@ -1010,9 +1245,13 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("The current Movie's Director Identifier");
 
-                    b.Property<int>("MovieWhatchTime")
+                    b.Property<int>("Duration")
                         .HasColumnType("int")
                         .HasComment("The current Movie's Movie Watch Time");
+
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("datetime2")
+                        .HasComment("The date on which the curent Movie release");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -1025,15 +1264,63 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasComment("The current Movie's URLImage");
 
-                    b.Property<DateTime>("YearPublished")
-                        .HasColumnType("datetime2")
-                        .HasComment("The date on which the curent Movie was published");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DirectorId");
 
                     b.ToTable("Movies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "\"Iron Man\" представя историята на Тони Старк, гений инженер и милиардер, който живее двойствен живот като супергерой. Филмът разкрива как Тони Старк, след като бива отвлечен и ранен в Афганистан, разработва високотехнологичен брониран костюм, който му позволява да се превърне в Желязният Човек. Той използва този костюм, за да се изправи срещу злодеи и престъпници, като същевременно се бори с вътрешни конфликти и дилеми. Филмът е пълен с екшън и напрежение, като зрителите са изправени пред въпроси за морал, отговорност и справедливост.",
+                            DirectorId = 1,
+                            Duration = 126,
+                            ReleaseDate = new DateTime(2008, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Iron Man",
+                            URLImage = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/80C64C0B63382CD3ED2653356125F275F63D036028A77D38DC3286AD851A6833/scale?width=1200&amp;aspectRatio=1.78&amp;format=webp"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "В епичния филм \"The Avengers\", Ник Фюри от S.H.I.E.L.D. събира екип от суперхора, за да формира отбора \"Мъстителите\", с цел да помогне за спасяването на Земята от Локи и неговата армия. Локи, братът на Тор и бивш бог на азгардската митология, пристига на Земята със зловещ план за завладяване на света и подчиняване на човечеството.\r\n\r\nФюри, разбирайки сериозността на заплахата, събира най-мощните супергерои от света, включително Желязният Човек (Тони Старк), Капитан Америка (Стив Роджърс), Тор, Хълк (Брус Банър), Блек Уидоу (Наташа Романоф) и Хоукай (Клинт Бартън). Заедно те формират отбора \"Мъстителите\", който трябва да се обедини и да се противопостави на Локи и неговите войски.\r\n\r\nФилмът предлага впечатляваща комбинация от екшън, вълнуващи битки, забавни диалози и емоционални моменти. \"Мъстителите\" не само представя единствено изключителния състав от супергерои, но и демонстрира тяхната способност да работят заедно, дори когато са различни по характери и мотивации.",
+                            DirectorId = 2,
+                            Duration = 143,
+                            ReleaseDate = new DateTime(2012, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "The Avengers",
+                            URLImage = "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/B6981BDF339764E6C56626C9DE0820CEF297EAF069F62F244E0F50061219F069/scale?width=1200&aspectRatio=1.78&format=webp"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A group of intergalactic criminals must pull together to stop a fanatical warrior with plans to purge the universe.",
+                            DirectorId = 3,
+                            Duration = 121,
+                            ReleaseDate = new DateTime(2014, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Guardians of the Galaxy",
+                            URLImage = "https://m.media-amazon.com/images/M/MV5BNDIzMTk4NDYtMjg5OS00ZGI0LWJhZDYtMzdmZGY1YWU5ZGNkXkEyXkFqcGdeQXVyMTI5NzUyMTIz._V1_.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "В \"Черният пантер\" (Black Panther), наследникът на скритото кралство Уаканда, Т'Чала, трябва да изпълни своето предназначение и да въведе своя народ в ново бъдеще, докато се изправя срещу предизвикателство от миналото на своята страна.\r\n\r\nСлед смъртта на баща си, крал Т'Чака, Т'Чала се връща в Уаканда, за да поеме своята правителствена отговорност като новият крал. Той обаче е изправен пред сериозни предизвикателства, когато мистериозния войник Ерик Килмонгър, познат също като Килмонгър, се появява, за да оспори неговото място като правител.\r\n\r\nТ'Чала се изправя срещу вътрешни и външни конфликти, докато се опитва да преодолее препятствията пред Уаканда и да гарантира мира и стабилността на своя народ. Разкрива се сложна интрига, която разкрива теми за власт, наследство и самоопределяне, като Т'Чала трябва да преодолее своите собствени съмнения и грешки, за да стане истинският герой, който Уаканда се нуждае.",
+                            DirectorId = 4,
+                            Duration = 134,
+                            ReleaseDate = new DateTime(2018, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Black Panther",
+                            URLImage = "https://m.media-amazon.com/images/I/91+GjGet65L._AC_UF894,1000_QL80_.jpg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "В \"Тор: Рагнарок\" (Thor: Ragnarok), Тор е затворен на планетата Сакаар и трябва да се състезава с времето, за да се върне в Асгард и да спре Рагнарок - разрушението на света му, на ръцете на могъщата и безмилостната злодейка Хела.\r\n\r\nСлед като е отведен отнасящата го в Сакаар, Тор се озовава в плен на тиранина Грандмастър, който го принуждава да участва в смъртоносни състезания. В този хаос той открива, че неговият стар враг, братът му Локи, също е в тези нещастия.\r\n\r\nТор и Локи се обединяват, за да победят своя общ враг - Хела, която се оказва могъща асгардианка, бягнала от затвора си, за да поеме контрол над своето родно кралство. Сблъсъкът е неизбежен, а Тор и Локи трябва да обединят силите си с нови съюзници, за да спасят Асгард от сигурната му гибел.",
+                            DirectorId = 5,
+                            Duration = 130,
+                            ReleaseDate = new DateTime(2017, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Thor: Ragnarok",
+                            URLImage = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p12402331_p_v10_ax.jpg"
+                        });
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", b =>
@@ -1095,6 +1382,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .HasComment("The current Movie's Identifier");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)")
                         .HasComment("The current Ticket's Price");
 
@@ -1163,7 +1451,7 @@ namespace SherplexTickets.Infrastructure.Migrations
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Books.Book", b =>
                 {
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Books.Author", "Author")
-                        .WithMany()
+                        .WithMany("Books")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1294,7 +1582,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", "Movie")
-                        .WithMany()
+                        .WithMany("Genres")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1307,7 +1595,7 @@ namespace SherplexTickets.Infrastructure.Migrations
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.MovieMovieTheater", b =>
                 {
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", "Movie")
-                        .WithMany()
+                        .WithMany("MovieTheaters")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1328,16 +1616,12 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.GenreOfMovie", null)
                         .WithMany("GenresMovies")
                         .HasForeignKey("GenreOfMovieId");
-
-                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("MovieId");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", b =>
                 {
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Director", "Director")
-                        .WithMany()
+                        .WithMany("Movies")
                         .HasForeignKey("DirectorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1354,6 +1638,11 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Books.Author", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Books.Book", b =>
@@ -1392,6 +1681,11 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("ActorsMovies");
                 });
 
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Director", b =>
+                {
+                    b.Navigation("Movies");
+                });
+
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.GenreOfMovie", b =>
                 {
                     b.Navigation("GenresMovies");
@@ -1402,6 +1696,8 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("ActorsMovies");
 
                     b.Navigation("Genres");
+
+                    b.Navigation("MovieTheaters");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", b =>

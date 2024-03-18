@@ -20,7 +20,7 @@ namespace SherplexTickets.Core.Contracts
         Task<MovieViewModel> DetailsAsync(int movieId);
         Task<IEnumerable<MovieAllViewModel>> SearchAsync(string input);
 
-
+        Task<int> AddAsync(MovieAddViewModel movieForm);
 
     }
 }

@@ -4,7 +4,6 @@ using SherplexTickets.Core.ViewModels.BookView;
 using SherplexTickets.Core.ViewModels.MovieView;
 using SherplexTickets.Infrastructure.Common;
 using SherplexTickets.Infrastructure.Data.DataConstants;
-using SherplexTickets.Infrastructure.Data.Models.Books;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 

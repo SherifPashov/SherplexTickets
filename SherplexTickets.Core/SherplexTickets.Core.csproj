@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\BookView\**" />
+    <EmbeddedResource Remove="ViewModels\BookView\**" />
+    <None Remove="ViewModels\BookView\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SherplexTickets.Infrastructure\SherplexTickets.Infrastructure.csproj" />
   </ItemGroup>
 

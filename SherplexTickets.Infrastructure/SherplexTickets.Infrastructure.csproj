@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Models\Carts\**" />
+    <Compile Remove="Data\Models\Mappings\BookMapping\**" />
+    <EmbeddedResource Remove="Data\Models\Carts\**" />
+    <EmbeddedResource Remove="Data\Models\Mappings\BookMapping\**" />
+    <None Remove="Data\Models\Carts\**" />
+    <None Remove="Data\Models\Mappings\BookMapping\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.26" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.26" />
   </ItemGroup>

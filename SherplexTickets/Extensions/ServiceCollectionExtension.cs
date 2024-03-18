@@ -38,8 +38,6 @@ namespace SherplexTickets.Extensions
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IBookStoreService, BookStoreService>();
-            services.AddScoped<IBookService, BookService>();
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IMovieTheaterService, MovieTheaterService>();
 

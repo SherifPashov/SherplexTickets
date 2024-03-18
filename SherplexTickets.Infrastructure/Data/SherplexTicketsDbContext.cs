@@ -2,13 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Infrastructure.Data.DataSeeding.Confogurations;
 using SherplexTickets.Infrastructure.Data.Models;
-using SherplexTickets.Infrastructure.Data.Models.Books;
-using SherplexTickets.Infrastructure.Data.Models.BookStores;
-using SherplexTickets.Infrastructure.Data.Models.Carts;
-using SherplexTickets.Infrastructure.Data.Models.Mappings.BookMapping;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
-using System.Reflection.Emit;
 
 namespace SherplexTickets.Infrastructure.Data
 {
@@ -18,7 +13,6 @@ namespace SherplexTickets.Infrastructure.Data
         {
         }
 
-        public DbSet<Cart> Carts { get; set; } = null!;
 
         //Movie
         public DbSet<Actor> Actors { get; set; } = null!;
@@ -31,18 +25,6 @@ namespace SherplexTickets.Infrastructure.Data
         public DbSet<GenreGenreOfMovie> GenresMovies { get; set; } = null!;
         public DbSet<MovieMovieTheater> MoviesMoviesTheaters { get; set; } = null!;
 
-        //Book
-
-        public DbSet<Book> Books { get; set; } = null!;
-        public DbSet<Author> Authors { get; set; } = null!;
-        public DbSet<BookReview> BookReviews { get; set; } = null!;
-        public DbSet<CoverType> CoverTypes { get; set; } = null!;
-        public DbSet<GenreOfBook> GenreOfBooks { get; set; } = null!;
-        public DbSet<BookStore> BookStores { get; set; } = null!;
-
-        public DbSet<BookBookStore> BookBookStores { get; set; } = null!;
-        public DbSet<GenreGenreOfBook> GenresGenresOfBooks { get; set; } = null!;
-        public DbSet<BookCart> BookCarts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -62,21 +44,7 @@ namespace SherplexTickets.Infrastructure.Data
                 .HasForeignKey(b => b.DirectorId)
                 .IsRequired();
 
-            //Book
-            builder.Entity<BookBookStore>()
-                .HasKey(ac => new { ac.BookId, ac.BookStoreId });
-
-            builder.Entity<BookCart>()
-                .HasKey(ac => new { ac.BookId, ac.CartId });
-
-            builder.Entity<GenreGenreOfBook>()
-                .HasKey(ac => new { ac.GenreId, ac.BookId });
-
-            builder.Entity<Book>()
-                .HasOne(b => b.Author)
-                .WithMany(a => a.Books)
-                .HasForeignKey(b => b.AuthorId)
-                .IsRequired();
+            
 
             builder.Entity<Ticket>()
                 .Property(t => t.Price)
@@ -84,12 +52,6 @@ namespace SherplexTickets.Infrastructure.Data
 
             base.OnModelCreating(builder);
 
-            //Configuration (Data Seeding)
-            builder.ApplyConfiguration(new GenreOfBookConfiguration());
-            builder.ApplyConfiguration(new CoverTypeConfiguration());
-            builder.ApplyConfiguration(new AuthorConfiguration());
-            builder.ApplyConfiguration(new BookConfiguration());
-            builder.ApplyConfiguration(new GenreGenreOfBookConfiguration());
 
             builder.ApplyConfiguration(new GenreOfMovieConfiguration());
             builder.ApplyConfiguration(new DirectorConfiguration());

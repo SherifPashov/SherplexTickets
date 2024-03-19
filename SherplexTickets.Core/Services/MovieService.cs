@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.BookView;
 using SherplexTickets.Core.ViewModels.MovieView;
@@ -6,6 +7,7 @@ using SherplexTickets.Infrastructure.Common;
 using SherplexTickets.Infrastructure.Data.DataConstants;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
+using System.IO;
 
 namespace SherplexTickets.Core.Services
 {
@@ -64,7 +66,7 @@ namespace SherplexTickets.Core.Services
         }
 
 
-        public async Task<IEnumerable<GenreViewModel>> AllGenreAsync(int movieId)
+        public async Task<IEnumerable<GenreViewModel>> AllGenresAsync(int movieId)
         {
             return await repository.AllReadonly<GenreGenreOfMovie>()
                 .Where(g => g.MovieId == movieId)
@@ -82,7 +84,7 @@ namespace SherplexTickets.Core.Services
             var currentDirector = await repository.AllReadonly<Director>()
                 .FirstOrDefaultAsync(d => d.Id == currentMovie.DirectorId);
 
-            var genres = await AllGenreAsync(movieId);
+            var genres = await AllGenresAsync(movieId);
 
             var actors = await AllActorsAsync(movieId);
 
@@ -162,6 +164,114 @@ namespace SherplexTickets.Core.Services
                     });
                 }
             }
+            foreach (var actorName in movieForm.ActorsName.Split(new string[] { ",", ", " }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                var actor = await repository.AllReadonly<Actor>().FirstOrDefaultAsync(a => a.Name.ToLower() == actorName.ToLower());
+
+                if (actor == null)
+                {
+                    actor = new Actor { Name = actorName };
+                    await repository.AddAsync(actor);
+
+                }
+
+                movie.ActorsMovies.Add(new ActorMovie { Actor = actor, Movie = movie });
+            }
+
+            await repository.SaveChangesAsync();
+
+            return movie.Id;
+        }
+
+        public async Task<MovieEditViewModel> EditGetAsync(int movieId)
+        {
+            var currentMovie = await repository.All<Movie>()
+                .FirstOrDefaultAsync(b => b.Id == movieId);
+
+            var director = await repository.All<Director>()
+                .FirstOrDefaultAsync(d => d.Id == currentMovie.DirectorId);
+
+            var actors = await AllActorsAsync(movieId);
+            var genres = await AllGenresAsync(movieId);
+
+            var movieForm = new MovieEditViewModel()
+            {
+                Id = movieId,
+                Title = currentMovie.Title,
+                Description = currentMovie.Description,
+                ReleaseDate = currentMovie.ReleaseDate,
+                URLImage = currentMovie.URLImage,
+                Duration = currentMovie.Duration,
+                Director = director.Name,
+                ActorsName = string.Join(", ", actors.Select(a=>a.FullName)),
+                SelectGenreIds = genres.Select(a=>a.Id),
+            };
+
+            movieForm.Genres = await AllGenresAsync();
+
+            return movieForm;
+        }
+
+        public async Task<int> EditPostAsync(MovieEditViewModel movieForm )
+        {
+
+
+            Director? director = await repository.AllReadonly<Director>()
+               .FirstOrDefaultAsync(d => d.Name.ToLower() == movieForm.Director.ToLower());
+
+            if (director == null)
+            {
+                director = new Director { Name = movieForm.Director };
+                await repository.AddAsync(director);
+            }
+
+            var movie = await repository.All<Movie>()
+               .Where(b => b.Id == movieForm.Id)
+               .FirstOrDefaultAsync();
+
+            var allGenreMovie = await repository.All<GenreGenreOfMovie>()
+                .Where(gm => gm.MovieId == movie.Id)
+                .ToListAsync();
+            var allActorMovie = await repository.All<ActorMovie>()
+                .Where(am => am.MovieId == movie.Id)
+                .ToListAsync();
+
+            if (allActorMovie != null)
+            {
+                repository.DeleteRange<ActorMovie>(allActorMovie);  
+
+            }
+            if (allGenreMovie != null)
+            {
+
+                repository.DeleteRange<GenreGenreOfMovie>(allGenreMovie);
+            }
+            await repository.SaveChangesAsync();
+
+
+
+            movie.Title = movieForm.Title;
+            movie.Description = movieForm.Description;
+            movie.ReleaseDate = movieForm.ReleaseDate;
+            movie.URLImage = movieForm.URLImage;
+            movie.Duration = movieForm.Duration;
+            movie.Director = director;
+
+            
+
+            foreach (var genreId in movieForm.GenreIds)
+            {
+                var genre = await repository.AllReadonly<GenreOfMovie>().FirstOrDefaultAsync(g => g.Id == genreId);
+                if (genre != null)
+                {
+                    movie.Genres.Add(new GenreGenreOfMovie()
+                    {
+                        Genre = genre,
+                        Movie = movie,
+                    });
+                }
+            }
+
             foreach (var actorName in movieForm.ActorsName.Split(new string[] { ",", ", " }, StringSplitOptions.RemoveEmptyEntries))
             {
                 var actor = await repository.AllReadonly<Actor>().FirstOrDefaultAsync(a => a.Name.ToLower() == actorName.ToLower());

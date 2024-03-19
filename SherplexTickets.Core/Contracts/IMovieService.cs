@@ -12,15 +12,17 @@ namespace SherplexTickets.Core.Contracts
     {
         Task<IEnumerable<MovieAllViewModel>> AllAsync();
         Task<IEnumerable<GenreViewModel>> AllGenresAsync();
+        Task<IEnumerable<GenreViewModel>> AllGenresAsync(int movieId);
         Task<bool> MovieExistsAsync(int movieId);
 
         Task<IEnumerable<ActorViewModel>> AllActorsAsync(int movieId);
 
-        Task<IEnumerable<GenreViewModel>> AllGenreAsync(int movieId);
         Task<MovieViewModel> DetailsAsync(int movieId);
         Task<IEnumerable<MovieAllViewModel>> SearchAsync(string input);
 
         Task<int> AddAsync(MovieAddViewModel movieForm);
+        Task<MovieEditViewModel> EditGetAsync(int bookId);
+        Task<int> EditPostAsync(MovieEditViewModel movieForm);
 
     }
 }

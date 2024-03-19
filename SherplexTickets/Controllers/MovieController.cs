@@ -85,5 +85,40 @@ namespace SherplexTickets.Controllers
             return RedirectToAction(nameof(Details),new { Id = newMovieId });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (!await movieService.MovieExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var bookForm = await movieService.EditGetAsync(id);
+            return View(bookForm);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Edit(MovieEditViewModel movieForm)
+        {
+            if (movieForm == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid )
+            {
+                movieForm.Genres = await movieService.AllGenresAsync();
+                var selectGenres = await movieService.AllGenresAsync(movieForm.Id);
+                movieForm.SelectGenreIds = selectGenres.Select(sg=>sg.Id).ToList();
+
+
+                return View(movieForm);
+            }
+
+            await movieService.EditPostAsync(movieForm);
+            return RedirectToAction(nameof(Details), new {id=movieForm.Id});
+        }
+
     }
 }

@@ -8,12 +8,15 @@
 <h2 class="text-center mt-4 mb-3" style="background: rgb(17, 31, 52); padding: 10px; margin: 0 auto; max-width: 30%; border-radius: 1rem;">@ViewBag.Title</h2>
 <style>
     body{
-        background-image: url('@Url.Content("~/images/AllBackgroundMovie.png")');
+        background-image: url('@Url.Content("~/images/MovieAll.png")');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
         color:white;
     }
 </style>
 
-<div class="container" style="background-image: url('@Url.Content("~/images/AllBackgroundMovie.png")'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+<div class="container" style="background-image: url('@Url.Content("~/images/MovieAll.png")'); background-size: cover; background-repeat: no-repeat; background-position: center;">
     
     <div class="text-center mb-4" style="padding-top: 15px;">
         <a asp-controller="Movie" asp-action="Add" class="btn btn-primary btn-lg">Добави филм</a>

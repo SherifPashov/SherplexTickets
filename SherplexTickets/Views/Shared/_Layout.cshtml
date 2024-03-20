@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SherplexTickets.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body style="font-size: 1.1rem;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                
+
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="/images/LogoNavBar.png" alt="Лого" style="width: 100px; height: 50; display: block; margin: 0px 10px;">
                 </a>
@@ -24,28 +24,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="All">Movies</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movie" asp-action="All">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MovieTheater" asp-action="All">Theaters</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="MovieTheater" asp-action="All">Theaters</a>
                         </li>
                     </ul>
-                    
+
                     <div class="dropdown show">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: rgb(225, 181, 56);">
                             Admine
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Movie" asp-action="Edit">Edit Movie</a>
                             <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Movie" asp-action="Edit">Edit Theater</a>
-                            
+
                         </div>
                     </div>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -54,7 +55,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container" style="color:white;">
+        <div class="container" style="color:rgb(225, 181, 56)">
             &copy; @DateTime.UtcNow.Year - Sherplex Tickets
         </div>
     </footer>

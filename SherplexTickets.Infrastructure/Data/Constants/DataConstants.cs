@@ -35,8 +35,8 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
 
 
             //ImageUrl
-            public const int MovieImageUrlMinLength = 5;
-            public const int MovieImageUrlMaxLength = 400;
+            public const int MovieUrlMinLength = 5;
+            public const int MovieUrlMaxLength = 400;
         }
         public static class  MovieReviewConstants
         {

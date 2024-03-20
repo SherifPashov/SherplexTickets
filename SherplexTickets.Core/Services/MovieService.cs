@@ -29,6 +29,7 @@ namespace SherplexTickets.Core.Services
                     Id = b.Id,
                     Title = b.Title,
                     URLImage = b.URLImage,
+                    YoutubeTrailerUrl = b.YoutubeTrailerUrl,
                     Duration = b.Duration.ToString(),
                     ReleaseDate = b.ReleaseDate.Year.ToString(),
 
@@ -77,6 +78,22 @@ namespace SherplexTickets.Core.Services
                 })
                 .ToListAsync();
         }
+        public string GetEmbeddedYouTubeUrl(string originalUrl)
+        {
+            // Проверка дали подаденият URL е от YouTube
+            if (originalUrl.Contains("youtube.com"))
+            {
+                // Извличане на уникалния идентификатор на видеото от URL адреса
+                var videoId = originalUrl.Split(new[] { "?v=" }, StringSplitOptions.RemoveEmptyEntries)[1];
+
+                // Създаване на URL адрес за вграждане с уникалния идентификатор на видеото
+                return $"https://www.youtube.com/embed/{videoId}";
+            }
+
+            // Ако URL адресът не е от YouTube, връщаме го както е
+            return originalUrl;
+        }
+
         public async Task<MovieViewModel> DetailsAsync(int movieId)
         {
             Movie? currentMovie = await repository.AllReadonly<Movie>()
@@ -95,6 +112,7 @@ namespace SherplexTickets.Core.Services
                 Title = currentMovie.Title,
                 Description = currentMovie.Description,
                 URLImage = currentMovie.URLImage,
+                YoutubeTrailerUrl = GetEmbeddedYouTubeUrl(currentMovie.YoutubeTrailerUrl),
                 ReleaseDate = currentMovie.ReleaseDate.ToString(DataConstants.DateTimeDefaultFormat),
                 Duration = currentMovie.Duration.ToString(),
                 DirectorName = currentDirector.Name,
@@ -120,6 +138,7 @@ namespace SherplexTickets.Core.Services
                     Id = b.Id,
                     Title = b.Title,
                     URLImage = b.URLImage,
+                    YoutubeTrailerUrl = b.YoutubeTrailerUrl,
                     Duration = b.Duration.ToString(),
                     ReleaseDate = b.ReleaseDate.Year.ToString(DataConstants.DateTimeDefaultFormat),
                 })
@@ -144,6 +163,7 @@ namespace SherplexTickets.Core.Services
                 Description = movieForm.Description,
                 ReleaseDate = movieForm.ReleaseDate,
                 URLImage = movieForm.URLImage,
+                YoutubeTrailerUrl = movieForm.YoutubeTrailerUrl,
                 Duration = movieForm.Duration,
                 Director = director, 
             };
@@ -201,6 +221,7 @@ namespace SherplexTickets.Core.Services
                 Description = currentMovie.Description,
                 ReleaseDate = currentMovie.ReleaseDate,
                 URLImage = currentMovie.URLImage,
+                YoutubeTrailerUrl = currentMovie.YoutubeTrailerUrl,
                 Duration = currentMovie.Duration,
                 Director = director.Name,
                 ActorsName = string.Join(", ", actors.Select(a=>a.FullName)),
@@ -254,6 +275,7 @@ namespace SherplexTickets.Core.Services
             movie.Description = movieForm.Description;
             movie.ReleaseDate = movieForm.ReleaseDate;
             movie.URLImage = movieForm.URLImage;
+            movie.YoutubeTrailerUrl = movieForm.YoutubeTrailerUrl;
             movie.Duration = movieForm.Duration;
             movie.Director = director;
 

@@ -65,6 +65,12 @@
                 <span asp-validation-for="@Model.URLImage" class="text-danger"></span>
             </div>
 
+            <div class="mb-3">
+                <label asp-for="@Model.YoutubeTrailerUrl" class="form-label-add-edit"><bold>Линк към трейлъра на филма в You Tube (URL)</bold></label>
+                <input asp-for="@Model.YoutubeTrailerUrl" class="form-control" type="text" />
+                <span asp-validation-for="@Model.YoutubeTrailerUrl" class="text-danger"></span>
+            </div>
+
 
             <div class="mb-3" style="padding-left:30px;">
                 <label asp-for="@Model.GenreIds" class="form-label-add-edit"><bold>Жанр</bold></label>

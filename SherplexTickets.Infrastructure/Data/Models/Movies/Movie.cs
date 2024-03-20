@@ -21,13 +21,18 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
 
         [Required]
         [MaxLength(MovieDiscriptionMaxLength)]
-
         [Comment("The current Movie's Description")]
         public string Description { get; set; } = string.Empty;
 
         [Required]
         [Comment("The current Movie's URLImage")]
+        [MaxLength(MovieUrlMaxLength)]
         public string URLImage { get; set; } = string.Empty;
+
+        [Required]
+        [Comment("The current Movie's YouTube Trailer Url")]
+        [MaxLength(MovieUrlMaxLength)]
+        public string YoutubeTrailerUrl { get; set; } =string.Empty;
 
         [Required]
         [Comment("The current Movie's Director Identifier")]

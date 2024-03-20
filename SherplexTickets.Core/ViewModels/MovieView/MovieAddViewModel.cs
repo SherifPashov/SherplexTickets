@@ -21,8 +21,12 @@ namespace SherplexTickets.Core.ViewModels.MovieView
         public string Description { get; set; } = string.Empty;
 
         [Required]
-        [StringLength(MovieImageUrlMaxLength, MinimumLength = MovieImageUrlMinLength, ErrorMessage = LengthErrorMessage)]
+        [StringLength(MovieUrlMaxLength, MinimumLength = MovieUrlMinLength, ErrorMessage = LengthErrorMessage)]
         public string URLImage { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(MovieUrlMaxLength, MinimumLength = MovieUrlMinLength, ErrorMessage = LengthErrorMessage)]
+        public string YoutubeTrailerUrl { get; set; } = string.Empty;
 
         [Required]
         [StringLength(DirectorConstants.DirectorNameMaxLength, MinimumLength = DirectorConstants.DirectorNameMinLength, ErrorMessage = LengthErrorMessage)]

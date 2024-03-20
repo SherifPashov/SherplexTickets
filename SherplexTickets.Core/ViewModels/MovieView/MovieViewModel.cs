@@ -16,7 +16,7 @@ namespace SherplexTickets.Core.ViewModels.MovieView
 
         public string URLImage { get; set; } = string.Empty;
 
-        public string YearPublished { get; set; } = string.Empty;
+        public string ReleaseDate { get; set; } = string.Empty;
 
         public string DateViewedMovie { get; set; } = string.Empty;
 

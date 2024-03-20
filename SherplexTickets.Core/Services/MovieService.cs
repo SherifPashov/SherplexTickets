@@ -30,7 +30,7 @@ namespace SherplexTickets.Core.Services
                     Title = b.Title,
                     URLImage = b.URLImage,
                     Duration = b.Duration.ToString(),
-                    YearPublished = b.ReleaseDate.Year.ToString(),
+                    ReleaseDate = b.ReleaseDate.Year.ToString(),
 
                 })
                 .ToListAsync();
@@ -95,7 +95,7 @@ namespace SherplexTickets.Core.Services
                 Title = currentMovie.Title,
                 Description = currentMovie.Description,
                 URLImage = currentMovie.URLImage,
-                YearPublished = currentMovie.ReleaseDate.ToString(DataConstants.DateTimeDefaultFormat),
+                ReleaseDate = currentMovie.ReleaseDate.ToString(DataConstants.DateTimeDefaultFormat),
                 Duration = currentMovie.Duration.ToString(),
                 DirectorName = currentDirector.Name,
                 ActorsName = actors.Any() ? string.Join(", ", actors.Select(a => a.FullName)) : "Няма информация",
@@ -121,7 +121,7 @@ namespace SherplexTickets.Core.Services
                     Title = b.Title,
                     URLImage = b.URLImage,
                     Duration = b.Duration.ToString(),
-                    YearPublished = b.ReleaseDate.Year.ToString(DataConstants.DateTimeDefaultFormat),
+                    ReleaseDate = b.ReleaseDate.Year.ToString(DataConstants.DateTimeDefaultFormat),
                 })
                 .ToListAsync();
 
@@ -290,8 +290,54 @@ namespace SherplexTickets.Core.Services
 
             return movie.Id;
         }
+        public async Task<MovieDeleteViewModel> DeleteAsync(int movieId)
+        {
+            var movie = await repository
+                .AllReadonly<Movie>().Where(b => b.Id == movieId)
+                .FirstOrDefaultAsync();
 
+            var deleteForm = new MovieDeleteViewModel()
+            {
+                Id = movie.Id,
+                ReleaseDate = movie.ReleaseDate.ToString(DataConstants.DateTimeDefaultFormat),
+                URLImage = movie.URLImage,
+                Duration=movie.Duration.ToString(),
+                Title = movie.Title,
+            };
 
+            return deleteForm;
+        }
 
+        public async Task DeleteConfirmedAsync(int bookId)
+        {
+            var movie = await repository.All<Movie>()
+                .Where(b => b.Id == bookId)
+                .FirstOrDefaultAsync();
+
+            var actorsMovie = await repository.All<ActorMovie>()
+                .Where(am => am.MovieId == movie.Id)
+                .ToListAsync();
+
+            var genresMovie = await repository.All<GenreGenreOfMovie>()
+                .Where(gm => gm.MovieId == movie.Id)
+                .ToListAsync();
+            if (movie != null)
+            {
+                if (genresMovie != null && genresMovie.Any())
+                {
+                    repository.DeleteRange(genresMovie);
+                }
+
+                if (actorsMovie != null && actorsMovie.Any())
+                {
+                    repository.DeleteRange(actorsMovie);
+                }
+                await repository.SaveChangesAsync();
+
+                repository.Delete(movie);
+                await repository.SaveChangesAsync();
+            }
+
+        }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SherplexTickets.Infrastructure.Data.DataSeeding;
 using SherplexTickets.Infrastructure.Data.DataSeeding.Confogurations;
 using SherplexTickets.Infrastructure.Data.Models;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
+using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
 
 namespace SherplexTickets.Infrastructure.Data
 {
@@ -19,11 +21,11 @@ namespace SherplexTickets.Infrastructure.Data
         public DbSet<GenreOfMovie> Genres { get; set; } = null!;
         public DbSet<Director> Directors { get; set; } = null!;
         public DbSet<Movie> Movies { get; set; } = null!;
-        public DbSet<Ticket> Tickets { get; set; } = null!;
 
         public DbSet<ActorMovie> ActorsMovies { get; set; } = null!;
         public DbSet<GenreGenreOfMovie> GenresMovies { get; set; } = null!;
-        public DbSet<MovieMovieTheater> MoviesMoviesTheaters { get; set; } = null!;
+        public DbSet<DailyScheduleMovieTheater> DailyScheduleMovieTheater { get; set; } = null!;
+        public DbSet<ShowTime> ShowTimes { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -35,7 +37,7 @@ namespace SherplexTickets.Infrastructure.Data
             builder.Entity<GenreGenreOfMovie>()
                 .HasKey(ac => new { ac.GenreId, ac.MovieId });
 
-            builder.Entity<MovieMovieTheater>()
+            builder.Entity<DailyScheduleMovieTheater>()
                 .HasKey(ac => new { ac.MovieId, ac.MovieTheaterId });
 
             builder.Entity<Movie>()
@@ -44,9 +46,7 @@ namespace SherplexTickets.Infrastructure.Data
                 .HasForeignKey(b => b.DirectorId)
                 .IsRequired();
 
-            
-
-            builder.Entity<Ticket>()
+            builder.Entity<DailyScheduleMovieTheater>()
                 .Property(t => t.Price)
                 .HasPrecision(18, 2);
 
@@ -59,6 +59,7 @@ namespace SherplexTickets.Infrastructure.Data
             builder.ApplyConfiguration(new MovieConfiguration());
             builder.ApplyConfiguration(new ActorMovieConfiguration());
             builder.ApplyConfiguration(new GenreGenreOfMovieConfiguration());
+
             builder.ApplyConfiguration(new MovieTheatersConfiguration());
         }
     }

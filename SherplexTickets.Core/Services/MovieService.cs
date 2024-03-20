@@ -164,7 +164,7 @@ namespace SherplexTickets.Core.Services
                     });
                 }
             }
-            foreach (var actorName in movieForm.ActorsName.Split(new string[] { ",", ", " }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var actorName in movieForm.ActorsName.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries))
             {
                 var actor = await repository.AllReadonly<Actor>().FirstOrDefaultAsync(a => a.Name.ToLower() == actorName.ToLower());
 
@@ -272,7 +272,7 @@ namespace SherplexTickets.Core.Services
                 }
             }
 
-            foreach (var actorName in movieForm.ActorsName.Split(new string[] { ",", ", " }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var actorName in movieForm.ActorsName.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries))
             {
                 var actor = await repository.AllReadonly<Actor>().FirstOrDefaultAsync(a => a.Name.ToLower() == actorName.ToLower());
 

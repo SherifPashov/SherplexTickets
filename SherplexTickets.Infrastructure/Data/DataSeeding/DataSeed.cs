@@ -2,7 +2,7 @@
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
 using System.Globalization;
-using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieTeaterConstants;
+using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
 
 namespace SherplexTickets.Infrastructure.Data.DataSeeding
 {
@@ -18,7 +18,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             ActorsMovies = SeedActorMovies();
             GenresGenreOfMovies = SeedGenreGenresOfMovie();
             MovieTheaters = SeedMovieTheaters();
-
+            DailySchedules = SeedDailySchedules();
         }
 
 
@@ -29,7 +29,9 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
         public IEnumerable<Movie> Movies { get; set; }
         public IEnumerable<ActorMovie> ActorsMovies { get; set; }
         public IEnumerable<GenreGenreOfMovie> GenresGenreOfMovies { get; set; }
+
         public IEnumerable<MovieTheater> MovieTheaters { get; set; }
+        public IEnumerable<DailyScheduleMovieTheater> DailySchedules { get; set; }
 
 
 
@@ -231,9 +233,9 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Id = 1,
                     Name = "Cinema City",
                     Location = "Mall Paradise Center, Хладилника, бул. „Черни връх“ 100, 1407 София",
-                    Contact = "02 929 2929",
-                    OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    Contact = "029292929",
+                    OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMdJrsk_0e4rX4NVGizrakLvwUFBD29M2GLQWNL=s680-w680-h510-rw"
                 },
                 new MovieTheater
@@ -241,9 +243,9 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Id = 2,
                     Name = "Cinema City",
                     Location = "Mall of, ж.к. Зона Б-5, бул. „Александър Стамболийски“ 101, 1303 София",
-                    Contact = "032 640 111",
-                    OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    Contact = "032640111",
+                    OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOmXpjzG2b9aPieXQdLPx1d3wis6FwOvEmdHlSr=s680-w680-h510-rw"
                 },
                 new MovieTheater
@@ -251,9 +253,9 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Id = 3,
                     Name = "АРЕНА THE MALL",
                     Location = "м. Къро, бул. „Цариградско шосе“ 115, 1784 София",
-                    Contact = "02 4047 121",
-                    OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    Contact = "024047121",
+                    OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOO_ILS0rWgwlCk-Dz3BLpUYBGwniBoAfjs1RGN=s680-w680-h510"
                 },
                 new MovieTheater
@@ -261,9 +263,9 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Id = 4,
                     Name = "АРЕНА МОЛ ВАРНА",
                     Location = "бул. Владислав Варненчик 186, Mall Varna Варна",
-                    Contact = "02 4047 131",
-                     OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    Contact = "024047131",
+                    OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ImageUrl = "https://programata.bg/wp-content/uploads/2022/09/arena-grand-mall-varna.jpg"
                 },
                 new MovieTheater
@@ -271,14 +273,71 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Id = 5,
                     Name = "Arena IMAX Mall Markovo Tepe Plovdiv",
                     Location = "ЦентърПловдив Център, бул. „Руски“ 54, 4000 Пловдив",
-                    Contact = "02 4047 125",
-                     OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    Contact = "024047125",
+                    OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ImageUrl = "https://markovotepemall.bg/wp-content/uploads/2020/03/Arena.jpg"
                 }
             };
         }
-        
+
+        private IEnumerable<DailyScheduleMovieTheater> SeedDailySchedules()
+        {
+            var schedules = new List<DailyScheduleMovieTheater>(){
+                new DailyScheduleMovieTheater
+                {
+                    MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
+                    MovieId = 1, // Идентификатор на филма "Kung Fu Panda"
+                    Date = new DateTime(2024, 3, 20), // Дата на излъчване
+                    ShowTimes = new List<ShowTime>
+                    {
+                        new ShowTime { Time = DateTime.Parse("13:30") },
+                        new ShowTime { Time = DateTime.Parse("15:13") },
+                        new ShowTime { Time = DateTime.Parse("22:30") }
+                    }
+                },
+                new DailyScheduleMovieTheater
+                {
+                    MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
+                    MovieId = 2, // Идентификатор на филма "Kung Fu Panda 2"
+                    Date = new DateTime(2024, 3, 21), // Дата на излъчване
+                    ShowTimes = new List<ShowTime>
+                    {
+                        new ShowTime { Time = DateTime.Parse("13:30") },
+                        new ShowTime { Time = DateTime.Parse("15:13") },
+                        new ShowTime { Time = DateTime.Parse("22:30") }
+                    }
+                },
+                new DailyScheduleMovieTheater
+                {
+                    MovieTheaterId = 2, // Идентификатор на киносалона "Арена"
+                    MovieId = 1, // Идентификатор на филма "Kung Fu Panda"
+                    Date = new DateTime(2024, 3, 20), // Дата на излъчване
+                    ShowTimes = new List<ShowTime>
+                    {
+                        new ShowTime { Time = DateTime.Parse("13:30") },
+                        new ShowTime { Time = DateTime.Parse("15:13") },
+                        new ShowTime { Time = DateTime.Parse("22:30") }
+                    }
+                },
+                new DailyScheduleMovieTheater
+                {
+                    MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
+                    MovieId = 2, // Идентификатор на филма "Kung Fu Panda 2"
+                    Date = new DateTime(2024, 3, 21), // Дата на излъчване
+                    ShowTimes = new List<ShowTime>
+                    {
+                        new ShowTime { Time = DateTime.Parse("13:30") },
+                        new ShowTime { Time = DateTime.Parse("15:13") },
+                        new ShowTime { Time = DateTime.Parse("22:30") }
+                    }
+                },
+            };
+
+            return schedules;
+        }
+
+
     }
 }
 

@@ -3,6 +3,7 @@ using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.MovieTheater;
 using SherplexTickets.Infrastructure.Common;
 using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
+using System.Xml.Linq;
 namespace SherplexTickets.Core.Services
 {
     public class MovieTheaterService : IMovieTheaterService
@@ -14,7 +15,7 @@ namespace SherplexTickets.Core.Services
             this.repository = repository;
         }
 
-        public async Task<MovieTheaterViewModel?> GetMovieTheater(int theaterId)
+        public async Task<MovieTheaterViewModel?> GetMovieTheaterAsync(int theaterId)
         {
             return await repository.AllReadonly<MovieTheater>()
                 .Where(t => t.Id == theaterId)
@@ -55,11 +56,66 @@ namespace SherplexTickets.Core.Services
 
         public async  Task<MovieTheaterViewModel?> DetailsAsync(int bookId)
         {
-            var theater = await GetMovieTheater(bookId);
+            var theater = await GetMovieTheaterAsync(bookId);
 
             return theater;
         }
 
-        
+        public async Task<int> AddAsync(MovieTheaterAddViewModel movieTheater)
+        {
+            MovieTheater book = new MovieTheater()
+            {
+                Name = movieTheater.Name,
+                ImageUrl = movieTheater.ImageUrl,
+                Contact = movieTheater.Contact,
+                Location = movieTheater.Location,
+                OpeningTime= movieTheater.OpeningTime,
+                ClosingTime= movieTheater.ClosingTime,
+                
+            };
+
+            await repository.AddAsync(book);
+            await repository.SaveChangesAsync();
+
+            return book.Id;
+        }
+
+        public async Task<MovieTheaterEditViewModel> EditGetAsync(int movieTheaterId)
+        {
+            var currentMovieTheater = await repository.All<MovieTheater>()
+                .FirstOrDefaultAsync(mt=>mt.Id==movieTheaterId);
+
+            return new MovieTheaterEditViewModel()
+            {
+                Name = currentMovieTheater.Name,
+                ImageUrl = currentMovieTheater.ImageUrl,
+                Contact = currentMovieTheater.Contact,
+                Location = currentMovieTheater.Location,
+                OpeningTime = currentMovieTheater.OpeningTime,
+                ClosingTime = currentMovieTheater.ClosingTime,
+
+            };
+        }
+
+        public async Task<int> EditPostAsync(MovieTheaterEditViewModel movieTheaterForm)
+        {
+            var movieTheater = await repository.All<MovieTheater>()
+                .FirstOrDefaultAsync(mt => mt.Id == movieTheaterForm.Id);
+
+            movieTheater.Name = movieTheaterForm.Name;
+            movieTheater.ImageUrl = movieTheaterForm.ImageUrl;
+            movieTheater.Contact = movieTheaterForm.Contact;
+            movieTheater.Location = movieTheaterForm.Location;
+            movieTheater.OpeningTime = movieTheaterForm.OpeningTime;
+            movieTheater.ClosingTime = movieTheaterForm.ClosingTime;
+
+
+            await repository.SaveChangesAsync();
+
+            return movieTheater.Id;
+        }
+
+
+
     }
 }

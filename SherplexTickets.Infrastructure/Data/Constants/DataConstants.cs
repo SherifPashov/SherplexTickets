@@ -11,6 +11,7 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
 
         //Data Time Delaflt Format
         public const string DateTimeDefaultFormat = "dd.MM.yyyy";
+        public const string DateTimeHouFormat = "HH:mm";
 
         //Length Error Message
         public const string LengthErrorMessage = "{0} must be between {2} and {1} characters long!";
@@ -77,99 +78,24 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
 
         public static class MovieTeaterConstants
         {
-            public const string DateTimeMovieTheaterFormat = "HH:mm";
 
             //Name
             public const int MovieTheaterNameMaxLength = 100;
+            public const int MovieTheaterNameMinLength = 2;
 
             //Location
             public const int MovieTheaterLocationMinLength = 5;
             public const int MovieTheaterLocationMaxLength = 300;
 
             //Contact
-            public const string MovieTheaterContactRegex = @"/^(?:\+359\d{9}|0\d{1}\s?\d{4}\s?\d{3})$";
+            public const string MovieTheaterContactRegex = @"^(?:\+359\d{9}|0\d{1}\s?\d{4}\s?\d{3})$";
 
             //ImageUrl
             public const int MovieTheaterImageUrlMinLength = 5;
             public const int MovieTheaterImageUrlMaxLength = 500;
         }
 
-        /// <summary>
-        /// Book All constants
-        /// </summary>
 
-        public static class BookConstants
-        {
-            //Title
-            public const int BookTitleMinLength = 1;
-            public const int BookTitleMaxLength = 100;
-
-            //Description
-            public const int BookDescriptionMinLength = 200;
-            public const int BookDescriptionMaxLength = 5000;
-
-            //Price
-            public const string BookPriceMinValue = "1";
-            public const string BookPriceMaxValue = "10000";
-
-            //Page
-            public const double BookPageMinValue = 1;
-            public const double BookPageMaxValue = 10000;
-
-            //PublishingHouse
-            public const int BookPublishingHouseMinLength = 1;
-            public const int BookPublishingHouseMaxLength = 70;
-
-            //YearPublished
-            public const int BookYearPublishedMinRange = 1;
-            public const int BookYearPublishedMaxRange = 2024;
-
-            //ImageUrl
-            public const int BookImageUrlMinLength = 5;
-            public const int BookImageUrlMaxLength = 400;
-        }
-        public static class AuthorConstants
-        {
-            //Name
-            public const int AuthorNameMinLength = 2;
-            public const int AuthorNameMaxLength = 50;
-        }
-
-        public static class BookReviewConstants
-        {
-            //Title
-            public const int BookReviewTitleMinLength = 1;
-            public const int BookReviewTitleMaxLength = 50;
-
-            //Description
-            public const int BookReviewDescriptionMinLength = 15;
-            public const int BookReviewDescriptionMaxLength = 8000;
-
-            //Description
-            public const int BookReviewRateMinRange = 1;
-            public const int BookReviewRateMaxRange = 10;
-        }
-
-        public static class BookStoreConstants
-        {
-            public const string DateTimeBookStoreFormat = "HH:mm";
-
-            //Name
-            public const int BookStoreNameMaxLength = 100;
-
-            //Location
-            public const int BookStoreLocationMinLength = 10;
-            public const int BookStoreLocationMaxLength = 100;
-
-            //Contact
-            public const string BookStoreContactRegex = @"^(?:\\+359\\d{9}|\\d{10})$";
-
-            //ImageUrl
-            public const int BookStoreImageUrlMinLength = 5;
-            public const int BookStoreImageUrlMaxLength = 500;
-        }
-
-
-
+       
     }
 }

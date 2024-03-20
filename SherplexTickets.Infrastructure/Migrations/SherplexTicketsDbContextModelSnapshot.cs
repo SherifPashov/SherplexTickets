@@ -318,6 +318,32 @@ namespace SherplexTickets.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.DailyScheduleMovieTheater", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int")
+                        .HasComment("The current Movie's Identifier");
+
+                    b.Property<int>("MovieTheaterId")
+                        .HasColumnType("int")
+                        .HasComment("The current MovieTheater's Identifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2")
+                        .HasComment("The current MovieTheater");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The current Ticket's Price");
+
+                    b.HasKey("MovieId", "MovieTheaterId");
+
+                    b.HasIndex("MovieTheaterId");
+
+                    b.ToTable("DailyScheduleMovieTheater");
+                });
+
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.GenreGenreOfMovie", b =>
                 {
                     b.Property<int>("GenreId")
@@ -390,23 +416,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                             GenreId = 7,
                             MovieId = 5
                         });
-                });
-
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.MovieMovieTheater", b =>
-                {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int")
-                        .HasComment("The current Movie's Identifier");
-
-                    b.Property<int>("MovieTheaterId")
-                        .HasColumnType("int")
-                        .HasComment("The current MovieTheater's Identifier");
-
-                    b.HasKey("MovieId", "MovieTheaterId");
-
-                    b.HasIndex("MovieTheaterId");
-
-                    b.ToTable("MoviesMoviesTheaters");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Actor", b =>
@@ -847,39 +856,28 @@ namespace SherplexTickets.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Ticket", b =>
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.ShowTime", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("The current Ticket's Identifier");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int")
-                        .HasComment("The current Movie's Identifier");
+                    b.Property<int?>("DailyScheduleMovieTheaterMovieId")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("The current Ticket's Price");
+                    b.Property<int?>("DailyScheduleMovieTheaterMovieTheaterId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("PurchaseDate")
-                        .HasColumnType("datetime2")
-                        .HasComment("The current Ticket's PurchaseDate");
-
-                    b.Property<int>("TheaterId")
-                        .HasColumnType("int")
-                        .HasComment("The current Theater's Identifier");
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("DailyScheduleMovieTheaterMovieId", "DailyScheduleMovieTheaterMovieTheaterId");
 
-                    b.HasIndex("TheaterId");
-
-                    b.ToTable("Tickets");
+                    b.ToTable("ShowTimes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -952,6 +950,25 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.DailyScheduleMovieTheater", b =>
+                {
+                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", "Movie")
+                        .WithMany("MovieTheaters")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", "MovieTheater")
+                        .WithMany("MoviesMoviesTheaters")
+                        .HasForeignKey("MovieTheaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("MovieTheater");
+                });
+
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.GenreGenreOfMovie", b =>
                 {
                     b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.GenreOfMovie", "Genre")
@@ -969,25 +986,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("Genre");
 
                     b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.MovieMovieTheater", b =>
-                {
-                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", "Movie")
-                        .WithMany("MovieTheaters")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", "MovieTheater")
-                        .WithMany("MoviesMoviesTheaters")
-                        .HasForeignKey("MovieTheaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-
-                    b.Navigation("MovieTheater");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.GenreOfMovie", b =>
@@ -1008,23 +1006,16 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("Director");
                 });
 
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Ticket", b =>
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.ShowTime", b =>
                 {
-                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.Movies.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.DailyScheduleMovieTheater", null)
+                        .WithMany("ShowTimes")
+                        .HasForeignKey("DailyScheduleMovieTheaterMovieId", "DailyScheduleMovieTheaterMovieTheaterId");
+                });
 
-                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", "Theater")
-                        .WithMany()
-                        .HasForeignKey("TheaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-
-                    b.Navigation("Theater");
+            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping.DailyScheduleMovieTheater", b =>
+                {
+                    b.Navigation("ShowTimes");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Actor", b =>

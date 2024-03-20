@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
+using SherplexTickets.Core.ViewModels.MovieTheater;
 
 namespace SherplexTickets.Controllers
 {
@@ -33,6 +34,53 @@ namespace SherplexTickets.Controllers
 
             var currentBook = await movieTheaterService.DetailsAsync(id);
             return View(currentBook);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(MovieTheaterAddViewModel movieForm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            int newBookId = await movieTheaterService.AddAsync(movieForm);
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (!await movieTheaterService.MovieTheaterExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var movieTheaterForm = await movieTheaterService.EditGetAsync(id);
+            return View(movieTheaterForm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MovieTheaterEditViewModel movieTheaterForm)
+        {
+            if (movieTheaterForm == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(movieTheaterForm);
+            }
+
+            await movieTheaterService.EditPostAsync(movieTheaterForm);
+            return RedirectToAction(nameof(All));
         }
     }
 }

@@ -9,10 +9,13 @@ namespace SherplexTickets.Core.Contracts
 {
     public interface IMovieTheaterService
     {
-        Task<MovieTheaterViewModel?> GetMovieTheater(int theaterId);
+        Task<MovieTheaterViewModel?> GetMovieTheaterAsync(int theaterId);
         Task<bool> MovieTheaterExistsAsync(int theaterId);
 
         Task<IEnumerable<MovieTheaterAllViewModel>> AllAsync();
         Task<MovieTheaterViewModel?> DetailsAsync(int bookId);
+        Task<int> AddAsync(MovieTheaterAddViewModel bookForm);
+        Task<MovieTheaterEditViewModel> EditGetAsync(int movieTheaterId);
+        Task<int> EditPostAsync(MovieTheaterEditViewModel movieTheaterForm);
     }
 }

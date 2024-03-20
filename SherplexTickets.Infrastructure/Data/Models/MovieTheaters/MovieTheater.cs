@@ -2,6 +2,7 @@
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using System.ComponentModel.DataAnnotations;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieTeaterConstants;
+using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
 
 namespace SherplexTickets.Infrastructure.Data.Models.MovieTheaters
 {
@@ -27,10 +28,12 @@ namespace SherplexTickets.Infrastructure.Data.Models.MovieTheaters
 
         [Required]
         [Comment("The current MovieTheater's Opening Time")]
+        [DisplayFormat(DataFormatString = DateTimeHouFormat, ApplyFormatInEditMode = true)]
         public DateTime OpeningTime { get; set; }
 
         [Required]
         [Comment("The current MovieTheater's Closing Time")]
+        [DisplayFormat(DataFormatString = DateTimeHouFormat, ApplyFormatInEditMode = true)]
         public DateTime ClosingTime { get; set; }
 
         [Required]
@@ -38,6 +41,6 @@ namespace SherplexTickets.Infrastructure.Data.Models.MovieTheaters
         [Comment("The current MovieTheater's Image Url")]
         public string ImageUrl { get; set; } = null!;
 
-        public ICollection<MovieMovieTheater> MoviesMoviesTheaters { get; set; } = new List<MovieMovieTheater>();
+        public ICollection<DailyScheduleMovieTheater> MoviesMoviesTheaters { get; set; } = new List<DailyScheduleMovieTheater>();
     }
 }

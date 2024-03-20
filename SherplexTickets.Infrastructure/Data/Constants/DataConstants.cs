@@ -83,11 +83,11 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
             public const int MovieTheaterNameMaxLength = 100;
 
             //Location
-            public const int MovieTheaterLocationMinLength = 10;
-            public const int MovieTheaterLocationMaxLength = 200;
+            public const int MovieTheaterLocationMinLength = 5;
+            public const int MovieTheaterLocationMaxLength = 300;
 
             //Contact
-            public const string MovieTheaterContactRegex = @"^(?:\\+359\\d{9}|\\d{10})$";
+            public const string MovieTheaterContactRegex = @"/^(?:\+359\d{9}|0\d{1}\s?\d{4}\s?\d{3})$";
 
             //ImageUrl
             public const int MovieTheaterImageUrlMinLength = 5;

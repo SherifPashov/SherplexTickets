@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
+using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +11,7 @@ namespace SherplexTickets.Infrastructure.Data.Models
     {
         [Key]
         [Comment("The current Ticket's Identifier")]
-        public int TicketId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Comment("The current Ticket's Price")]
@@ -28,6 +29,14 @@ namespace SherplexTickets.Infrastructure.Data.Models
         [Comment("The current Movie")]
         public virtual Movie Movie { get; set; } = null!;
 
-        
+        [Required]
+        [Comment("The current Theater's Identifier")]
+        public int TheaterId { get; set; }
+
+        [ForeignKey(nameof(TheaterId))]
+        [Comment("The current Theater")]
+        public virtual MovieTheater Theater { get; set; } = null!;
+
+
     }
 }

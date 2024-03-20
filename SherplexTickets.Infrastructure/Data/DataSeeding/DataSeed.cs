@@ -1,5 +1,8 @@
 ﻿using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
+using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
+using System.Globalization;
+using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieTeaterConstants;
 
 namespace SherplexTickets.Infrastructure.Data.DataSeeding
 {
@@ -14,6 +17,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             Movies = SeedMovies();
             ActorsMovies = SeedActorMovies();
             GenresGenreOfMovies = SeedGenreGenresOfMovie();
+            MovieTheaters = SeedMovieTheaters();
 
         }
 
@@ -25,9 +29,10 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
         public IEnumerable<Movie> Movies { get; set; }
         public IEnumerable<ActorMovie> ActorsMovies { get; set; }
         public IEnumerable<GenreGenreOfMovie> GenresGenreOfMovies { get; set; }
+        public IEnumerable<MovieTheater> MovieTheaters { get; set; }
 
-        
-       
+
+
 
 
         private IEnumerable<GenreOfMovie> SeedGenresOfMovie()
@@ -109,7 +114,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     DirectorId = 1,
                     ReleaseDate = new DateTime(2008, 5, 2),
                     Duration = 126,
-                    
+
                 },
                 new Movie()
                 {
@@ -117,10 +122,10 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Title = "The Avengers",
                     Description = "В епичния филм \"The Avengers\", Ник Фюри от S.H.I.E.L.D. събира екип от суперхора, за да формира отбора \"Мъстителите\", с цел да помогне за спасяването на Земята от Локи и неговата армия. Локи, братът на Тор и бивш бог на азгардската митология, пристига на Земята със зловещ план за завладяване на света и подчиняване на човечеството.\r\n\r\nФюри, разбирайки сериозността на заплахата, събира най-мощните супергерои от света, включително Желязният Човек (Тони Старк), Капитан Америка (Стив Роджърс), Тор, Хълк (Брус Банър), Блек Уидоу (Наташа Романоф) и Хоукай (Клинт Бартън). Заедно те формират отбора \"Мъстителите\", който трябва да се обедини и да се противопостави на Локи и неговите войски.\r\n\r\nФилмът предлага впечатляваща комбинация от екшън, вълнуващи битки, забавни диалози и емоционални моменти. \"Мъстителите\" не само представя единствено изключителния състав от супергерои, но и демонстрира тяхната способност да работят заедно, дори когато са различни по характери и мотивации.",
                     URLImage = "https://fr.web.img3.acsta.net/medias/nmedia/18/85/31/58/20042068.jpg",
-                    DirectorId = 2, 
+                    DirectorId = 2,
                     ReleaseDate = new DateTime(2012, 4, 11),
                     Duration = 143,
-                    
+
                 },
                 new Movie()
                 {
@@ -138,10 +143,10 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Title = "Black Panther",
                     Description = "В \"Черният пантер\" (Black Panther), наследникът на скритото кралство Уаканда, Т'Чала, трябва да изпълни своето предназначение и да въведе своя народ в ново бъдеще, докато се изправя срещу предизвикателство от миналото на своята страна.\r\n\r\nСлед смъртта на баща си, крал Т'Чака, Т'Чала се връща в Уаканда, за да поеме своята правителствена отговорност като новият крал. Той обаче е изправен пред сериозни предизвикателства, когато мистериозния войник Ерик Килмонгър, познат също като Килмонгър, се появява, за да оспори неговото място като правител.\r\n\r\nТ'Чала се изправя срещу вътрешни и външни конфликти, докато се опитва да преодолее препятствията пред Уаканда и да гарантира мира и стабилността на своя народ. Разкрива се сложна интрига, която разкрива теми за власт, наследство и самоопределяне, като Т'Чала трябва да преодолее своите собствени съмнения и грешки, за да стане истинският герой, който Уаканда се нуждае.",
                     URLImage = "https://m.media-amazon.com/images/I/91+GjGet65L._AC_UF894,1000_QL80_.jpg",
-                    DirectorId = 4, 
+                    DirectorId = 4,
                     ReleaseDate = new DateTime(2018, 2, 16),
                     Duration = 134,
-                   
+
                 },
                 new Movie()
                 {
@@ -152,7 +157,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     DirectorId = 5,
                     ReleaseDate = new DateTime(2017, 10, 24),
                     Duration = 130,
-                    
+
                 }
 
            };
@@ -216,6 +221,64 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                 new GenreGenreOfMovie { MovieId = 5, GenreId = 7 }, // Научна фантастика
             };
         }
+
+        private IEnumerable<MovieTheater> SeedMovieTheaters()
+        {
+            return new List<MovieTheater>()
+                {
+                new MovieTheater
+                {
+                    Id = 1,
+                    Name = "Cinema City",
+                    Location = "Mall Paradise Center, Хладилника, бул. „Черни връх“ 100, 1407 София",
+                    Contact = "02 929 2929",
+                    OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMdJrsk_0e4rX4NVGizrakLvwUFBD29M2GLQWNL=s680-w680-h510-rw"
+                },
+                new MovieTheater
+                {
+                    Id = 2,
+                    Name = "Cinema City",
+                    Location = "Mall of, ж.к. Зона Б-5, бул. „Александър Стамболийски“ 101, 1303 София",
+                    Contact = "032 640 111",
+                    OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOmXpjzG2b9aPieXQdLPx1d3wis6FwOvEmdHlSr=s680-w680-h510-rw"
+                },
+                new MovieTheater
+                {
+                    Id = 3,
+                    Name = "АРЕНА THE MALL",
+                    Location = "м. Къро, бул. „Цариградско шосе“ 115, 1784 София",
+                    Contact = "02 4047 121",
+                    OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOO_ILS0rWgwlCk-Dz3BLpUYBGwniBoAfjs1RGN=s680-w680-h510"
+                },
+                new MovieTheater
+                {
+                    Id = 4,
+                    Name = "АРЕНА МОЛ ВАРНА",
+                    Location = "бул. Владислав Варненчик 186, Mall Varna Варна",
+                    Contact = "02 4047 131",
+                     OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ImageUrl = "https://programata.bg/wp-content/uploads/2022/09/arena-grand-mall-varna.jpg"
+                },
+                new MovieTheater
+                {
+                    Id = 5,
+                    Name = "Arena IMAX Mall Markovo Tepe Plovdiv",
+                    Location = "ЦентърПловдив Център, бул. „Руски“ 54, 4000 Пловдив",
+                    Contact = "02 4047 125",
+                     OpeningTime = DateTime.ParseExact("13:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ClosingTime = DateTime.ParseExact("21:00", DateTimeMovieTheaterFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                    ImageUrl = "https://markovotepemall.bg/wp-content/uploads/2020/03/Arena.jpg"
+                }
+            };
+        }
+        
     }
 }
 

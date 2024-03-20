@@ -59,6 +59,7 @@ namespace SherplexTickets.Infrastructure.Data
             builder.ApplyConfiguration(new MovieConfiguration());
             builder.ApplyConfiguration(new ActorMovieConfiguration());
             builder.ApplyConfiguration(new GenreGenreOfMovieConfiguration());
+            builder.ApplyConfiguration(new MovieTheatersConfiguration());
         }
     }
 }

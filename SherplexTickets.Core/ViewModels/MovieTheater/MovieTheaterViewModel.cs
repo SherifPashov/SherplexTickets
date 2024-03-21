@@ -20,6 +20,6 @@ namespace SherplexTickets.Core.ViewModels.MovieTheater
         public DateTime ClosingTime { get; set; }
         public string ImageUrl { get; set; } = null!;
 
-        public IEnumerable<DailySchedulesTheaterViewModel> WeeklySchedules { get; set; } = null!;
+        public IEnumerable<MovieTheaterDailyScheduleForMovieEditViewModel> WeeklySchedules { get; set; } = null!;
     }
 }

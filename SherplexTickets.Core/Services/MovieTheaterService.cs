@@ -55,24 +55,25 @@ namespace SherplexTickets.Core.Services
                 })
                 .ToListAsync();
         }
-        public async Task<IEnumerable<DailySchedulesTheaterViewModel>> GetWeeklyScheduleForTheaterAsync(int movieTheaterId)
+        public async Task<IEnumerable<MovieTheaterDailyScheduleForMovieEditViewModel>> GetWeeklyScheduleForTheaterAsync(int movieTheaterId)
         {
             DateTime today = DateTime.Today;
 
-            List<DailySchedulesTheaterViewModel> dailySchedules = new List<DailySchedulesTheaterViewModel>();
+            List<MovieTheaterDailyScheduleForMovieEditViewModel> dailySchedules = new List<MovieTheaterDailyScheduleForMovieEditViewModel>();
 
             for (int i = 0; i < 7; i++)
             {
                 DateTime currentDate = today.AddDays(i);
 
-                var schedulesForCurrentDate = await repository.AllReadonly<DailyScheduleMovieTheater>()
+                var schedulesForCurrentDate = await repository.AllReadonly<MovieTheaterDailyScheduleForMovie>()
                     .Where(ds =>
                             ds.MovieTheaterId == movieTheaterId &&
                             ds.Date == currentDate)
-                    .Select(ds => new DailySchedulesTheaterViewModel()
+                    .Select(ds => new MovieTheaterDailyScheduleForMovieEditViewModel()
                     {
+                        Id=ds.Id,
                         MovieId = ds.MovieTheaterId,
-                        Price = ds.Price.ToString(),
+                        Price = ds.Price,
                         DayNameAndDate = ds.Date.ToString("dd.MM (dddd)"),
                         MovieTitle =ds.Movie.Title,
                         MovieImageUrl =ds.Movie.URLImage,

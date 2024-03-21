@@ -4,13 +4,13 @@ using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 
 namespace SherplexTickets.Infrastructure.Data.DataSeeding.Confogurations.MovieTheater
 {
-    internal class DailyScheduleConfiguration : IEntityTypeConfiguration<DailyScheduleMovieTheater>
+    internal class DailyScheduleConfiguration : IEntityTypeConfiguration<MovieTheaterDailyScheduleForMovie>
     {
-        public void Configure(EntityTypeBuilder<DailyScheduleMovieTheater> builder)
+        public void Configure(EntityTypeBuilder<MovieTheaterDailyScheduleForMovie> builder)
         {
             var data = new DataSeed();
 
-            builder.HasData(data.DailySchedules);
+            builder.HasData(data.MovieTheatersDailyScheduleForMovies);
         }
     }
 }

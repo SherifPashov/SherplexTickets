@@ -7,7 +7,7 @@ using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
 
 namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 {
-    public class DailyScheduleMovieTheater
+    public class MovieTheaterDailyScheduleForMovie
     {
         [Key]
         [Comment("The current DailyScheduleMovieTheater's Identifier")]

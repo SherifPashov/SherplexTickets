@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SherplexTickets.Controllers;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.Services;
 using SherplexTickets.Infrastructure.Common;
@@ -40,6 +41,7 @@ namespace SherplexTickets.Extensions
         {
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IMovieTheaterService, MovieTheaterService>();
+            services.AddScoped<IMovieTheaterMovieLink, MovieTheaterMovieLinkService>();
 
             return services;
         }

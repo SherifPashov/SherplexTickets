@@ -7,7 +7,7 @@ namespace SherplexTickets.Core.Contracts
     {
         Task<MovieTheaterViewModel?> GetMovieTheaterAsync(int theaterId);
         Task<bool> MovieTheaterExistsAsync(int theaterId);
-        Task<IEnumerable<DailySchedulesTheaterViewModel>> GetWeeklyScheduleForTheaterAsync(int movieTheaterId);
+        Task<IEnumerable<MovieTheaterDailyScheduleForMovieEditViewModel>> GetWeeklyScheduleForTheaterAsync(int movieTheaterId);
 
         Task<IEnumerable<MovieTheaterAllViewModel>> AllAsync();
         Task<MovieTheaterViewModel?> DetailsAsync(int bookId);

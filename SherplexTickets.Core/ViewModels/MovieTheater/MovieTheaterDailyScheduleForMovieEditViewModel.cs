@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SherplexTickets.Core.ViewModels.MovieTheater
 {
-    public class DailySchedulesTheaterViewModel
+    public class MovieTheaterDailyScheduleForMovieEditViewModel
     {
         public int Id {  get; set; }
         public string DayNameAndDate { get; set; } = string.Empty;
@@ -14,7 +14,7 @@ namespace SherplexTickets.Core.ViewModels.MovieTheater
         public int MovieId { get; set; }
         public string MovieTitle { get; set; } = string.Empty;
 
-        public string Price { get; set; } = string.Empty;
+        public decimal Price { get; set; } 
 
         public string MovieImageUrl { get; set; } = string.Empty;
         public List<string> ShowTimeMovie { get; set; } = new List<string>();

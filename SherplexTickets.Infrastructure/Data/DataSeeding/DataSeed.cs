@@ -18,7 +18,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             ActorsMovies = SeedActorMovies();
             GenresGenreOfMovies = SeedGenreGenresOfMovie();
             MovieTheaters = SeedMovieTheaters();
-            DailySchedules = SeedDailySchedules();
+            MovieTheatersDailyScheduleForMovies = SeedDailySchedules();
         }
 
 
@@ -31,7 +31,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
         public IEnumerable<GenreGenreOfMovie> GenresGenreOfMovies { get; set; }
 
         public IEnumerable<MovieTheater> MovieTheaters { get; set; }
-        public IEnumerable<DailyScheduleMovieTheater> DailySchedules { get; set; }
+        public IEnumerable<MovieTheaterDailyScheduleForMovie> MovieTheatersDailyScheduleForMovies { get; set; }
 
 
 
@@ -286,44 +286,44 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             };
         }
       
-        private IEnumerable<DailyScheduleMovieTheater> SeedDailySchedules()
+        private IEnumerable<MovieTheaterDailyScheduleForMovie> SeedDailySchedules()
         {
-            var schedules = new List<DailyScheduleMovieTheater>(){
-                new DailyScheduleMovieTheater
+            var schedules = new List<MovieTheaterDailyScheduleForMovie>(){
+                new MovieTheaterDailyScheduleForMovie
                 {
                     Id=1,
                     MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
                     MovieId = 1, // Идентификатор на филма "Kung Fu Panda"
                     Date = new DateTime(2024, 3, 23), // Дата на излъчване
                     Price = 17,
-                    ShowTimes="13:30, 15:00, 17:00, 22:30"
+                    ShowTimes="13:30 15:00 17:00 22:30"
                 },
-                new DailyScheduleMovieTheater
+                new MovieTheaterDailyScheduleForMovie
                 {
                     Id = 2,
                     MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
                     MovieId = 2, // Идентификатор на филма "Kung Fu Panda 2"
                     Date = new DateTime(2024, 3, 24), // Дата на излъчване
                     Price = 17,
-                    ShowTimes="13:30, 15:00, 17:00, 22:30"
+                    ShowTimes="13:30 15:00 17:00 22:30"
                 },
-                new DailyScheduleMovieTheater
+                new MovieTheaterDailyScheduleForMovie
                 {
                     Id = 3,
                     MovieTheaterId = 2, // Идентификатор на киносалона "Арена"
                     MovieId = 1, // Идентификатор на филма "Kung Fu Panda"
                     Date = new DateTime(2024, 3, 25), // Дата на излъчване
                     Price = 17,
-                    ShowTimes="13:30, 15:00, 17:00, 22:30"
+                    ShowTimes="13:30 15:00 17:00 22:30"
                 },
-                new DailyScheduleMovieTheater
+                new MovieTheaterDailyScheduleForMovie
                 {
                     Id = 4,
                     MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
                     MovieId = 2, // Идентификатор на филма "Kung Fu Panda 2"
                     Date = new DateTime(2024, 3, 26), // Дата на излъчване
                     Price = 17,
-                    ShowTimes="13:30, 15:00, 17:00, 22:30"
+                    ShowTimes="13:30 15:00 17:00 22:30"
                 },
             };
 

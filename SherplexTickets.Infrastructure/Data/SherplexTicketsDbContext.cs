@@ -25,7 +25,7 @@ namespace SherplexTickets.Infrastructure.Data
 
         public DbSet<ActorMovie> ActorsMovies { get; set; } = null!;
         public DbSet<GenreGenreOfMovie> GenresMovies { get; set; } = null!;
-        public DbSet<DailyScheduleMovieTheater> DailyScheduleMovieTheater { get; set; } = null!;
+        public DbSet<MovieTheaterDailyScheduleForMovie> MovieTheaterDailyScheduleForMovie { get; set; } = null!;
        
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -43,7 +43,7 @@ namespace SherplexTickets.Infrastructure.Data
                 .HasForeignKey(b => b.DirectorId)
                 .IsRequired();
 
-            builder.Entity<DailyScheduleMovieTheater>()
+            builder.Entity<MovieTheaterDailyScheduleForMovie>()
                 .Property(t => t.Price)
                 .HasPrecision(18, 2);
 

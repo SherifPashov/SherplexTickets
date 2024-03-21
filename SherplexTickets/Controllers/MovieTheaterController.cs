@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.MovieTheater;
+using SherplexTickets.Infrastructure.Data.Models.Movies;
 
 namespace SherplexTickets.Controllers
 {
@@ -81,6 +82,18 @@ namespace SherplexTickets.Controllers
 
             await movieTheaterService.EditPostAsync(movieTheaterForm);
             return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditТheaterMovieInformation(int id)
+        {
+            if (!await movieTheaterService.MovieTheaterExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var movieTheaterForm = await movieTheaterService.EditGetAsync(id);
+            return View(movieTheaterForm);
         }
     }
 }

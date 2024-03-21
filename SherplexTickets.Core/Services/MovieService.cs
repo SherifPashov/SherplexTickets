@@ -321,7 +321,7 @@ namespace SherplexTickets.Core.Services
             var deleteForm = new MovieDeleteViewModel()
             {
                 Id = movie.Id,
-                ReleaseDate = movie.ReleaseDate.ToString(DataConstants.DateTimeDefaultFormat),
+                ReleaseDate = movie.ReleaseDate.ToString("yyyy"),
                 URLImage = movie.URLImage,
                 Duration=movie.Duration.ToString(),
                 Title = movie.Title,

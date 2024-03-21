@@ -4,24 +4,22 @@
 @{
     ViewBag.Title = "Изтрий връзка Филм - киносалон";
 }
-<h2 class="text-center mt-4 mb-3" style="color:goldenrod;">@ViewBag.Title</h2>
+<h2 class="text-center" style="color:goldenrod; background-color:rgb(17, 31, 52); padding:1rem; width: 60%; margin: 0 auto; border-radius:3rem;box-shadow: 0px 0px 43px 9px goldenrod;">@ViewBag.Title</h2>
 <hr />
 
-<div class="container" style="margin-top: 2rem;">
+<div class="container" style="margin-top: 2rem; ">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card" style="text-align: center;">
+            <div class="card" style="text-align: center;box-shadow: 0px 0px 43px 9px goldenrod;">
                 <div class="card mb-3" style="border: 4px solid goldenrod; justify-content: center;">
                     <div class="card-body" style="background: rgb(17, 31, 52); color: goldenrod;">
                         <div class="row justify-content-center">
-                            <!-- Центриране на реда -->
                             <div class="col-md-5" style="margin: 1rem; max-height: 15rem; max-width: 15rem;">
                                 <img src="@Model.MovieImageUrl" class="img-fluid" alt="Movie Image" style="max-height: 15rem; max-width: 15rem;" />
                             </div>
                             <div class="col-md-7 text-center">
-                                <!-- Центриране на текста -->
                                 <h4 class="card-title">@Model.MovieTitle</h4>
-                                <p class="card-text">Цена: @Model.Price</p>
+                                <p class="card-text">Цена: @Model.Price лв.</p>
                                 <p class="card-text">Времена на представления:</p>
                                 <ul class="list-unstyled row text-center" style="gap: 1rem">
                                     @foreach (var showTime in Model.ShowTimeMovie)
@@ -33,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="text-danger mt-3">Сигурен ли си, че искаш да изтриеш тази книга?</p>
+                <p class="text-danger mt-3">Сигурен ли си, че искаш да изтриеш тази връзка</p>
                 <div class="card-footer d-flex justify-content-center">
                     <form asp-action="DeleteConfirmed" method="post" class="col-12">
                         <input type="hidden" asp-for="Id" />
@@ -45,5 +43,13 @@
         </div>
     </div>
 </div>
+<style>
+    body {
+        background-image: url('@Url.Content("~/images/DeleteMovieTheaterLinkMovie.png")');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
 
 

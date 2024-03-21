@@ -37,7 +37,7 @@ namespace SherplexTickets.Core.Services
                 Id = currentMovieTheaterDailyScheduleForMovie.Id,
                 MovieImageUrl = movie.URLImage,
                 MovieTitle = movie.Title,
-                Price = currentMovieTheaterDailyScheduleForMovie.Price,
+                Price = currentMovieTheaterDailyScheduleForMovie.Price.ToString(),
                 ShowTimeMovie = currentMovieTheaterDailyScheduleForMovie.ShowTimes,
                 Date = currentMovieTheaterDailyScheduleForMovie.Date,
 
@@ -51,8 +51,9 @@ namespace SherplexTickets.Core.Services
             var currentMovieTheaterDailyScheduleForMovie = await repository.All<MovieTheaterDailyScheduleForMovie>()
                 .FirstOrDefaultAsync(b => b.Id == movieTheaterDailyScheduleForMovieId.Id);
 
+            decimal.TryParse(movieTheaterDailyScheduleForMovieId.Price, out decimal parsedPrice);
 
-            currentMovieTheaterDailyScheduleForMovie.Price = movieTheaterDailyScheduleForMovieId.Price;
+            currentMovieTheaterDailyScheduleForMovie.Price = parsedPrice;
             currentMovieTheaterDailyScheduleForMovie.ShowTimes = movieTheaterDailyScheduleForMovieId.ShowTimeMovie.ToString();
             currentMovieTheaterDailyScheduleForMovie.Date = movieTheaterDailyScheduleForMovieId.Date;
 

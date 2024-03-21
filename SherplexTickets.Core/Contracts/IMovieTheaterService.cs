@@ -1,9 +1,5 @@
 ﻿using SherplexTickets.Core.ViewModels.MovieTheater;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 
 namespace SherplexTickets.Core.Contracts
 {
@@ -11,6 +7,7 @@ namespace SherplexTickets.Core.Contracts
     {
         Task<MovieTheaterViewModel?> GetMovieTheaterAsync(int theaterId);
         Task<bool> MovieTheaterExistsAsync(int theaterId);
+        Task<IEnumerable<DailySchedulesTheaterViewModel>> GetWeeklyScheduleForTheaterAsync(int movieTheaterId);
 
         Task<IEnumerable<MovieTheaterAllViewModel>> AllAsync();
         Task<MovieTheaterViewModel?> DetailsAsync(int bookId);

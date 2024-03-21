@@ -2,8 +2,10 @@
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.MovieTheater;
 using SherplexTickets.Infrastructure.Common;
+using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
-using System.Xml.Linq;
+using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
+
 namespace SherplexTickets.Core.Services
 {
     public class MovieTheaterService : IMovieTheaterService
@@ -19,7 +21,7 @@ namespace SherplexTickets.Core.Services
         {
             return await repository.AllReadonly<MovieTheater>()
                 .Where(t => t.Id == theaterId)
-                .Select(t=> new MovieTheaterViewModel()
+                .Select(t => new MovieTheaterViewModel()
                 {
                     Id = theaterId,
                     Name = t.Name,
@@ -35,7 +37,7 @@ namespace SherplexTickets.Core.Services
         public async Task<bool> MovieTheaterExistsAsync(int theaterId)
         {
             return await repository.AllReadonly<MovieTheater>()
-                .AnyAsync(t=> t.Id == theaterId);
+                .AnyAsync(t => t.Id == theaterId);
         }
 
         public async Task<IEnumerable<MovieTheaterAllViewModel>> AllAsync()
@@ -49,14 +51,49 @@ namespace SherplexTickets.Core.Services
                     OpeningTime = mt.OpeningTime,
                     ClosingTime = mt.ClosingTime,
                     ImageUrl = mt.ImageUrl,
-                    Contact=mt.Contact,
+                    Contact = mt.Contact,
                 })
                 .ToListAsync();
         }
-
-        public async  Task<MovieTheaterViewModel?> DetailsAsync(int bookId)
+        public async Task<IEnumerable<DailySchedulesTheaterViewModel>> GetWeeklyScheduleForTheaterAsync(int movieTheaterId)
         {
-            var theater = await GetMovieTheaterAsync(bookId);
+            DateTime today = DateTime.Today;
+
+            List<DailySchedulesTheaterViewModel> dailySchedules = new List<DailySchedulesTheaterViewModel>();
+
+            for (int i = 0; i < 7; i++)
+            {
+                DateTime currentDate = today.AddDays(i);
+
+                var schedulesForCurrentDate = await repository.AllReadonly<DailyScheduleMovieTheater>()
+                    .Where(ds =>
+                            ds.MovieTheaterId == movieTheaterId &&
+                            ds.Date == currentDate)
+                    .Select(ds => new DailySchedulesTheaterViewModel()
+                    {
+                        MovieId = ds.MovieTheaterId,
+                        Price = ds.Price.ToString(),
+                        DayNameAndDate = ds.Date.ToString("dd.MM (dddd)"),
+                        MovieTitle =ds.Movie.Title,
+                        MovieImageUrl =ds.Movie.URLImage,
+                        ShowTimeMovie = ds.ShowTimes.Split().ToList()
+
+                    })
+                    .ToListAsync();
+                dailySchedules.AddRange(schedulesForCurrentDate);
+            }
+
+            return dailySchedules;
+        }
+
+
+        public async Task<MovieTheaterViewModel?> DetailsAsync(int movieTheaterId)
+        {
+            var theater = await GetMovieTheaterAsync(movieTheaterId);
+
+            var weeklyScheduleForTheater = await GetWeeklyScheduleForTheaterAsync(movieTheaterId);
+
+            theater.WeeklySchedules = weeklyScheduleForTheater;
 
             return theater;
         }
@@ -69,9 +106,9 @@ namespace SherplexTickets.Core.Services
                 ImageUrl = movieTheater.ImageUrl,
                 Contact = movieTheater.Contact,
                 Location = movieTheater.Location,
-                OpeningTime= movieTheater.OpeningTime,
-                ClosingTime= movieTheater.ClosingTime,
-                
+                OpeningTime = movieTheater.OpeningTime,
+                ClosingTime = movieTheater.ClosingTime,
+
             };
 
             await repository.AddAsync(book);
@@ -83,7 +120,7 @@ namespace SherplexTickets.Core.Services
         public async Task<MovieTheaterEditViewModel> EditGetAsync(int movieTheaterId)
         {
             var currentMovieTheater = await repository.All<MovieTheater>()
-                .FirstOrDefaultAsync(mt=>mt.Id==movieTheaterId);
+                .FirstOrDefaultAsync(mt => mt.Id == movieTheaterId);
 
             return new MovieTheaterEditViewModel()
             {

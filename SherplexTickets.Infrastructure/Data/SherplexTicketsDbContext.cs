@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Infrastructure.Data.DataSeeding;
 using SherplexTickets.Infrastructure.Data.DataSeeding.Confogurations;
+using SherplexTickets.Infrastructure.Data.DataSeeding.Confogurations.MovieTheater;
 using SherplexTickets.Infrastructure.Data.Models;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
@@ -25,8 +26,7 @@ namespace SherplexTickets.Infrastructure.Data
         public DbSet<ActorMovie> ActorsMovies { get; set; } = null!;
         public DbSet<GenreGenreOfMovie> GenresMovies { get; set; } = null!;
         public DbSet<DailyScheduleMovieTheater> DailyScheduleMovieTheater { get; set; } = null!;
-        public DbSet<ShowTime> ShowTimes { get; set; } = null!;
-
+       
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,9 +36,6 @@ namespace SherplexTickets.Infrastructure.Data
 
             builder.Entity<GenreGenreOfMovie>()
                 .HasKey(ac => new { ac.GenreId, ac.MovieId });
-
-            builder.Entity<DailyScheduleMovieTheater>()
-                .HasKey(ac => new { ac.MovieId, ac.MovieTheaterId });
 
             builder.Entity<Movie>()
                 .HasOne(m => m.Director)
@@ -61,6 +58,7 @@ namespace SherplexTickets.Infrastructure.Data
             builder.ApplyConfiguration(new GenreGenreOfMovieConfiguration());
 
             builder.ApplyConfiguration(new MovieTheatersConfiguration());
+            builder.ApplyConfiguration(new DailyScheduleConfiguration());
         }
     }
 }

@@ -4,12 +4,15 @@ using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
-using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieTeaterConstants;
 
 namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 {
     public class DailyScheduleMovieTheater
     {
+        [Key]
+        [Comment("The current DailyScheduleMovieTheater's Identifier")]
+        public int Id { get; set; }
+
         [Required]
         [Comment("The current Movie's Identifier")]
         public int MovieId { get; set; }
@@ -37,8 +40,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
         public DateTime Date { get; set; }
 
         [Required]
-        [DisplayFormat(DataFormatString = DateTimeHouFormat, ApplyFormatInEditMode = true)]
-        public List<ShowTime> ShowTimes { get; set; } = new List<ShowTime>();
+        public string ShowTimes { get; set; } = string.Empty;
 
     }
 }

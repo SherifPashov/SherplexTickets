@@ -1,19 +1,20 @@
 ﻿@using SherplexTickets.Core.ViewModels.MovieTheater
+@using SherplexTickets.Extensions
 @model MovieTheaterViewModel
 
 @{
     ViewBag.Title = "Детайли";
 }
-<h2 class="text-center" style="color:goldenrod; background-color:rgb(17, 31, 52); padding:1rem; width: 30rem; margin: 0 auto; border-radius:3rem;box-shadow: 0px 0px 43px 9px goldenrod;">@ViewBag.Title</h2>
+<h2 class="text-center" style="color:goldenrod; background-color:rgb(17, 31, 52); padding:1rem;  border: 2px solid white; width: 30rem; margin: 0 auto; border-radius:3rem;box-shadow: 0px 0px 43px 9px goldenrod;">@ViewBag.Title</h2>
 <hr />
 
 <div class="container" style="box-shadow: 0px 0px 43px 9px goldenrod;color:goldenrod; border: 2px solid white; background:rgb(17, 31, 52); padding: 3px;">
     <div class="row align-items-center justify-content-center">
         <div class="col-md-12 text-center mb-4" style="position: relative;">
             <img src="@Model.ImageUrl" class="img-fluid" alt="Movie Theater Image" style="max-width: 100%; border-radius: 1rem;" />
-            <div class="status-indicator" style="position: absolute; top: 1rem; right: 1rem; width:10rem; text-align:center; background-color: @(IsBookstoreOpen(Model.OpeningTime, Model.ClosingTime) ? "green" : "red"); border-radius: 1rem;">
+            <div class="status-indicator" style="position: absolute; top: 1rem; right: 1rem; width:10rem; text-align:center; background-color: @(MovieTheaterHelper.IsMovieTheaterOpen(Model.OpeningTime, Model.ClosingTime) ? "green" : "red"); border-radius: 1rem;">
                 <span class="text-white">
-                    @if (IsBookstoreOpen(Model.OpeningTime, Model.ClosingTime))
+                    @if (MovieTheaterHelper.IsMovieTheaterOpen(Model.OpeningTime, Model.ClosingTime))
                     {
                         <strong>Отворено</strong>
                     }
@@ -43,7 +44,7 @@
 </div>
 
 <hr />
-<h2 class="text-center" style="color:goldenrod; background-color:rgb(17, 31, 52); padding:1rem; margin: 0 auto; border-radius:3rem;box-shadow: 0px 0px 43px 9px goldenrod;">Какво ще дават през следващите 7дни</h2>
+<h2 class="text-center" style="color:goldenrod; background-color:rgb(17, 31, 52); border: 2px solid white; padding:1rem; margin: 0 auto; border-radius:3rem;box-shadow: 0px 0px 43px 9px goldenrod;">Какво ще дават през следващите 7дни</h2>
 <hr />
 
 <div class="container" style="margin-top: 2rem;">
@@ -97,43 +98,3 @@
         background-position: center;
     }
 </style>
-
-@functions {
-    bool IsBookstoreOpen(DateTime openingTime, DateTime closingTime)
-    {
-        var now = DateTime.Now;
-
-        if (now.Hour < openingTime.Hour || now.Hour > closingTime.Hour)
-        {
-            return false;
-        }
-
-        if (now.Hour > openingTime.Hour && now.Hour < closingTime.Hour)
-        {
-            return true;
-        }
-
-        if (now.Hour == openingTime.Hour)
-        {
-            if (now.Minute >= openingTime.Minute)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            if (now.Minute <= closingTime.Minute)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-}

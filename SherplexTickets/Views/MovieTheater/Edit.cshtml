@@ -5,41 +5,43 @@
     ViewBag.Title = "Редактиране на Киносалона";
 }
 
-<h2 class="text-center" style="color:goldenrod; background-color:rgb(0, 0, 0, 0.7); padding:1rem; width: 30rem; margin: 0 auto; border-radius:3rem;box-shadow: 0px 0px 43px 9px goldenrod;">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+<link rel="stylesheet" type="text/css" href="~/css/EditMovieTheater.css">
 
-<div class="row" style="font-size: 1.1rem; color: goldenrod;">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6" style="background-color:rgb(0, 0,0, 0.7); padding:20px; border-radius: 1rem;box-shadow: 0px 0px 43px 9px goldenrod;">
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Edit" method="post">
             <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label-add-edit"><bold>Име на Киносалона</bold></label>
+                <label asp-for="@Model.Name" class="form-label-add-edit">Име на Киносалона</label>
                 <input asp-for="@Model.Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Location" class="form-label-add-edit"><bold>Локация: </bold></label>
+                <label asp-for="@Model.Location" class="form-label-add-edit">Локация: </label>
                 <input asp-for="@Model.Location" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Location" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Contact" class="form-label-add-edit"><strong>Телефонен номер</strong></label>
+                <label asp-for="@Model.Contact" class="form-label-add-edit">Телефонен номер</label>
                 <input asp-for="@Model.Contact" class="form-control" aria-required="true" placeholder="Пример: +359888123456 или 020202020" />
                 <span asp-validation-for="@Model.Contact" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="@Model.ImageUrl" class="form-label-add-edit"><bold>Линк към снимка на киносалона(URL)</bold></label>
+                <label asp-for="@Model.ImageUrl" class="form-label-add-edit">Линк към снимка на киносалона(URL)</label>
                 <input asp-for="@Model.ImageUrl" class="form-control" type="text" />
                 <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.OpeningTime" class="form-label-add-edit"><strong>Време на отваряне</strong></label>
+                <label asp-for="@Model.OpeningTime" class="form-label-add-edit">Време на отваряне</label>
                 <input asp-for="@Model.OpeningTime" class="form-control" aria-required="true" type="time" value="@Model.OpeningTime.ToString("HH:mm")" />
                 <span asp-validation-for="@Model.OpeningTime" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="@Model.ClosingTime" class="form-label-add-edit"><strong>Време на затваряне</strong></label>
+                <label asp-for="@Model.ClosingTime" class="form-label-add-edit">Време на затваряне</label>
                 <input asp-for="@Model.ClosingTime" class="form-control" aria-required="true" type="time" value="@Model.ClosingTime.ToString("HH:mm")" />
                 <span asp-validation-for="@Model.ClosingTime" class="text-danger"></span>
             </div>
@@ -50,23 +52,3 @@
         </form>
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script src="~/GenresSelector/GenresSelector.js"></script>
-
-}
-
-<style>
-    body {
-        background-image: url('@Url.Content("~/images/MovieTheaterAdd.png")');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
-    label {
-        color: white;
-        size: 2 rem;
-    }
-</style>

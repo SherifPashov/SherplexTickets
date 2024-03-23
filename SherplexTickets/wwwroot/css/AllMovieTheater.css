@@ -1,0 +1,41 @@
+﻿body {
+    background-image: url(/images/TheaterAll.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 1.1rem;
+}
+
+h2.text-center {
+    color: goldenrod;
+    background: rgb(17, 31, 52);
+    padding: 10px;
+    margin: 0 auto;
+    width: 30rem;
+    border-radius: 1rem;
+    box-shadow: 0px -3px 48px 12px goldenrod;
+    border: 2px solid white;
+}
+
+.row {
+    font-size: 1.1rem;
+}
+
+.col-lg-3.col-md-4.col-sm-6.mb-4 {
+    border-radius: 1rem;
+}
+
+.card.h-100.text-center {
+    background: rgb(17, 31, 52);
+    border-radius: 1rem;
+    color: goldenrod;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+
+
+.card-img-top {
+    height: 12rem;
+    object-fit: cover;
+}
+

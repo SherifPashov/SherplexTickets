@@ -4,20 +4,11 @@
 @{
     ViewBag.Title = "Всички Филми";
 }
+<link rel="stylesheet" type="text/css" href="~/css/AllMovie.css">
 
-<h2 class="text-center mt-4 mb-3" style="background: rgb(17, 31, 52); padding: 10px; margin: 0 auto; width: 30rem; border-radius: 1rem;">@ViewBag.Title</h2>
-<style>
-    body{
-        background-image: url('@Url.Content("~/images/MovieAll.png")');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        color:white;
-    }
-</style>
+<h2 class="text-center mt-4 mb-3">@ViewBag.Title</h2>
 
-<div class="container" style="background-image: url('@Url.Content("~/images/MovieAll.png")'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-    
+<div class="container">
     <div class="text-center mb-4" style="padding-top: 15px;">
         <a asp-controller="Movie" asp-action="Add" class="btn btn-primary btn-lg">Добави филм</a>
     </div>
@@ -45,26 +36,24 @@
         {
             @foreach (var movie in Model)
             {
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4 mb-lg-4 "  >
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4 mb-lg-4">
                     <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id" class="">
-
-                        <div class="card h-100 text-center" style="width: 100%; background-color:rgb(17, 31, 52) ;border-radius: 1rem;">
+                        <div class="card h-100 text-center">
                             <div style="position: relative;">
-                                <img class="card-img-top" src="@movie.URLImage" alt="Book Image" style="height: 25rem; object-fit: cover; border-radius: 1rem;">
-                                <div style="position: absolute; bottom: 0; right: 0; background-color: rgb(17, 31, 52); color: white; padding: 5px;border-radius: 0.3rem;">
+                                <img class="card-img-top" src="@movie.URLImage" alt="Book Image">
+                                <div style="position: absolute; bottom: 0; right: 0;">
                                     <p class="m-0">@movie.Duration мин</p>
                                 </div>
-                                <div style="position: absolute; top: 0; start:0; background-color: rgb(17, 31, 52); color: white; padding: 5px;border-radius:0.3rem;">
+                                <div style="position: absolute; top: 0; start:0;">
                                     <p class="m-0">@movie.ReleaseDate</p>
                                 </div>
                             </div>
-                            <div class="card-body text-lg-center" style="margin: 0 auto;">
-                                <h4 class="card-title" style="color:white; text-decoration:none;"><strong>@movie.Title</strong></h4>
+                            <div class="card-body text-lg-center">
+                                <h4 class="card-title"><strong>@movie.Title</strong></h4>
                             </div>
                         </div>
                     </a>
                 </div>
-
             }
         }
         else

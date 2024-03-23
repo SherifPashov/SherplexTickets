@@ -1,34 +1,31 @@
 ﻿@using System.Globalization;
 @using SherplexTickets.Core.ViewModels.MovieTheater
+@using SherplexTickets.Extensions;
 @model IEnumerable<MovieTheaterAllViewModel>
 
 @{
     ViewBag.Title = "Всички Киносалони";
 }
-<style>
-    body {
-        background-image: url('@Url.Content("~/images/TheaterAll.png")');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        font-size: 1.1rem;
-    }
-</style>
+
+<link rel="stylesheet" type="text/css" href="/css/AllMovieTheater.css">
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
 
 <div class="container">
-    <h2 class="text-center mt-4 mb-3" style="color:goldenrod; background: rgb(17, 31, 52); padding: 10px; margin: 0 auto; width: 30rem; border-radius: 1rem;" >@ViewBag.Title</h2>
-    <div class="text-center mb-4" style="padding-top: 15px;">
+    <div class="text-center mb-4">
         <a asp-controller="MovieTheater" asp-action="Add" class="btn btn-primary btn-lg">Добави киносалон</a>
     </div>
 
     <div class="row justify-content-center">
         @foreach (var movieTheater in Model)
         {
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4" style="">
-                <div class="card h-100 text-center" style="background:rgb(17, 31, 52); color:goldenrod; box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">
-                    <div class="status-indicator" style="background-color: @(IsBookstoreOpen(movieTheater.OpeningTime, movieTheater.ClosingTime) ? "green" : "red")">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="status-indicator" style="border-radius: 0.5rem 0.5rem 0 0; background-color: @(MovieTheaterHelper.IsMovieTheaterOpen(movieTheater.OpeningTime, movieTheater.ClosingTime) ? "green" : "red")">
                         <span class="text-white">
-                            @if (IsBookstoreOpen(movieTheater.OpeningTime, movieTheater.ClosingTime))
+                            @if (MovieTheaterHelper.IsMovieTheaterOpen(movieTheater.OpeningTime, movieTheater.ClosingTime))
                             {
                                 <strong>Отворено</strong>
                             }
@@ -38,8 +35,9 @@
                             }
                         </span>
                     </div>
-                    <div style="height: 200px; overflow: hidden;">
-                        <img class="card-img-top" src="@movieTheater.ImageUrl" alt="Movie Theater Image" style="height: 12rem; object-fit: cover;">
+
+                    <div>
+                        <img class="card-img-top" src="@movieTheater.ImageUrl" alt="Movie Theater Image">
                     </div>
                     <div class="card-body">
                         <h3 class="card-title"><strong>@movieTheater.Name</strong></h3>
@@ -50,50 +48,11 @@
                         </p>
                     </div>
                     <a asp-controller="MovieTheater" asp-action="Details" asp-route-id="@movieTheater.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж повече</a>
-                    <a asp-controller="MovieTheater" asp-action="AllMovie" asp-route-id="@movieTheater.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Какво ще гледам през седмицата</a>
                 </div>
             </div>
-
         }
     </div>
 </div>
+<script src="/js/IsMovieTheaterOpen.js"></script>
 
-@functions {
-    bool IsBookstoreOpen(DateTime openingTime, DateTime closingTime)
-    {
-        var now = DateTime.Now;
 
-        if (now.Hour < openingTime.Hour || now.Hour > closingTime.Hour)
-        {
-            return false;
-        }
-
-        if (now.Hour > openingTime.Hour && now.Hour < closingTime.Hour)
-        {
-            return true;
-        }
-
-        if (now.Hour == openingTime.Hour)
-        {
-            if (now.Minute >= openingTime.Minute)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            if (now.Minute <= closingTime.Minute)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-}

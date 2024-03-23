@@ -4,21 +4,21 @@
 @{
     ViewBag.Title = "Добави Киносалон";
 }
+<link rel="stylesheet" type="text/css" href="~/css/AddTheaterMovie.css">
 
-<h2 class="text-center" style="color:goldenrod; background-color:rgb(0, 0, 0, 0.7); padding:1rem; width: 30rem; margin: 0 auto; border-radius:3rem;box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-
-<div class="row" style="font-size: 1.1rem;">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6" style="background-color:rgb(0, 0,0, 0.7); padding:20px; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; border-radius: 1rem;">
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Add" method="post">
             <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label-add-edit"><bold>Име на Киносалона</bold></label>
+                <label asp-for="@Model.Name" class="form-label-add-edit"><strong>Име на Киносалона</strong></label>
                 <input asp-for="@Model.Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Location" class="form-label-add-edit"><bold>Локация: </bold></label>
+                <label asp-for="@Model.Location" class="form-label-add-edit"><strong>Локация: </strong></label>
                 <input asp-for="@Model.Location" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Location" class="text-danger"></span>
             </div>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="@Model.ImageUrl" class="form-label-add-edit"><bold>Линк към снимка на киносалона(URL)</bold></label>
+                <label asp-for="@Model.ImageUrl" class="form-label-add-edit"><strong>Линк към снимка на киносалона(URL)</strong></label>
                 <input asp-for="@Model.ImageUrl" class="form-control" type="text" />
                 <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
             </div>
@@ -44,7 +44,6 @@
                 <input asp-for="@Model.ClosingTime" class="form-control" aria-required="true" type="time" />
                 <span asp-validation-for="@Model.ClosingTime" class="text-danger"></span>
             </div>
-
             <div class="mb-3">
                 <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Добави" />
                 <a asp-action="All" class="btn btn-secondary mb-1 w-100 p-3 fw-bold">Обратно към Всички</a>
@@ -56,18 +55,4 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/GenresSelector/GenresSelector.js"></script>
-
 }
-<style>
-    body {
-        background-image: url('@Url.Content("~/images/MovieTheaterAdd.png")');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
-    label {
-        color: white;
-        size: 2 rem;
-    }
-</style>

@@ -1,0 +1,39 @@
+﻿body {
+    background-image: url(/images/MovieTheaterAdd.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+label {
+    color: white;
+    size: 2 rem;
+    color: goldenrod;
+}
+
+.row {
+    font-size: 1.1rem;
+}
+
+.status-indicator {
+    border-radius: 1rem;
+}
+
+.col-sm-12.offset-lg-2.col-lg-8.offset-xl-3.col-xl-6 {
+    background-color: rgb(17, 31, 52);
+    padding: 20px;
+    border-radius: 1rem;
+    box-shadow: 0px -3px 48px 12px goldenrod;
+    border: 2px solid white;
+}
+
+h2.text-center {
+    color: goldenrod;
+    background-color: rgb(17, 31, 52);
+    padding: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 3rem;
+    border: 2px solid white;
+    box-shadow: 0px -3px 48px 12px goldenrod;
+}

@@ -19,6 +19,7 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
         //Range Error Message
         public const string RangeErrorMessage = "{0} must be a number between {1} and {2}!";
 
+        public const string RangePriceErrorMessage = "{0} must be a number between {1} and {2}!";
 
         /// <summary>
         /// Movie All constants
@@ -80,8 +81,8 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
         {
 
             //Name
-            public const int MovieTheaterNameMaxLength = 100;
             public const int MovieTheaterNameMinLength = 2;
+            public const int MovieTheaterNameMaxLength = 100;
 
             //Location
             public const int MovieTheaterLocationMinLength = 5;
@@ -95,7 +96,15 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
             public const int MovieTheaterImageUrlMaxLength = 500;
         }
 
+        public static class MovieTheaterDailyScheduleForMovieConstants
+        {
+            public const double MovieTheaterDailyScheduleForMovieMinPrice = 0.1;
+            public const double MovieTheaterDailyScheduleForMovieMaxPrice = 100;
 
-       
+        }
+
+
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
+using SherplexTickets.Core.Services;
 using SherplexTickets.Core.ViewModels.TheaterLinkMovie;
 using System.Globalization;
 
@@ -11,7 +12,7 @@ namespace SherplexTickets.Controllers
 
         public MovieTheaterMovieLinkController(IMovieTheaterMovieLink movieTheaterMovieLinkService)
         {
-                this.movieTheaterMovieLinkService = movieTheaterMovieLinkService;
+            this.movieTheaterMovieLinkService = movieTheaterMovieLinkService;
         }
 
         [HttpGet]
@@ -50,7 +51,7 @@ namespace SherplexTickets.Controllers
 
 
             var theaterId = await movieTheaterMovieLinkService.EditPostAsync(movieTheaterInformationForm);
-            return RedirectToAction("Details", "MovieTheater", new { id = theaterId});
+            return RedirectToAction("Details", "MovieTheater", new { id = theaterId });
         }
 
         [HttpGet]
@@ -75,19 +76,35 @@ namespace SherplexTickets.Controllers
             }
 
             var theaterId = await movieTheaterMovieLinkService.DeleteConfirmedAsync(id);
-            return RedirectToAction("Details", "MovieTheater", new { id = theaterId});
+            return RedirectToAction("Details", "MovieTheater", new { id = theaterId });
         }
 
         [HttpHead]
         public async Task<IActionResult> Add()
         {
-            return View();
+            var dailyForm = new MovieTheaterMovieLinkAddViewModel()
+            {
+                Movies = await movieTheaterMovieLinkService.GetAllMovie()
+            };
+
+            return View(dailyForm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ForbidResult form)
+        public async Task<IActionResult> Add(MovieTheaterMovieLinkAddViewModel dailyForm)
         {
-            return View();
+            if (await movieTheaterMovieLinkService.MovieTheaterDailyScheduleForMovieAddDateExistsAsync(
+                dailyForm.MovieTheaterId,
+                dailyForm.MovieId,
+                dailyForm.Date))
+            {
+                ModelState.AddModelError("Date", "Филмът вече е добавен за тази дата.");
+                return View(dailyForm);
+            }
+
+            int newLinkMovie = await movieTheaterMovieLinkService.AddAsync(dailyForm);
+            return RedirectToAction("Details", "MovieTheater", new { id = dailyForm.MovieTheaterId });
+
         }
         public static bool TryParseTimes(string input, out TimeSpan[] times)
         {
@@ -99,7 +116,7 @@ namespace SherplexTickets.Controllers
             {
                 if (!TimeSpan.TryParseExact(parts[i], "hh\\:mm", CultureInfo.InvariantCulture, out times[i]))
                 {
-                    return false; 
+                    return false;
                 }
             }
 

@@ -22,7 +22,23 @@ namespace SherplexTickets.Core.Services
             return await repository.AllReadonly<MovieTheaterDailyScheduleForMovie>()
                 .AnyAsync(mtdfm => mtdfm.Id == movieTheaterDailyScheduleForMovieId);
         }
-
+        public async Task<IEnumerable<DailyMovieViewModel>> GetAllMovie()
+        {
+            return await repository.AllReadonly<Movie>()
+                .Select(m => new DailyMovieViewModel()
+                {
+                    MovieId = m.Id,
+                    Title = m.Title
+                })
+                .ToListAsync();
+        }
+        public async Task<bool> MovieTheaterDailyScheduleForMovieAddDateExistsAsync(int movieTheaterId, int movieId, DateTime date)
+        {
+            return await repository.AllReadonly<MovieTheaterDailyScheduleForMovie>()
+                .AnyAsync(mtdfm => mtdfm.MovieId == movieId &&
+                                    mtdfm.MovieTheaterId == movieTheaterId &&
+                                    mtdfm.Date == date);
+        }
         public async Task<MovieTheaterDailyScheduleForMovieEditViewModel> EditGetAsync(int movieTheaterDailyScheduleForMovieId)
         {
             var currentMovieTheaterDailyScheduleForMovie = await repository.All<MovieTheaterDailyScheduleForMovie>()
@@ -30,7 +46,7 @@ namespace SherplexTickets.Core.Services
 
             var movie = await repository.All<Movie>()
                 .FirstOrDefaultAsync(m => m.Id == currentMovieTheaterDailyScheduleForMovie.MovieId);
-            
+
 
             var movieTheaterLinkMovieForm = new ViewModels.TheaterLinkMovie.MovieTheaterDailyScheduleForMovieEditViewModel()
             {
@@ -94,6 +110,28 @@ namespace SherplexTickets.Core.Services
             await repository.SaveChangesAsync();
 
             return currentMovieTheaterDailyScheduleForMovie.MovieTheaterId;
+        }
+
+        public async Task<bool> MovieExistsAsync(int movieId)
+        {
+            return await repository.AllReadonly<Movie>()
+                .AnyAsync(m => m.Id == movieId);
+        }
+
+        public async Task<int> AddAsync(MovieTheaterMovieLinkAddViewModel dailyForm)
+        {
+            MovieTheaterDailyScheduleForMovie movieTheaterDailyScheduleForMovie = new()
+            {
+                MovieId = dailyForm.MovieId,
+                MovieTheaterId = dailyForm.MovieTheaterId,
+                Price = dailyForm.Price,
+                Date = dailyForm.Date,
+                ShowTimes = dailyForm.ShowTimes,
+            };
+            await repository.AddAsync(movieTheaterDailyScheduleForMovie);
+            await repository.SaveChangesAsync();
+
+            return movieTheaterDailyScheduleForMovie.Id;
         }
     }
 }

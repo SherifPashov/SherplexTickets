@@ -4,6 +4,7 @@ using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
+using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieTheaterDailyScheduleForMovieConstants;
 
 namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 {
@@ -32,6 +33,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 
         [Required]
         [Comment("The current Ticket's Price")]
+        [Range(MovieTheaterDailyScheduleForMovieMinPrice, MovieTheaterDailyScheduleForMovieMaxPrice, ErrorMessage = RangePriceErrorMessage)]
         public decimal Price { get; set; }
 
         [Required]

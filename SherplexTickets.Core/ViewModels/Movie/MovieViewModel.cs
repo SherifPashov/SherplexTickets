@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SherplexTickets.Core.ViewModels.BookView;
-using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
-using SherplexTickets.Infrastructure.Data.Models.Movies;
-using System.ComponentModel.DataAnnotations;
-using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieConstants;
-namespace SherplexTickets.Core.ViewModels.MovieView
+﻿namespace SherplexTickets.Core.ViewModels.MovieView
 {
     public class MovieViewModel
     {

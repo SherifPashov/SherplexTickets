@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
-using SherplexTickets.Core.Services;
-using SherplexTickets.Core.ViewModels.BookView;
 using SherplexTickets.Core.ViewModels.MovieView;
 
 namespace SherplexTickets.Controllers

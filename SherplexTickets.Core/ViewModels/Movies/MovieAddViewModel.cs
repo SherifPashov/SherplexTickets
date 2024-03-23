@@ -1,14 +1,12 @@
-﻿using SherplexTickets.Core.ViewModels.BookView;
+﻿using SherplexTickets.Core.ViewModels.Movies;
 using System.ComponentModel.DataAnnotations;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieConstants;
 
 namespace SherplexTickets.Core.ViewModels.MovieView
 {
-    public class MovieEditViewModel
+    public class MovieAddViewModel
     {
-        [Required]
-        public int Id { get; set; }
 
         [Required]
         [StringLength(MovieTitleMaxLength, MinimumLength = MovieTitleMinLength, ErrorMessage = LengthErrorMessage)]
@@ -47,11 +45,7 @@ namespace SherplexTickets.Core.ViewModels.MovieView
         [Display(Name = "Genre")]
         public IEnumerable<int> GenreIds { get; set; } = new List<int>();
 
-        [Required]
-        [Display(Name = "GenreSelect")]
-        public IEnumerable<int> SelectGenreIds { get; set; } = new List<int>();
-
         public IEnumerable<GenreViewModel> Genres { get; set; } = new List<GenreViewModel>();
-
+       
     }
 }

@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SherplexTickets.Core.Contracts;
-using SherplexTickets.Core.ViewModels.BookView;
+using SherplexTickets.Core.Enums;
+using SherplexTickets.Core.ViewModels.Movies;
 using SherplexTickets.Core.ViewModels.MovieView;
+using SherplexTickets.Core.ViewModels.QueryModels;
 using SherplexTickets.Infrastructure.Common;
 using SherplexTickets.Infrastructure.Data.DataConstants;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
-using System.IO;
 
 namespace SherplexTickets.Core.Services
 {
@@ -18,23 +18,6 @@ namespace SherplexTickets.Core.Services
         public MovieService(IRepository repository)
         {
             this.repository = repository;
-        }
-
-        public async Task<IEnumerable<MovieAllViewModel>> AllAsync()
-        {
-            return await repository
-                .AllReadonly<Movie>()
-                .Select(b => new MovieAllViewModel()
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    URLImage = b.URLImage,
-                    YoutubeTrailerUrl = b.YoutubeTrailerUrl,
-                    Duration = b.Duration.ToString(),
-                    ReleaseDate = b.ReleaseDate.Year.ToString(),
-
-                })
-                .ToListAsync();
         }
 
         public async Task<IEnumerable<GenreViewModel>> AllGenresAsync()
@@ -123,29 +106,58 @@ namespace SherplexTickets.Core.Services
             return currentMovieDetails;
         }
 
-        public async Task<IEnumerable<MovieAllViewModel>> SearchAsync(string input)
+        public async Task<MovieQueryServiceModel> AllAsync(
+            string? searchTerm = null,
+            MovieSorting? sorting = MovieSorting.TitleAscending,
+            string? genre = null,
+            int currentPage = 1,
+            int moviesPerPage = 8)
         {
-            var lowercaseInput = input.ToLower();
 
-            var searchedMovies = await repository.AllReadonly<Movie>()
-                .Where(m =>
-                    m.Title.ToLower().Contains(lowercaseInput)
-                    || m.Description.ToLower().Contains(lowercaseInput)
-                    || m.Genres.Any(ggb => ggb.Genre.Name.ToLower().Contains(lowercaseInput))
-                    || m.Director.Name.ToLower().Contains(lowercaseInput))
-                .Select(b => new MovieAllViewModel
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    URLImage = b.URLImage,
-                    YoutubeTrailerUrl = b.YoutubeTrailerUrl,
-                    Duration = b.Duration.ToString(),
-                    ReleaseDate = b.ReleaseDate.Year.ToString(DataConstants.DateTimeDefaultFormat),
-                })
+            var allMoviesShow = repository.AllReadonly<Movie>();
+
+            if (genre != null)
+            {
+                allMoviesShow = allMoviesShow
+                    .Where(m => m.Genres.Any(g => g.Genre.Name.ToLower() == genre.ToLower()));
+            }
+            if (searchTerm != null)
+            {
+                var lowercaseInput = searchTerm.ToLower();
+
+                allMoviesShow = allMoviesShow
+                    .Where(m =>
+                        m.Title.ToLower().Contains(lowercaseInput)
+                        || m.Description.ToLower().Contains(lowercaseInput)
+                        || m.Genres.Any(ggb => ggb.Genre.Name.ToLower().Contains(lowercaseInput))
+                        || m.Director.Name.ToLower().Contains(lowercaseInput));
+
+            }
+
+            allMoviesShow = sorting switch
+            {
+                MovieSorting.TitleAscending => allMoviesShow.OrderBy(m => m.Title),
+                MovieSorting.TitleDescending => allMoviesShow.OrderByDescending(m => m.Title),
+                MovieSorting.ReleaseDateAscending => allMoviesShow.OrderBy(m => m.ReleaseDate.Year),
+                MovieSorting.ReleaseDateDescending => allMoviesShow.OrderByDescending(m => m.ReleaseDate.Year),
+                _ => allMoviesShow.OrderByDescending(b => b.Id),
+            };
+
+            int totalMovies = await allMoviesShow.CountAsync();
+
+            var movies = await allMoviesShow
+                .Skip((currentPage - 1) * moviesPerPage)
+                .Take(moviesPerPage)
+                .ProjectToMovieAllViewModel()
                 .ToListAsync();
 
-            return searchedMovies;
+            return new MovieQueryServiceModel()
+            {
+                Movies = movies,
+                TotalMoviesCount = totalMovies,
+            };
         }
+
         public async Task<int> AddAsync(MovieAddViewModel movieForm)
         {
             Director? director = await repository.AllReadonly<Director>()
@@ -165,7 +177,7 @@ namespace SherplexTickets.Core.Services
                 URLImage = movieForm.URLImage,
                 YoutubeTrailerUrl = movieForm.YoutubeTrailerUrl,
                 Duration = movieForm.Duration,
-                Director = director, 
+                Director = director,
             };
 
             await repository.AddAsync(movie);
@@ -224,8 +236,8 @@ namespace SherplexTickets.Core.Services
                 YoutubeTrailerUrl = currentMovie.YoutubeTrailerUrl,
                 Duration = currentMovie.Duration,
                 Director = director.Name,
-                ActorsName = string.Join(", ", actors.Select(a=>a.FullName)),
-                SelectGenreIds = genres.Select(a=>a.Id),
+                ActorsName = string.Join(", ", actors.Select(a => a.FullName)),
+                SelectGenreIds = genres.Select(a => a.Id),
             };
 
             movieForm.Genres = await AllGenresAsync();
@@ -233,7 +245,7 @@ namespace SherplexTickets.Core.Services
             return movieForm;
         }
 
-        public async Task<int> EditPostAsync(MovieEditViewModel movieForm )
+        public async Task<int> EditPostAsync(MovieEditViewModel movieForm)
         {
 
 
@@ -259,7 +271,7 @@ namespace SherplexTickets.Core.Services
 
             if (allActorMovie != null)
             {
-                repository.DeleteRange<ActorMovie>(allActorMovie);  
+                repository.DeleteRange<ActorMovie>(allActorMovie);
 
             }
             if (allGenreMovie != null)
@@ -279,7 +291,7 @@ namespace SherplexTickets.Core.Services
             movie.Duration = movieForm.Duration;
             movie.Director = director;
 
-            
+
 
             foreach (var genreId in movieForm.GenreIds)
             {
@@ -323,7 +335,7 @@ namespace SherplexTickets.Core.Services
                 Id = movie.Id,
                 ReleaseDate = movie.ReleaseDate.ToString("yyyy"),
                 URLImage = movie.URLImage,
-                Duration=movie.Duration.ToString(),
+                Duration = movie.Duration.ToString(),
                 Title = movie.Title,
             };
 

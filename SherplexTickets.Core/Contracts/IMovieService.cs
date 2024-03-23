@@ -1,16 +1,18 @@
-﻿using SherplexTickets.Core.ViewModels.BookView;
+﻿using SherplexTickets.Core.Enums;
+using SherplexTickets.Core.ViewModels.Movies;
 using SherplexTickets.Core.ViewModels.MovieView;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SherplexTickets.Core.ViewModels.QueryModels;
 
 namespace SherplexTickets.Core.Contracts
 {
     public interface IMovieService
     {
-        Task<IEnumerable<MovieAllViewModel>> AllAsync();
+        Task<MovieQueryServiceModel> AllAsync(
+            string? searchTerm,
+            MovieSorting? sorting,
+            string? genre = null,
+            int currentPage = 1,
+            int moviesPerPage = 8);
 
         Task<IEnumerable<GenreViewModel>> AllGenresAsync();
 
@@ -21,8 +23,6 @@ namespace SherplexTickets.Core.Contracts
         Task<IEnumerable<ActorViewModel>> AllActorsAsync(int movieId);
 
         Task<MovieViewModel> DetailsAsync(int movieId);
-
-        Task<IEnumerable<MovieAllViewModel>> SearchAsync(string input);
 
         Task<int> AddAsync(MovieAddViewModel movieForm);
 

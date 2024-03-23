@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.MovieView;
+using SherplexTickets.Core.ViewModels.QueryModels;
 
 namespace SherplexTickets.Controllers
 {
@@ -11,16 +12,6 @@ namespace SherplexTickets.Controllers
         public MovieController(IMovieService movieService)
         {
             this.movieService = movieService;  
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> All()
-        {
-            var allMovies = await movieService.AllAsync();
-
-
-            return View(allMovies);
         }
 
         [AllowAnonymous]
@@ -40,21 +31,24 @@ namespace SherplexTickets.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Search(string input)
+        public async Task<IActionResult> All([FromQuery] AllMovieQueryModel model)
         {
-            if (input == null)
-            {
-                return RedirectToAction(nameof(All));
-            }
+            var allSearchedMovies = await movieService.AllAsync(
+                model.SearchTerm,
+                model.Sorting,
+                model.Genre,
+                model.CurrentPage,
+                model.MoviePerPage);
 
-            var searchedMovies = await movieService.SearchAsync(input);
+            model.TotalMoviesCount = allSearchedMovies.TotalMoviesCount;
+            model.Movies = allSearchedMovies.Movies;
 
-            if (searchedMovies == null)
-            {
-                return RedirectToAction(nameof(All));
-            }
+            var genre = await movieService.AllGenresAsync();
 
-            return View(searchedMovies);
+            var genresNames = genre.Select(a=>a.Name).ToArray();
+            model.Genres = genresNames;
+
+            return View(model);
         }
 
         [HttpGet]

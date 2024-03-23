@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.GenreConstants;
-namespace SherplexTickets.Core.ViewModels.BookView
+namespace SherplexTickets.Core.ViewModels.Movies
 {
     public class GenreViewModel
     {

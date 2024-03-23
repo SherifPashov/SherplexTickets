@@ -1,4 +1,4 @@
-﻿@using SherplexTickets.Core.ViewModels.MovieView
+﻿@* @using SherplexTickets.Core.ViewModels.MovieView
 
 @model IEnumerable<MovieAllViewModel>
 
@@ -6,53 +6,65 @@
     ViewBag.Title = "Търсени Филми";
 }
 
+<link rel="stylesheet" type="text/css" href="~/css/AllMovie.css">
 <h2 class="text-center mt-4 mb-3">@ViewBag.Title</h2>
 <hr />
-<div class="text-center mb-4">
-    <form asp-controller="Book" asp-action="Search" method="get" class="row">
-        <div class="col-md-11">
-            <div class="form-group">
-                <input type="text" name="input" class="form-control" placeholder="Търсене... (На кирилица)" />
-            </div>
-        </div>
-        <div class="col-md-1 d-flex justify-content-end">
-            <div class="form-group">
-                <button type="submit" class="btn btn-warning mr-2">Търси</button>
-            </div>
-            <div class="form-group">
-                <a asp-controller="Book" asp-action="All" class="btn btn-secondary ml-2">Изчисти</a>
-            </div>
-        </div>
-    </form>
-</div>
+<div class="container">
+    <div class="text-center mb-4" style="padding-top: 15px;">
+        <a asp-controller="Movie" asp-action="Add" class="btn btn-primary btn-lg">Добави филм</a>
+    </div>
 
-<div class="row justify-content-center">
-    @if (Model != null && Model.Count() > 0)
-    {
-        @foreach (var movie in Model)
-        {
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card h-100 text-center">
-                    <img class="card-img-top" src="@movie.URLImage" alt="Book Image">
-                    <div class="card-body">
-                        <h4 class="card-title"><strong>@movie.Title</strong></h4>
-                        <p class="card-text"><strong>Година:</strong> @movie.ReleaseDate</p>
-                        <p class="card-text"><strong>Време:</strong> @movie.Duration мин.</p>
-                    </div>
-                    <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж Повече</a>
-
-                    <a asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-primary mb-1 w-100 p-3 fw-bold">Редактирай</a>
+    <div class="text-center mb-4">
+        <form asp-controller="Movie" asp-action="Search" method="get" class="row">
+            <div class="col-md-11">
+                <div class="form-group">
+                    <input type="text" name="input" class="form-control" placeholder="Търсене... (На кирилица)" />
                 </div>
             </div>
+            <div class="col-md-1 d-flex justify-content-end">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning mr-2">Търси</button>
+                </div>
+                <div class="form-group">
+                    <a asp-controller="Movie" asp-action="All" class="btn btn-secondary ml-2">Изчисти</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row justify-content-center">
+        @if (Model != null && Model.Count() > 0)
+        {
+            @foreach (var movie in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4 mb-lg-4">
+                    <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id" class="">
+                        <div class="card h-100 text-center">
+                            <div style="position: relative;">
+                                <img class="card-img-top" src="@movie.URLImage" alt="Book Image">
+                                <div style="position: absolute; bottom: 0; right: 0;">
+                                    <p class="m-0">@movie.Duration мин</p>
+                                </div>
+                                <div style="position: absolute; top: 0; start:0;">
+                                    <p class="m-0">@movie.ReleaseDate</p>
+                                </div>
+                            </div>
+                            <div class="card-body text-lg-center">
+                                <h4 class="card-title"><strong>@movie.Title</strong></h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         }
-    }
-    else
-    {
-        <h2 class="text-center mb-4">Няма намерени резултати!</h2>
-    }
-</div>
+        else
+        {
+            <h2 class="text-center mb-4">Няма намерени резултати!</h2>
+        }
+    </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+ *@

@@ -20,7 +20,7 @@
                 <input asp-for="SearchTerm" class="form-control" placeholder="Търси...">
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
                 <label asp-for="Sorting"></label>
                 <select asp-for="Sorting" class="form-control">
                     <option value="0">Заглавие (Възходящо)</option>
@@ -29,7 +29,7 @@
                     <option value="3">Датана Излизане (Низходящ)</option>
                 </select>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label asp-for="Genre"></label>
                 <select asp-for="Genre" class="form-control">
                     <option value="">Всички</option>
@@ -40,8 +40,9 @@
                 </select>
             </div>
 
-            <div class="col-md-1 d-flex align-items-end">
+            <div class="col-md-2 d-flex align-items-end">
                 <input type="submit" value="Търси" class="btn btn-success w-100" />
+
             </div>
         </div>
     </form>

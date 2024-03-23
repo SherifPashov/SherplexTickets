@@ -1,0 +1,39 @@
+﻿
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination .active .page-link {
+    color: white;
+    background-color: darkgoldenrod;
+}
+
+.pagination .page-link {
+    background-color: goldenrod; 
+    color: white; 
+    border-color: black;
+}
+.page-link {
+    background-color: goldenrod;
+    color: white;
+}
+
+.pagination .page-link {
+    color: white;
+    background-color: goldenrod;
+    border-color: black;
+}
+
+.pagination .page-link:hover {
+    color: white;
+    background-color: darkgoldenrod;
+    border-color: black;
+}
+
+
+.pagination .disabled .page-link {
+    color: gray;
+    background-color: lightgray;
+    border-color: white;
+}

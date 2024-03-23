@@ -292,25 +292,52 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                 new MovieTheaterDailyScheduleForMovie
                 {
                     Id=1,
-                    MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
-                    MovieId = 1, // Идентификатор на филма "Kung Fu Panda"
-                    Date = new DateTime(2024, 3, 23), // Дата на излъчване
+                    MovieTheaterId = 3,
+                    MovieId = 1, 
+                    Date = new DateTime(2024, 3, 25),
                     Price = 17,
                     ShowTimes="13:30 15:00 17:00 22:30"
                 },
                 new MovieTheaterDailyScheduleForMovie
                 {
                     Id = 2,
-                    MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
-                    MovieId = 2, // Идентификатор на филма "Kung Fu Panda 2"
-                    Date = new DateTime(2024, 3, 24), // Дата на излъчване
+                    MovieTheaterId = 3,
+                    MovieId = 2,
+                    Date = new DateTime(2024, 3, 24), 
                     Price = 17,
                     ShowTimes="13:30 15:00 17:00 22:30"
                 },
                 new MovieTheaterDailyScheduleForMovie
                 {
                     Id = 3,
-                    MovieTheaterId = 2, // Идентификатор на киносалона "Арена"
+                    MovieTheaterId = 2, 
+                    MovieId = 1, 
+                    Date = new DateTime(2024, 3, 25), 
+                    Price = 17,
+                    ShowTimes="13:30 15:00 17:00 22:30"
+                },
+                new MovieTheaterDailyScheduleForMovie
+                {
+                    Id = 4,
+                    MovieTheaterId = 3, 
+                    MovieId = 2, 
+                    Date = new DateTime(2024, 3, 26), 
+                    Price = 17,
+                    ShowTimes="13:30 15:00 17:00 22:30"
+                },
+                new MovieTheaterDailyScheduleForMovie
+                {
+                    Id = 5,
+                    MovieTheaterId = 2, 
+                    MovieId = 2, 
+                    Date = new DateTime(2024, 3, 24), 
+                    Price = 17,
+                    ShowTimes="13:30 15:00 17:00 22:30"
+                },
+                new MovieTheaterDailyScheduleForMovie
+                {
+                    Id = 6,
+                    MovieTheaterId = 1, // Идентификатор на киносалона "Арена"
                     MovieId = 1, // Идентификатор на филма "Kung Fu Panda"
                     Date = new DateTime(2024, 3, 25), // Дата на излъчване
                     Price = 17,
@@ -318,8 +345,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                 },
                 new MovieTheaterDailyScheduleForMovie
                 {
-                    Id = 4,
-                    MovieTheaterId = 3, // Идентификатор на киносалона "Арена"
+                    Id = 7,
+                    MovieTheaterId = 1, // Идентификатор на киносалона "Арена"
                     MovieId = 2, // Идентификатор на филма "Kung Fu Panda 2"
                     Date = new DateTime(2024, 3, 26), // Дата на излъчване
                     Price = 17,

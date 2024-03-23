@@ -77,6 +77,18 @@ namespace SherplexTickets.Controllers
             var theaterId = await movieTheaterMovieLinkService.DeleteConfirmedAsync(id);
             return RedirectToAction("Details", "MovieTheater", new { id = theaterId});
         }
+
+        [HttpHead]
+        public async Task<IActionResult> Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(ForbidResult form)
+        {
+            return View();
+        }
         public static bool TryParseTimes(string input, out TimeSpan[] times)
         {
             var parts = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);

@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.ViewModels.MovieTheater;
+using SherplexTickets.Core.ViewModels.MovieView;
 using SherplexTickets.Infrastructure.Common;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
+using SherplexTickets.Infrastructure.Data.Models.Movies;
 using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
-using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
 
 namespace SherplexTickets.Core.Services
 {
@@ -17,13 +18,13 @@ namespace SherplexTickets.Core.Services
             this.repository = repository;
         }
 
-        public async Task<MovieTheaterViewModel?> GetMovieTheaterAsync(int theaterId)
+        public async Task<MovieTheaterViewModel?> GetMovieTheaterAsync(int movieTheaterId)
         {
             return await repository.AllReadonly<MovieTheater>()
-                .Where(t => t.Id == theaterId)
+                .Where(t => t.Id == movieTheaterId)
                 .Select(t => new MovieTheaterViewModel()
                 {
-                    Id = theaterId,
+                    Id = movieTheaterId,
                     Name = t.Name,
                     Location = t.Location,
                     Contact = t.Contact,
@@ -34,10 +35,10 @@ namespace SherplexTickets.Core.Services
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<bool> MovieTheaterExistsAsync(int theaterId)
+        public async Task<bool> MovieTheaterExistsAsync(int movieTheaterId)
         {
             return await repository.AllReadonly<MovieTheater>()
-                .AnyAsync(t => t.Id == theaterId);
+                .AnyAsync(t => t.Id == movieTheaterId);
         }
 
         public async Task<IEnumerable<MovieTheaterAllViewModel>> AllAsync()
@@ -153,7 +154,49 @@ namespace SherplexTickets.Core.Services
             return movieTheater.Id;
         }
 
+        public async Task<MovieTheaterDeleteViewModel> DeleteAsync(int movieTheaterId)
+        {
+            var movieTheater = await repository
+                .AllReadonly<MovieTheater>().Where(b => b.Id == movieTheaterId)
+                .FirstOrDefaultAsync();
 
+            var deleteForm = new MovieTheaterDeleteViewModel()
+            {
+                Id = movieTheater.Id,
+                Name = movieTheater.Name,
+                ImageUrl = movieTheater.ImageUrl,
+                ClosingTime = movieTheater.ClosingTime,
+                OpeningTime = movieTheater.OpeningTime,
+                Contact = movieTheater.Contact,
+                Location = movieTheater.Location,
+            };
+
+            return deleteForm;
+        }
+
+        public async Task DeleteConfirmedAsync(int movieTheaterId)
+        {
+            var movieTheater = await repository.All<MovieTheater>()
+                .Where(b => b.Id == movieTheaterId)
+                .FirstOrDefaultAsync();
+
+
+            var dailyMovieLink = await repository.All<MovieTheaterDailyScheduleForMovie>()
+                .Where(mtdm => mtdm.MovieId == movieTheater.Id)
+                .ToListAsync();
+            if (movieTheater != null)
+            {
+                if (dailyMovieLink != null && dailyMovieLink.Any())
+                {
+                    repository.DeleteRange(dailyMovieLink);
+                }
+                await repository.SaveChangesAsync();
+
+                repository.Delete(movieTheater);
+                await repository.SaveChangesAsync();
+            }
+
+        }
 
     }
 }

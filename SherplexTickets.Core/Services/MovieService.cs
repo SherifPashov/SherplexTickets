@@ -343,6 +343,10 @@ namespace SherplexTickets.Core.Services
             var genresMovie = await repository.All<GenreGenreOfMovie>()
                 .Where(gm => gm.MovieId == movie.Id)
                 .ToListAsync();
+
+            var daily = await repository.All<MovieTheaterDailyScheduleForMovie>()
+                .Where(mtdm => mtdm.MovieId == movie.Id)
+                .ToListAsync();
             if (movie != null)
             {
                 if (genresMovie != null && genresMovie.Any())
@@ -353,6 +357,11 @@ namespace SherplexTickets.Core.Services
                 if (actorsMovie != null && actorsMovie.Any())
                 {
                     repository.DeleteRange(actorsMovie);
+                }
+
+                if (daily != null && daily.Any())
+                {
+                    repository.DeleteRange(daily);
                 }
                 await repository.SaveChangesAsync();
 

@@ -1,0 +1,44 @@
+﻿@using SherplexTickets.Core.ViewModels.MovieTheater
+@model MovieTheaterDeleteViewModel
+
+@{
+    ViewBag.Title = "Изтрий Филма";
+}
+<link rel="stylesheet" type="text/css" href="~/css/DeleteMovieTheater.css">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <div class="card card-container">
+                <div class="card h-100 text-center">
+                    <div class="img-container">
+                        <img class="card-img-top" src="@Model.ImageUrl" alt="MovieTheater Image">
+                       
+                    </div>
+                    <div class="card-body text-lg-center">
+                        <h4 class="title"><strong>@Model.Name</strong></h4>
+                        <div class="col-md-12">
+                            <p class="card-text">
+                                <strong>Работи:</strong>
+                                <span class="d-inline">@Model.OpeningTime.ToString("HH:mm")ч. -</span>
+                                <span class="d-inline">@Model.ClosingTime.ToString("HH:mm")ч.</span>
+                            </p>
+                            <p><strong>Телефонен номер: </strong> @Model.Contact</p>
+                            <p><strong>Локация: </strong> @Model.Location</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-lg-center">
+                    <h4 class="text-danger "><strong>Сигурен ли си, че искаш да изтриеш киносалона</strong></h4>
+                    <h4 class="text-danger "><strong>Помисли добре</strong></h4>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <form asp-action="DeleteConfirmed" method="post" class="col-12">
+                        <input type="hidden" asp-for="Id" />
+                        <a asp-action="All" class="btn btn-secondary mb-1 w-100 p-3 fw-bold">Обратно към всички</a>
+                        <button type="submit" class="btn btn-danger mb-1 w-100 p-3 fw-bold">Изтрий</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

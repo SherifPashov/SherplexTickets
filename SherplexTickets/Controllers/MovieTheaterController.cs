@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
+using SherplexTickets.Core.Services;
 using SherplexTickets.Core.ViewModels.MovieTheater;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 
@@ -85,15 +86,31 @@ namespace SherplexTickets.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditТheaterMovieInformation(int id)
+        [AllowAnonymous]
+        public async Task<IActionResult> Delete(int id)
         {
             if (!await movieTheaterService.MovieTheaterExistsAsync(id))
             {
                 return BadRequest();
             }
 
-            var movieTheaterForm = await movieTheaterService.EditGetAsync(id);
-            return View(movieTheaterForm);
+            var searchedBook = await movieTheaterService.DeleteAsync(id);
+
+            return View(searchedBook);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (!await movieTheaterService.MovieTheaterExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            await movieTheaterService.DeleteConfirmedAsync(id);
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

@@ -12,8 +12,8 @@ using SherplexTickets.Infrastructure.Data;
 namespace SherplexTickets.Infrastructure.Migrations
 {
     [DbContext(typeof(SherplexTicketsDbContext))]
-    [Migration("20240321165903_Rename")]
-    partial class Rename
+    [Migration("20240323111544_initialse")]
+    partial class initialse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -436,11 +436,11 @@ namespace SherplexTickets.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2024, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MovieId = 1,
                             MovieTheaterId = 3,
                             Price = 17m,
-                            ShowTimes = "13:30, 15:00, 17:00, 22:30"
+                            ShowTimes = "13:30 15:00 17:00 22:30"
                         },
                         new
                         {
@@ -449,7 +449,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             MovieId = 2,
                             MovieTheaterId = 3,
                             Price = 17m,
-                            ShowTimes = "13:30, 15:00, 17:00, 22:30"
+                            ShowTimes = "13:30 15:00 17:00 22:30"
                         },
                         new
                         {
@@ -458,7 +458,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             MovieId = 1,
                             MovieTheaterId = 2,
                             Price = 17m,
-                            ShowTimes = "13:30, 15:00, 17:00, 22:30"
+                            ShowTimes = "13:30 15:00 17:00 22:30"
                         },
                         new
                         {
@@ -467,7 +467,34 @@ namespace SherplexTickets.Infrastructure.Migrations
                             MovieId = 2,
                             MovieTheaterId = 3,
                             Price = 17m,
-                            ShowTimes = "13:30, 15:00, 17:00, 22:30"
+                            ShowTimes = "13:30 15:00 17:00 22:30"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Date = new DateTime(2024, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MovieId = 2,
+                            MovieTheaterId = 2,
+                            Price = 17m,
+                            ShowTimes = "13:30 15:00 17:00 22:30"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Date = new DateTime(2024, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MovieId = 1,
+                            MovieTheaterId = 1,
+                            Price = 17m,
+                            ShowTimes = "13:30 15:00 17:00 22:30"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Date = new DateTime(2024, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MovieId = 2,
+                            MovieTheaterId = 1,
+                            Price = 17m,
+                            ShowTimes = "13:30 15:00 17:00 22:30"
                         });
                 });
 
@@ -872,52 +899,52 @@ namespace SherplexTickets.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ClosingTime = new DateTime(2024, 3, 21, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClosingTime = new DateTime(2024, 3, 23, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Contact = "029292929",
                             ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMdJrsk_0e4rX4NVGizrakLvwUFBD29M2GLQWNL=s680-w680-h510-rw",
                             Location = "Mall Paradise Center, Хладилника, бул. „Черни връх“ 100, 1407 София",
                             Name = "Cinema City",
-                            OpeningTime = new DateTime(2024, 3, 21, 13, 0, 0, 0, DateTimeKind.Unspecified)
+                            OpeningTime = new DateTime(2024, 3, 23, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            ClosingTime = new DateTime(2024, 3, 21, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClosingTime = new DateTime(2024, 3, 23, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Contact = "032640111",
                             ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOmXpjzG2b9aPieXQdLPx1d3wis6FwOvEmdHlSr=s680-w680-h510-rw",
                             Location = "Mall of, ж.к. Зона Б-5, бул. „Александър Стамболийски“ 101, 1303 София",
                             Name = "Cinema City",
-                            OpeningTime = new DateTime(2024, 3, 21, 13, 0, 0, 0, DateTimeKind.Unspecified)
+                            OpeningTime = new DateTime(2024, 3, 23, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            ClosingTime = new DateTime(2024, 3, 21, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClosingTime = new DateTime(2024, 3, 23, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Contact = "024047121",
                             ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOO_ILS0rWgwlCk-Dz3BLpUYBGwniBoAfjs1RGN=s680-w680-h510",
                             Location = "м. Къро, бул. „Цариградско шосе“ 115, 1784 София",
                             Name = "АРЕНА THE MALL",
-                            OpeningTime = new DateTime(2024, 3, 21, 13, 0, 0, 0, DateTimeKind.Unspecified)
+                            OpeningTime = new DateTime(2024, 3, 23, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            ClosingTime = new DateTime(2024, 3, 21, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClosingTime = new DateTime(2024, 3, 23, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Contact = "024047131",
                             ImageUrl = "https://programata.bg/wp-content/uploads/2022/09/arena-grand-mall-varna.jpg",
                             Location = "бул. Владислав Варненчик 186, Mall Varna Варна",
                             Name = "АРЕНА МОЛ ВАРНА",
-                            OpeningTime = new DateTime(2024, 3, 21, 13, 0, 0, 0, DateTimeKind.Unspecified)
+                            OpeningTime = new DateTime(2024, 3, 23, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            ClosingTime = new DateTime(2024, 3, 21, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClosingTime = new DateTime(2024, 3, 23, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Contact = "024047125",
                             ImageUrl = "https://markovotepemall.bg/wp-content/uploads/2020/03/Arena.jpg",
                             Location = "ЦентърПловдив Център, бул. „Руски“ 54, 4000 Пловдив",
                             Name = "Arena IMAX Mall Markovo Tepe Plovdiv",
-                            OpeningTime = new DateTime(2024, 3, 21, 13, 0, 0, 0, DateTimeKind.Unspecified)
+                            OpeningTime = new DateTime(2024, 3, 23, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

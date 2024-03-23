@@ -1,34 +1,40 @@
 ﻿body {
-    background-image: url(/images/MovieDelete.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
+    background-image: url(/images/DeleteMovieTheater.PNG);
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+
 
 .card {
-    background-color:  rgb(17, 31, 52);
+    background-color: rgb(17, 31, 52);
     box-shadow: 0 0 10px rgb(17, 31, 52);
     border-radius: 1rem;
     border: 2px solid white;
 }
-.card-container{
-    box-shadow: 0px 4px 35px 0px rgb(255, 255, 255);
 
+.card-container {
+    box-shadow: 0px 4px 35px 0px rgb(255, 255, 255);
+}
+.col-md-12 {
+    color: wheat;
+    border: 2px solid goldenrod;
+    border-radius: 1rem;
+    margin-bottom:1rem;
 }
 .title {
     color: goldenrod;
     padding: 1rem 0;
 }
+
 .img-container {
     position: relative;
 }
 
 .card-img-top {
-    max-width:25rem;
-    max-height:40rem;
+    max-width: 25rem;
+    max-height: 40rem;
     border-radius: 1rem;
     height: 15rem;
-    object-fit:fill;
+    object-fit: fill;
 }
 
 .duration {
@@ -61,6 +67,5 @@
 
 .text-danger {
     color: #dc3545;
-    padding-top:1.2rem;
+    padding-top: 1.2rem;
 }
-

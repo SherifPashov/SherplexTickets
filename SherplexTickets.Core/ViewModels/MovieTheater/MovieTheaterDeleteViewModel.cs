@@ -1,7 +1,6 @@
-﻿
-namespace SherplexTickets.Core.ViewModels.MovieTheater
+﻿namespace SherplexTickets.Core.ViewModels.MovieTheater
 {
-    public class MovieTheaterViewModel
+    public class MovieTheaterDeleteViewModel
     {
         public int Id { get; set; }
 
@@ -14,8 +13,7 @@ namespace SherplexTickets.Core.ViewModels.MovieTheater
         public DateTime OpeningTime { get; set; }
 
         public DateTime ClosingTime { get; set; }
-        public string ImageUrl { get; set; } = null!;
 
-        public IEnumerable<MovieTheaterDailyScheduleForMovieEditViewModel> WeeklySchedules { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
     }
 }

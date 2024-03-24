@@ -7,7 +7,7 @@ namespace SherplexTickets.Core.ViewModels.QueryModels
 {
     public class AllMovieQueryModel
     {
-        public int MoviePerPage { get; } = 2;
+        public int MoviePerPage { get; } = 3;
 
         [Display(Name = "Търсене")]
         public string SearchTerm { get; set; } = null!;

@@ -58,7 +58,7 @@ p {
     padding: 2rem;
 }
 
-    .col-md-6:last-child {
-        border-top: 2px solid white;
-        padding: 2rem;
-    }
+.col-md-6:last-child {
+    border-top: 2px solid white;
+    padding: 2rem;
+}

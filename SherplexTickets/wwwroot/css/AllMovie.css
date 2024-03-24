@@ -5,6 +5,7 @@
     background-position: center;
     color: white;
     
+    
 }
 
 .text-center.mt-4.mb-3 {
@@ -23,23 +24,22 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-
+.search-container {
+    margin: 2rem 0 ;
+}
 .text-center.mb-4 {
     padding-top: 15px;
 }
-/* Оцветяване на бутона за търсене в goldenrod с бели букви */
 .btn-success {
     background-color: goldenrod;
     color: rgb(17, 31, 52);
 }
 
-/* Центриране на формата */
 form {
     display: flex;
     justify-content: center;
 }
 
-/* Разпъване на полето за търсене */
 .form-group.col-md-3 {
     flex-grow: 1;
 }

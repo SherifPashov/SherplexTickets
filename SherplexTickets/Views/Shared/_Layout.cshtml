@@ -11,7 +11,7 @@
 </head>
 <body style="font-size: 1.1rem;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
 
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
@@ -24,24 +24,24 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Movie" asp-action="All">Movies</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movie" asp-action="All">Филми</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="MovieTheater" asp-action="All">Theaters</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="MovieTheater" asp-action="All">Киносалони</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">За нас</a>
                         </li>
                     </ul>
-
-                    <div class="dropdown show" style="margin:auto 1rem; ">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: rgb(225, 181, 56);font-size: 1.1rem; color:rgb(17, 31, 52); color:white;">
-                            Admine
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Movie" asp-action="Edit">Edit Movie</a>
-                            <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Movie" asp-action="Edit">Edit Theater</a>
-
+                    <div class="dropdown mb-1" style="margin:auto 1rem; ">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: rgb(225, 181, 56);font-size: 1.1rem; color:rgb(17, 31, 52); color:white; white-space: normal;">
+                            Допълнителни настройки
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-area="" asp-controller="Movie" asp-action="All" asp-route-data="Price">All Movie</a>
                         </div>
                     </div>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>

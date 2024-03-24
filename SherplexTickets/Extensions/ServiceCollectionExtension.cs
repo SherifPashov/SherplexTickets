@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SherplexTickets.Controllers;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.Services;
 using SherplexTickets.Infrastructure.Common;

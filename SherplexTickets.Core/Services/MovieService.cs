@@ -61,19 +61,15 @@ namespace SherplexTickets.Core.Services
                 })
                 .ToListAsync();
         }
-        public string GetEmbeddedYouTubeUrl(string originalUrl)
+        public static string GetEmbeddedYouTubeUrl(string originalUrl)
         {
-            // Проверка дали подаденият URL е от YouTube
             if (originalUrl.Contains("youtube.com"))
             {
-                // Извличане на уникалния идентификатор на видеото от URL адреса
                 var videoId = originalUrl.Split(new[] { "?v=" }, StringSplitOptions.RemoveEmptyEntries)[1];
 
-                // Създаване на URL адрес за вграждане с уникалния идентификатор на видеото
                 return $"https://www.youtube.com/embed/{videoId}";
             }
 
-            // Ако URL адресът не е от YouTube, връщаме го както е
             return originalUrl;
         }
 
@@ -381,6 +377,21 @@ namespace SherplexTickets.Core.Services
                 await repository.SaveChangesAsync();
             }
 
+        }
+
+        public async Task<IEnumerable<MovieIndexViewModel>> GetTop10NewestPopularMovies()
+        {
+            return await repository.AllReadonly<Movie>()
+                .OrderByDescending(m => m.ReleaseDate)
+                .Select(m => new MovieIndexViewModel()
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    URLImage = m.URLImage,
+                    YoutubeTrailerUrl = GetEmbeddedYouTubeUrl(m.YoutubeTrailerUrl)
+                })
+                .Take(10)
+                .ToListAsync();
         }
     }
 }

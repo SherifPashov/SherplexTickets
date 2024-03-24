@@ -1,0 +1,75 @@
+﻿body {
+    background: url(/images/MovieAll.PNG);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+h1 {
+    color: goldenrod;
+}
+
+.modal-body {
+    background: rgb(17, 31, 52);
+    
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(17, 31, 52);
+    z-index: 1;
+}
+.modal-content .pb-3 {
+    height: 100rem;
+}
+.specific-image {
+    height: 45rem;
+    width: 80%;
+}
+
+.carousel-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0px 10px 15px 8px goldenrod;
+    z-index: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+}
+
+.btn-view-more {
+    position: relative;
+    z-index: 3;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+.carousel-duration {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 1.5em;
+    color: white;
+    box-shadow: 0px 10px 15px 8px goldenrod;
+}
+
+
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+}

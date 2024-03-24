@@ -1,8 +1,60 @@
-﻿@{
+﻿@using SherplexTickets.Core.ViewModels.Movies
+@model IEnumerable<MovieIndexViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
+    var newestMovies = Model.ToList();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" type="text/css" href="~/css/Home.css">
+@if (!newestMovies.Any())
+{
+    <div class="mt-4 p-5 bg-light">
+        <h1 class="display-4">Добре дошли в Sherplex Tickets - Открийте магията на киното!</h1>
+        <p class="lead">
+            В момента няма никакви филми.
+        </p>
+    </div>
+}
+<h1 class="text-center mt-4 mb-3">Виж 10-те най-нови филми!</h1>
+<hr />
+<div class="mb-5"></div>
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @for (int i = 0; i < newestMovies.Count(); i++)
+        {
+            var movie = newestMovies[i];
+            <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+                <img class="d-block w-100 specific-image"  src="@newestMovies[i].URLImage" alt="@newestMovies[i].Title">
+                <a data-bs-toggle="modal" data-bs-target="#videoModal-@i">
+                    <img src="/images/PlayIcon.png" class="play-icon" alt="Play video" />
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="carousel-title">@newestMovies[i].Title</h5>
+                </div>
+            </div>
+            <div class="modal fade" id="videoModal-@i" tabindex="-1" aria-labelledby="videoModalLabel-@i" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <iframe width="100%" height="500" src="@newestMovies[i].YoutubeTrailerUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
+
+

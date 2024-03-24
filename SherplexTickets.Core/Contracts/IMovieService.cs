@@ -34,5 +34,7 @@ namespace SherplexTickets.Core.Contracts
 
         Task DeleteConfirmedAsync(int bookId);
 
+        Task<IEnumerable<MovieIndexViewModel>> GetTop10NewestPopularMovies();
+
     }
 }

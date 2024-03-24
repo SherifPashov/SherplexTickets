@@ -12,7 +12,6 @@ namespace SherplexTickets.Core.ViewModels.QueryModels
                 Id = m.Id,
                 Title = m.Title,
                 URLImage = m.URLImage,
-                YoutubeTrailerUrl = m.YoutubeTrailerUrl,
                 Duration = m.Duration.ToString(),
                 ReleaseDate = m.ReleaseDate.Year.ToString(),
             });

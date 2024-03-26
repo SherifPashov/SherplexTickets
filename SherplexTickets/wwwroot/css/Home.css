@@ -4,8 +4,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-
-h1 {
+.title-page {
     color: goldenrod;
 }
 
@@ -38,8 +37,10 @@ h1 {
     transform: translate(-50%, -50%);
     font-size: 2em;
     font-weight: bold;
-    color: white;
-    text-shadow: 0px 10px 15px 8px goldenrod;
+    color: goldenrod;
+    background: rgb(17, 31, 52);
+    padding: 1rem;
+    border-radius: 1.5rem;
     z-index: 2;
     white-space: nowrap;
     overflow: hidden;
@@ -73,3 +74,9 @@ h1 {
     height: 5rem;
     cursor: pointer;
 }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 100px;
+    height: 100px;
+}
+

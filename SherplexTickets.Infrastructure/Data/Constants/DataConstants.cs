@@ -45,13 +45,13 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
             public const int MovieReviewTitleMinLength = 5;
             public const int MovieReviewTitleMaxLength = 50;
 
-            // Content
+            // Description
             public const int MovieReviewDescriptionMinLength = 15;
             public const int MovieReviewDescriptionMaxLength = 5000;
 
             //Rate
             public const int MovieReviewRateMinRange = 1;
-            public const int MovieReviewRateMaxRange = 10;
+            public const int MovieReviewRateMaxRange = 5;
         }
         public static class ActorConstants
         {

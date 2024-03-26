@@ -25,6 +25,7 @@ namespace SherplexTickets.Infrastructure.Data
 
         public DbSet<ActorMovie> ActorsMovies { get; set; } = null!;
         public DbSet<GenreGenreOfMovie> GenresMovies { get; set; } = null!;
+        public DbSet<MovieReview> MovieReviews { get; set; } = null!;
         public DbSet<MovieTheaterDailyScheduleForMovie> MovieTheaterDailyScheduleForMovie { get; set; } = null!;
        
 

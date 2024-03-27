@@ -56,15 +56,15 @@ namespace SherplexTickets.Core.Services
                 })
                 .ToListAsync();
         }
-        public async Task<IEnumerable<MovieTheaterDailyScheduleForMovieEditViewModel>> GetWeeklyScheduleForTheaterAsync(int movieTheaterId)
+        public async Task<IEnumerable<MovieTheaterDailyScheduleForMovieEditViewModel>> GetWeeklyScheduleForTheaterAsync(int movieTheaterId, DateTime todayDate)
         {
-            DateTime today = DateTime.Today;
+           
 
             List<MovieTheaterDailyScheduleForMovieEditViewModel> dailySchedules = new List<MovieTheaterDailyScheduleForMovieEditViewModel>();
 
             for (int i = 0; i < 7; i++)
             {
-                DateTime currentDate = today.AddDays(i);
+                DateTime currentDate = todayDate.AddDays(i);
 
                 var schedulesForCurrentDate = await repository.AllReadonly<MovieTheaterDailyScheduleForMovie>()
                     .Where(ds =>
@@ -89,11 +89,11 @@ namespace SherplexTickets.Core.Services
         }
 
 
-        public async Task<MovieTheaterViewModel?> DetailsAsync(int movieTheaterId)
+        public async Task<MovieTheaterViewModel?> DetailsAsync(int movieTheaterId, DateTime today)
         {
             var theater = await GetMovieTheaterAsync(movieTheaterId);
 
-            var weeklyScheduleForTheater = await GetWeeklyScheduleForTheaterAsync(movieTheaterId);
+            var weeklyScheduleForTheater = await GetWeeklyScheduleForTheaterAsync(movieTheaterId,today);
 
             theater.WeeklySchedules = weeklyScheduleForTheater;
 

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SherplexTickets.Core.Contracts;
+using SherplexTickets.Core.ViewModels.Movies;
 using SherplexTickets.Core.ViewModels.MovieView;
 using SherplexTickets.Core.ViewModels.QueryModels;
+using SherplexTickets.Extensions;
 
 namespace SherplexTickets.Controllers
 {
@@ -141,5 +143,133 @@ namespace SherplexTickets.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> AddReview(int movieId)
+        {
+            string userId = User.Id();
+
+            var movieReviewForm = new MovieReviewAddViewModel()
+            {
+                MovieId = movieId,
+                UserId = userId
+            };
+            return View(movieReviewForm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddReview(MovieReviewAddViewModel movieReviewForm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(movieReviewForm);
+            }
+
+            int newMovieReviewId = await movieService.AddMovieReviewAsync(movieReviewForm);
+
+            int movieId = movieReviewForm.MovieId;
+            return RedirectToAction(nameof(AllReviews), new { id = movieId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllReviews (int movieId, [FromQuery] AllMovieReviewQueryModel model)
+        {
+            var movie = movieService.FindMovieIdAsync(movieId).Result;
+
+            if (movie == null)
+            {
+                return BadRequest();
+            }
+
+            var allMovies = await movieService.AllMovieReviewsAsync(
+                movieId,
+                movie.Title,
+                model.Sorting,
+                model.CurrentPage,
+                model.ReviewsPerPage);
+
+            model.TotalMovieReviewsCount = allMovies.TotalReviewsCount;
+            model.MovieReviews = allMovies.MovieReviews;
+            model.MovieId = movie.Id;
+            model.MovieTitle = movie.Title;
+
+            return View(model);
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditMovieReview(int reviewId)
+        {
+            var movieReview = await movieService.FindMovieReviewAsync(reviewId);
+            if (movieReview == null)
+            {
+                return BadRequest();
+            }
+
+            if (User.Id() != movieReview.UserId)
+            {
+                return Unauthorized();
+            }
+
+            var movieReviewForm = await movieService.EditMovieReviewGetAsync(reviewId);
+
+            return View(movieReviewForm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditMovieReview(MovieReviewEditViewModel movieReviewForm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            if (User.Id() != movieReviewForm.UserId)
+            {
+                return Unauthorized();
+            }
+
+            int movieId = await movieService.EditMovieReviewPostAsync(movieReviewForm);
+
+            return RedirectToAction(nameof(AllReviews), new { movieId = movieId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteMovieReview(int reviewId)
+        {
+            var movieReview = await movieService.FindMovieReviewAsync(reviewId);
+
+            if (movieReview == null)
+            {
+                return BadRequest();
+            }
+
+            if (User.Id() != movieReview.UserId)
+            {
+                return Unauthorized();
+            }
+            var searchedMovieReview = await movieService.DeleteMovieReviewAsync(reviewId);
+
+            return View(searchedMovieReview);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteMovieReviewConfirmend(int reviewId)
+        {
+            var movieReview = await movieService.FindMovieReviewAsync(reviewId);
+
+            if (movieReview == null)
+            {
+                return BadRequest();
+            }
+            if (User.Id() != movieReview.UserId)
+            {
+                return Unauthorized();
+            }
+
+            var movieId = await movieService.DeleteMovieReviewConfirmedAsync(reviewId);
+
+            return RedirectToAction(nameof(AllReviews), new { movieId = movieId });
+
+        }
     }
 }

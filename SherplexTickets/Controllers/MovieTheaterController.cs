@@ -34,7 +34,7 @@ namespace SherplexTickets.Controllers
                 return BadRequest();
             }
 
-            var currentBook = await movieTheaterService.DetailsAsync(id);
+            var currentBook = await movieTheaterService.DetailsAsync(id, new DateTime(2024, 03, 22));
             return View(currentBook);
         }
 

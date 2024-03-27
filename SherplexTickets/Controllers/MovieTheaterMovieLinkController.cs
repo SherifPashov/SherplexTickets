@@ -49,7 +49,6 @@ namespace SherplexTickets.Controllers
                 return View(movieTheaterInformationForm);
             }
 
-
             var theaterId = await movieTheaterMovieLinkService.EditPostAsync(movieTheaterInformationForm);
             return RedirectToAction("Details", "MovieTheater", new { id = theaterId });
         }

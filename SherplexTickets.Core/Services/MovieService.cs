@@ -37,6 +37,18 @@ namespace SherplexTickets.Core.Services
                 .AnyAsync(m => m.Id == movieId);
         }
 
+        public async Task<Movie?> FindMovieIdAsync(int movieId)
+        {
+            return await repository.AllReadonly<Movie>()
+                .FirstOrDefaultAsync(m => m.Id == movieId);
+        }
+
+        public async Task<MovieReview?> FindMovieReviewAsync(int reviewId)
+        {
+            return await repository.AllReadonly<MovieReview>()
+                .FirstOrDefaultAsync(mr => mr.Id == reviewId);
+        }
+
         public async Task<IEnumerable<ActorViewModel>> AllActorsAsync(int movieId)
         {
             return await repository.AllReadonly<ActorMovie>()
@@ -392,6 +404,113 @@ namespace SherplexTickets.Core.Services
                 })
                 .Take(10)
                 .ToListAsync();
+        }
+
+        public async Task<int> AddMovieReviewAsync(MovieReviewAddViewModel movieReviewForm)
+        {
+            var movieReview = new MovieReview
+            {
+                UserId = movieReviewForm.UserId,
+                MovieId = movieReviewForm.MovieId,
+                Title = movieReviewForm.Title,
+                Description = movieReviewForm.Description,
+                Rate = movieReviewForm.Rate,
+
+            };
+
+            await repository.AddAsync<MovieReview>(movieReview);
+            await repository.SaveChangesAsync();
+
+            return movieReview.Id;
+        }
+
+        public async Task<MovieReviewQueryServiceModel> AllMovieReviewsAsync(
+            int movieId,
+            string movieTitle,
+            MovieReviewSorting sorting = MovieReviewSorting.Newest,
+            int currentPage = 1,
+            int reviewsPerPage = 4)
+        {
+            var allReviewsToShow = repository.AllReadonly<MovieReview>()
+                .Where(mr => mr.MovieId == movieId);
+
+            allReviewsToShow = sorting switch
+            {
+                MovieReviewSorting.Oldest => allReviewsToShow.OrderBy(mr => mr.Id),
+                MovieReviewSorting.RateAscending => allReviewsToShow.OrderBy(mr => mr.Rate),
+                MovieReviewSorting.RateDescending => allReviewsToShow.OrderByDescending(mr => mr.Rate),
+                _ => allReviewsToShow.OrderByDescending(mr => mr.Id),
+
+            };
+
+            var reviews = await allReviewsToShow
+                .Skip((currentPage - 1) * reviewsPerPage)
+                .Take(reviewsPerPage)
+                .Select(mr => new MovieReviewServiceModel()
+                {
+                    Id = mr.Id,
+                    Title = mr.Title,
+                    Description = mr.Description,
+                    Rate = mr.Rate,
+                    MovieId = mr.MovieId,
+                    UserId = mr.UserId,
+                })
+                .ToListAsync();
+            int totalReviews = reviews.Count;
+            return new MovieReviewQueryServiceModel()
+            {
+                MovieReviews = reviews,
+                TotalReviewsCount = totalReviews
+            };
+        }
+
+        public async Task<MovieReviewEditViewModel> EditMovieReviewGetAsync(int reviewId)
+        {
+            var cuurMovieReview = await repository.GetByIdAsync<MovieReview>(reviewId);
+
+            var movieReviewEditForm = new MovieReviewEditViewModel()
+            {
+                Id = reviewId,
+                Title = cuurMovieReview.Title,
+                Description = cuurMovieReview.Description,
+                Rate = cuurMovieReview.Rate,
+                MovieId = cuurMovieReview.MovieId,
+                UserId = cuurMovieReview.UserId,
+            };
+            return movieReviewEditForm;
+        }
+
+        public async Task<int> EditMovieReviewPostAsync(MovieReviewEditViewModel movieReveiwForm)
+        {
+            var currMovieReview = await repository.GetByIdAsync<MovieReview>(movieReveiwForm.Id);
+
+            currMovieReview.Title = movieReveiwForm.Title;
+            currMovieReview.Rate = movieReveiwForm.Rate;
+            currMovieReview.Description = movieReveiwForm.Description;
+
+            await repository.SaveChangesAsync();
+            return currMovieReview.MovieId;
+        }
+
+        public async Task<MovieReviewDeleteViewModel> DeleteMovieReviewAsync(int reveiwId)
+        {
+            var review = await repository.GetByIdAsync<MovieReview>(reveiwId);
+            var movie = await repository.GetByIdAsync<Movie>(review.MovieId);
+
+            return new MovieReviewDeleteViewModel()
+            {
+                MovieId = movie.Id,
+                ReviewId = review.Id,
+            };
+        }
+        public async Task<int> DeleteMovieReviewConfirmedAsync(int reviewId)
+        {
+            var review = await repository.GetByIdAsync<MovieReview>(reviewId);
+
+            await repository.DeleteAsync<MovieReview>(review);
+            await repository.SaveChangesAsync();
+
+            return review.MovieId;
         }
     }
 }

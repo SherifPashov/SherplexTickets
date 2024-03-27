@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SherplexTickets.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using SherplexTickets.Infrastructure.Data;
 namespace SherplexTickets.Infrastructure.Migrations
 {
     [DbContext(typeof(SherplexTicketsDbContext))]
-    partial class SherplexTicketsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240327204524_ChangeGenre")]
+    partial class ChangeGenre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -887,34 +889,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.ToTable("MovieReviews");
                 });
 
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.ТheaterМanager", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("The current ТheaterМanager's Identifier");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasComment("The current User's Identifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TheaterManagars");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            UserId = "18702015-42e4-46a9-93db-2dcca0e37703"
-                        });
-                });
-
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", b =>
                 {
                     b.Property<int>("Id")
@@ -955,15 +929,9 @@ namespace SherplexTickets.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("The current MovieTheater's Opening Time");
 
-                    b.Property<int>("TheaterManagerId")
-                        .HasColumnType("int")
-                        .HasComment("The current TheaterManager's Identifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TheaterManagerId");
-
-                    b.ToTable("MovieTheaters");
+                    b.ToTable("MovieTheater");
 
                     b.HasData(
                         new
@@ -974,8 +942,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMdJrsk_0e4rX4NVGizrakLvwUFBD29M2GLQWNL=s680-w680-h510-rw",
                             Location = "Mall Paradise Center, Хладилника, бул. „Черни връх“ 100, 1407 София",
                             Name = "Cinema City",
-                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            TheaterManagerId = 1
+                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -985,8 +952,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOmXpjzG2b9aPieXQdLPx1d3wis6FwOvEmdHlSr=s680-w680-h510-rw",
                             Location = "Mall of, ж.к. Зона Б-5, бул. „Александър Стамболийски“ 101, 1303 София",
                             Name = "Cinema City",
-                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            TheaterManagerId = 1
+                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -996,8 +962,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOO_ILS0rWgwlCk-Dz3BLpUYBGwniBoAfjs1RGN=s680-w680-h510",
                             Location = "м. Къро, бул. „Цариградско шосе“ 115, 1784 София",
                             Name = "АРЕНА THE MALL",
-                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            TheaterManagerId = 1
+                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1007,8 +972,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             ImageUrl = "https://programata.bg/wp-content/uploads/2022/09/arena-grand-mall-varna.jpg",
                             Location = "бул. Владислав Варненчик 186, Mall Varna Варна",
                             Name = "АРЕНА МОЛ ВАРНА",
-                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            TheaterManagerId = 1
+                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1018,8 +982,7 @@ namespace SherplexTickets.Infrastructure.Migrations
                             ImageUrl = "https://markovotepemall.bg/wp-content/uploads/2020/03/Arena.jpg",
                             Location = "ЦентърПловдив Център, бул. „Руски“ 54, 4000 Пловдив",
                             Name = "Arena IMAX Mall Markovo Tepe Plovdiv",
-                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            TheaterManagerId = 1
+                            OpeningTime = new DateTime(2024, 3, 27, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1161,28 +1124,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.ТheaterМanager", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", b =>
-                {
-                    b.HasOne("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.ТheaterМanager", "TheaterManager")
-                        .WithMany("Theaters")
-                        .HasForeignKey("TheaterManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TheaterManager");
-                });
-
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.Movies.Actor", b =>
                 {
                     b.Navigation("ActorsMovies");
@@ -1207,11 +1148,6 @@ namespace SherplexTickets.Infrastructure.Migrations
                     b.Navigation("MovieTheaters");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.ТheaterМanager", b =>
-                {
-                    b.Navigation("Theaters");
                 });
 
             modelBuilder.Entity("SherplexTickets.Infrastructure.Data.Models.MovieTheaters.MovieTheater", b =>

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
 {
-    public class GenreGenreOfMovie
+    public class GenreMovie
     {
         [Required]
         [Comment("The current Genre's Identifier")]
@@ -14,7 +14,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
         [Required]
         [ForeignKey(nameof(GenreId))]
         [Comment("The current Genre")]
-        public Movies.GenreOfMovie Genre { get; set; } = null!;
+        public Movies.Genre Genre { get; set; } = null!;
 
         [Required]
         [Comment("The current Movie's Identifier")]

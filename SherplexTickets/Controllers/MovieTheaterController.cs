@@ -1,20 +1,30 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SherplexTickets.Attributes;
 using SherplexTickets.Core.Contracts;
-using SherplexTickets.Core.Services;
 using SherplexTickets.Core.ViewModels.MovieTheater;
-using SherplexTickets.Infrastructure.Data.Models.Movies;
 
 namespace SherplexTickets.Controllers
 {
     public class MovieTheaterController : Controller
     {
-        
-        private readonly IMovieTheaterService movieTheaterService;
 
-        public MovieTheaterController(IMovieTheaterService movieTheaterService)
+        private readonly IMovieTheaterService movieTheaterService;
+        private readonly ITheaterManagerService theaterManagerService;
+
+        public MovieTheaterController(IMovieTheaterService movieTheaterService, ITheaterManagerService theaterManagerService)
         {
-                this.movieTheaterService = movieTheaterService;
+            this.movieTheaterService = movieTheaterService;
+            this.theaterManagerService = theaterManagerService;
+        }
+
+        public async Task<bool> CheckIfUserExistsAsync(string username)
+        {
+            return await theaterManagerService
+                .ExistsByIdAsync(username);
+
+             
         }
 
         [HttpGet]
@@ -39,12 +49,14 @@ namespace SherplexTickets.Controllers
         }
 
         [HttpGet]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add()
         {
             return View();
         }
 
         [HttpPost]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add(MovieTheaterAddViewModel movieForm)
         {
             if (!ModelState.IsValid)
@@ -57,6 +69,7 @@ namespace SherplexTickets.Controllers
         }
 
         [HttpGet]
+        [MustBeTheaterManager]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await movieTheaterService.MovieTheaterExistsAsync(id))
@@ -86,7 +99,7 @@ namespace SherplexTickets.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [MustBeTheaterManager]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await movieTheaterService.MovieTheaterExistsAsync(id))
@@ -100,7 +113,7 @@ namespace SherplexTickets.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [MustBeTheaterManager]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (!await movieTheaterService.MovieTheaterExistsAsync(id))

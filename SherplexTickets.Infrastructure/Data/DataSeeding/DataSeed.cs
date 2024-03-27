@@ -19,43 +19,46 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             GenresGenreOfMovies = SeedGenreGenresOfMovie();
             MovieTheaters = SeedMovieTheaters();
             MovieTheatersDailyScheduleForMovies = SeedDailySchedules();
+            ТheaterМanagers = SeedТheaterМanagers();
         }
+
 
 
         //Movie
         public IEnumerable<Director> Directors { get; set; }
-        public IEnumerable<GenreOfMovie> GenresOfMovies { get; set; }
+        public IEnumerable<Genre> GenresOfMovies { get; set; }
         public IEnumerable<Actor> Actors { get; set; }
         public IEnumerable<Movie> Movies { get; set; }
         public IEnumerable<ActorMovie> ActorsMovies { get; set; }
-        public IEnumerable<GenreGenreOfMovie> GenresGenreOfMovies { get; set; }
+        public IEnumerable<GenreMovie> GenresGenreOfMovies { get; set; }
 
         public IEnumerable<MovieTheater> MovieTheaters { get; set; }
+        public IEnumerable<ТheaterМanager> ТheaterМanagers { get; set; }
         public IEnumerable<MovieTheaterDailyScheduleForMovie> MovieTheatersDailyScheduleForMovies { get; set; }
 
 
 
 
 
-        private IEnumerable<GenreOfMovie> SeedGenresOfMovie()
+        private IEnumerable<Genre> SeedGenresOfMovie()
         {
-            return new List<GenreOfMovie>()
+            return new List<Genre>()
             {
-                new GenreOfMovie { Id = 1, Name = "Екшън" },
-                new GenreOfMovie { Id = 2, Name = "Приключенски" },
-                new GenreOfMovie { Id = 3, Name = "Комедия" },
-                new GenreOfMovie { Id = 4, Name = "Драма" },
-                new GenreOfMovie { Id = 5, Name = "Ужаси" },
-                new GenreOfMovie { Id = 6, Name = "Фентъзи" },
-                new GenreOfMovie { Id = 7, Name = "Научна фантастика" },
-                new GenreOfMovie { Id = 8, Name = "Трилър" },
-                new GenreOfMovie { Id = 9, Name = "Криминален" },
-                new GenreOfMovie { Id = 10, Name = "Документален" },
-                new GenreOfMovie { Id = 11, Name = "Романтичен" },
-                new GenreOfMovie { Id = 12, Name = "Исторически" },
-                new GenreOfMovie { Id = 13, Name = "Военен" },
-                new GenreOfMovie { Id = 14, Name = "Анимация" },
-                new GenreOfMovie { Id = 15, Name = "Мистерия" }
+                new Genre { Id = 1, Name = "Екшън" },
+                new Genre { Id = 2, Name = "Приключенски" },
+                new Genre { Id = 3, Name = "Комедия" },
+                new Genre { Id = 4, Name = "Драма" },
+                new Genre { Id = 5, Name = "Ужаси" },
+                new Genre { Id = 6, Name = "Фентъзи" },
+                new Genre { Id = 7, Name = "Научна фантастика" },
+                new Genre { Id = 8, Name = "Трилър" },
+                new Genre { Id = 9, Name = "Криминален" },
+                new Genre { Id = 10, Name = "Документален" },
+                new Genre { Id = 11, Name = "Романтичен" },
+                new Genre { Id = 12, Name = "Исторически" },
+                new Genre { Id = 13, Name = "Военен" },
+                new Genre { Id = 14, Name = "Анимация" },
+                new Genre { Id = 15, Name = "Мистерия" }
             };
         }
         private IEnumerable<Director> SeedDirectors()
@@ -202,37 +205,48 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             };
         }
 
-        private IEnumerable<GenreGenreOfMovie> SeedGenreGenresOfMovie()
+        private IEnumerable<GenreMovie> SeedGenreGenresOfMovie()
         {
-            return new List<GenreGenreOfMovie>()
+            return new List<GenreMovie>()
             {
                 // За "Железният човек"
-                new GenreGenreOfMovie { MovieId = 1, GenreId = 1 }, // Екшън
-                new GenreGenreOfMovie { MovieId = 1, GenreId = 7 }, // Научна фантастика
+                new GenreMovie { MovieId = 1, GenreId = 1 }, // Екшън
+                new GenreMovie { MovieId = 1, GenreId = 7 }, // Научна фантастика
 
                 // За "Отмъстителите"
-                new GenreGenreOfMovie { MovieId = 2, GenreId = 1 }, // Екшън
-                new GenreGenreOfMovie { MovieId = 2, GenreId = 7 }, // Научна фантастика
+                new GenreMovie { MovieId = 2, GenreId = 1 }, // Екшън
+                new GenreMovie { MovieId = 2, GenreId = 7 }, // Научна фантастика
 
                 // За "Стражите на Галактиката"
-                new GenreGenreOfMovie { MovieId = 3, GenreId = 1 }, // Екшън
-                new GenreGenreOfMovie { MovieId = 3, GenreId = 7 }, // Научна фантастика
+                new GenreMovie { MovieId = 3, GenreId = 1 }, // Екшън
+                new GenreMovie { MovieId = 3, GenreId = 7 }, // Научна фантастика
 
                 // За "Черна пантера"
-                new GenreGenreOfMovie { MovieId = 4, GenreId = 1 }, // Екшън
-                new GenreGenreOfMovie { MovieId = 4, GenreId = 6 }, // Фентъзи
+                new GenreMovie { MovieId = 4, GenreId = 1 }, // Екшън
+                new GenreMovie { MovieId = 4, GenreId = 6 }, // Фентъзи
 
                 // За "Тор: Рагнарок"
-                new GenreGenreOfMovie { MovieId = 5, GenreId = 1 }, // Екшън
-                new GenreGenreOfMovie { MovieId = 5, GenreId = 6 }, // Фентъзи
-                new GenreGenreOfMovie { MovieId = 5, GenreId = 7 }, // Научна фантастика
+                new GenreMovie { MovieId = 5, GenreId = 1 }, // Екшън
+                new GenreMovie { MovieId = 5, GenreId = 6 }, // Фентъзи
+                new GenreMovie { MovieId = 5, GenreId = 7 }, // Научна фантастика
             };
         }
 
+        private IEnumerable<ТheaterМanager> SeedТheaterМanagers()
+        {
+            return new List<ТheaterМanager>()
+            {
+                new ТheaterМanager
+                {
+                    Id = 1,
+                    UserId = "18702015-42e4-46a9-93db-2dcca0e37703",
+                }
+            };
+        }
         private IEnumerable<MovieTheater> SeedMovieTheaters()
         {
             return new List<MovieTheater>()
-                {
+            {
                 new MovieTheater
                 {
                     Id = 1,
@@ -241,7 +255,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Contact = "029292929",
                     OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMdJrsk_0e4rX4NVGizrakLvwUFBD29M2GLQWNL=s680-w680-h510-rw"
+                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMdJrsk_0e4rX4NVGizrakLvwUFBD29M2GLQWNL=s680-w680-h510-rw",
+                    TheaterManagerId = 1,
                 },
                 new MovieTheater
                 {
@@ -251,7 +266,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Contact = "032640111",
                     OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOmXpjzG2b9aPieXQdLPx1d3wis6FwOvEmdHlSr=s680-w680-h510-rw"
+                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOmXpjzG2b9aPieXQdLPx1d3wis6FwOvEmdHlSr=s680-w680-h510-rw",
+                    TheaterManagerId = 1,
                 },
                 new MovieTheater
                 {
@@ -261,7 +277,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Contact = "024047121",
                     OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOO_ILS0rWgwlCk-Dz3BLpUYBGwniBoAfjs1RGN=s680-w680-h510"
+                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOO_ILS0rWgwlCk-Dz3BLpUYBGwniBoAfjs1RGN=s680-w680-h510",
+                    TheaterManagerId = 1,
                 },
                 new MovieTheater
                 {
@@ -271,7 +288,8 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Contact = "024047131",
                     OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ImageUrl = "https://programata.bg/wp-content/uploads/2022/09/arena-grand-mall-varna.jpg"
+                    ImageUrl = "https://programata.bg/wp-content/uploads/2022/09/arena-grand-mall-varna.jpg",
+                    TheaterManagerId = 1,
                 },
                 new MovieTheater
                 {
@@ -281,11 +299,12 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Contact = "024047125",
                     OpeningTime = DateTime.ParseExact("13:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                     ClosingTime = DateTime.ParseExact("21:00", DateTimeHouFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
-                    ImageUrl = "https://markovotepemall.bg/wp-content/uploads/2020/03/Arena.jpg"
+                    ImageUrl = "https://markovotepemall.bg/wp-content/uploads/2020/03/Arena.jpg",
+                    TheaterManagerId = 1,
                 }
             };
         }
-      
+
         private IEnumerable<MovieTheaterDailyScheduleForMovie> SeedDailySchedules()
         {
             var schedules = new List<MovieTheaterDailyScheduleForMovie>(){
@@ -293,7 +312,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                 {
                     Id=1,
                     MovieTheaterId = 3,
-                    MovieId = 1, 
+                    MovieId = 1,
                     Date = new DateTime(2024, 3, 25),
                     Price = 17,
                     ShowTimes="13:30 15:00 17:00 22:30"
@@ -303,34 +322,34 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
                     Id = 2,
                     MovieTheaterId = 3,
                     MovieId = 2,
-                    Date = new DateTime(2024, 3, 24), 
+                    Date = new DateTime(2024, 3, 24),
                     Price = 17,
                     ShowTimes="13:30 15:00 17:00 22:30"
                 },
                 new MovieTheaterDailyScheduleForMovie
                 {
                     Id = 3,
-                    MovieTheaterId = 2, 
-                    MovieId = 1, 
-                    Date = new DateTime(2024, 3, 25), 
+                    MovieTheaterId = 2,
+                    MovieId = 1,
+                    Date = new DateTime(2024, 3, 25),
                     Price = 17,
                     ShowTimes="13:30 15:00 17:00 22:30"
                 },
                 new MovieTheaterDailyScheduleForMovie
                 {
                     Id = 4,
-                    MovieTheaterId = 3, 
-                    MovieId = 2, 
-                    Date = new DateTime(2024, 3, 26), 
+                    MovieTheaterId = 3,
+                    MovieId = 2,
+                    Date = new DateTime(2024, 3, 26),
                     Price = 17,
                     ShowTimes="13:30 15:00 17:00 22:30"
                 },
                 new MovieTheaterDailyScheduleForMovie
                 {
                     Id = 5,
-                    MovieTheaterId = 2, 
-                    MovieId = 2, 
-                    Date = new DateTime(2024, 3, 24), 
+                    MovieTheaterId = 2,
+                    MovieId = 2,
+                    Date = new DateTime(2024, 3, 24),
                     Price = 17,
                     ShowTimes="13:30 15:00 17:00 22:30"
                 },
@@ -357,7 +376,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             return schedules;
         }
 
-        
+
 
 
     }

@@ -100,8 +100,14 @@ namespace SherplexTickets.Core.Services
             return theater;
         }
 
+        //public async Task<bool> TheaterManegerIdExist(string email)
+        //{
+        //    return await repository.AllReadonly<TheaterManeger>
+        //}
+
         public async Task<int> AddAsync(MovieTheaterAddViewModel movieTheater)
         {
+            
             MovieTheater book = new MovieTheater()
             {
                 Name = movieTheater.Name,
@@ -110,6 +116,7 @@ namespace SherplexTickets.Core.Services
                 Location = movieTheater.Location,
                 OpeningTime = movieTheater.OpeningTime,
                 ClosingTime = movieTheater.ClosingTime,
+                TheaterManagerId = 
 
             };
 

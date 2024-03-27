@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieTeaterConstants;
+﻿using System.ComponentModel.DataAnnotations;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants;
+using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieTeaterConstants;
 
 namespace SherplexTickets.Core.ViewModels.MovieTheater
 {
@@ -17,7 +16,7 @@ namespace SherplexTickets.Core.ViewModels.MovieTheater
         public string Location { get; set; } = null!;
 
         [Required(ErrorMessage = "Contact is required")]
-        [RegularExpression(MovieTheaterContactRegex, ErrorMessage = "Invalid contact format")]
+        [RegularExpression(MovieTheaterContactRegex, ErrorMessage = ContactErrorMessage)]
         public string Contact { get; set; } = null!;
 
 
@@ -32,5 +31,10 @@ namespace SherplexTickets.Core.ViewModels.MovieTheater
         [Required]
         [StringLength(MovieTheaterImageUrlMaxLength, MinimumLength = MovieTheaterImageUrlMinLength, ErrorMessage = LengthErrorMessage)]
         public string ImageUrl { get; set; } = null!;
+
+        [Required]
+        [RegularExpression(MovieTheaterManagerEmailRegex, ErrorMessage = AddresErrorMessage)]
+        public string TheaterManagerEmailName { get; set; } = string.Empty;
+
     }
 }

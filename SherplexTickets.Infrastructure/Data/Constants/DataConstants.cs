@@ -21,6 +21,10 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
 
         public const string RangePriceErrorMessage = "{0} must be a number between {1} and {2}!";
 
+        public const string AddresErrorMessage = "Invalid email address";
+
+        public const string ContactErrorMessage = "Invalid contact format";
+
         /// <summary>
         /// Movie All constants
         /// </summary>
@@ -90,6 +94,9 @@ namespace SherplexTickets.Infrastructure.Data.DataConstants
 
             //Contact
             public const string MovieTheaterContactRegex = @"^(?:\+359\d{9}|0\d{1}\s?\d{4}\s?\d{3})$";
+
+            //Manager
+            public const string MovieTheaterManagerEmailRegex = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
 
             //ImageUrl
             public const int MovieTheaterImageUrlMinLength = 5;

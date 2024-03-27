@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using System.ComponentModel.DataAnnotations;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.GenreConstants;
 namespace SherplexTickets.Infrastructure.Data.Models.Movies
 {
-    public class GenreOfMovie
+    public class Genre
     {
         [Key]
         [Comment("The current Movie Genre's Identifier")]
@@ -14,6 +15,6 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
         [Comment("The current Movie Genre's Name")]
         public string Name { get; set; } = null!;
 
-        public ICollection<GenreOfMovie> GenresMovies { get; set; } = new HashSet<GenreOfMovie>();
+        public ICollection<GenreMovie> GenresMovies { get; set; } = new HashSet<GenreMovie>();
     }
 }

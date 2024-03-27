@@ -22,7 +22,7 @@ namespace SherplexTickets.Core.Services
 
         public async Task<IEnumerable<GenreViewModel>> AllGenresAsync()
         {
-            return await repository.AllReadonly<GenreOfMovie>()
+            return await repository.AllReadonly<Genre>()
                 .Select(ct => new GenreViewModel()
                 {
                     Id = ct.Id,
@@ -64,7 +64,7 @@ namespace SherplexTickets.Core.Services
 
         public async Task<IEnumerable<GenreViewModel>> AllGenresAsync(int movieId)
         {
-            return await repository.AllReadonly<GenreGenreOfMovie>()
+            return await repository.AllReadonly<GenreMovie>()
                 .Where(g => g.MovieId == movieId)
                 .Select(g => new GenreViewModel()
                 {
@@ -194,10 +194,10 @@ namespace SherplexTickets.Core.Services
 
             foreach (var genreId in movieForm.GenreIds)
             {
-                var genre = await repository.AllReadonly<GenreOfMovie>().FirstOrDefaultAsync(g => g.Id == genreId);
+                var genre = await repository.AllReadonly<Genre>().FirstOrDefaultAsync(g => g.Id == genreId);
                 if (genre != null)
                 {
-                    movie.Genres.Add(new GenreGenreOfMovie()
+                    movie.Genres.Add(new GenreMovie()
                     {
                         Genre = genre,
                         Movie = movie,
@@ -270,7 +270,7 @@ namespace SherplexTickets.Core.Services
                .Where(b => b.Id == movieForm.Id)
                .FirstOrDefaultAsync();
 
-            var allGenreMovie = await repository.All<GenreGenreOfMovie>()
+            var allGenreMovie = await repository.All<GenreMovie>()
                 .Where(gm => gm.MovieId == movie.Id)
                 .ToListAsync();
             var allActorMovie = await repository.All<ActorMovie>()
@@ -285,7 +285,7 @@ namespace SherplexTickets.Core.Services
             if (allGenreMovie != null)
             {
 
-                repository.DeleteRange<GenreGenreOfMovie>(allGenreMovie);
+                repository.DeleteRange<GenreMovie>(allGenreMovie);
             }
             await repository.SaveChangesAsync();
 
@@ -303,10 +303,10 @@ namespace SherplexTickets.Core.Services
 
             foreach (var genreId in movieForm.GenreIds)
             {
-                var genre = await repository.AllReadonly<GenreOfMovie>().FirstOrDefaultAsync(g => g.Id == genreId);
+                var genre = await repository.AllReadonly<Genre>().FirstOrDefaultAsync(g => g.Id == genreId);
                 if (genre != null)
                 {
-                    movie.Genres.Add(new GenreGenreOfMovie()
+                    movie.Genres.Add(new GenreMovie()
                     {
                         Genre = genre,
                         Movie = movie,
@@ -360,7 +360,7 @@ namespace SherplexTickets.Core.Services
                 .Where(am => am.MovieId == movie.Id)
                 .ToListAsync();
 
-            var genresMovie = await repository.All<GenreGenreOfMovie>()
+            var genresMovie = await repository.All<GenreMovie>()
                 .Where(gm => gm.MovieId == movie.Id)
                 .ToListAsync();
 

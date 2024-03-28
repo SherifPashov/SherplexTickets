@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Infrastructure.Data.DataSeeding;
 using SherplexTickets.Infrastructure.Data.DataSeeding.Confogurations;
@@ -22,7 +23,7 @@ namespace SherplexTickets.Infrastructure.Data
         public DbSet<Director> Directors { get; set; } = null!;
         public DbSet<Movie> Movies { get; set; } = null!;
         public DbSet<MovieTheater> MovieTheaters { get; set; } = null!;
-        public DbSet<ТheaterМanager> TheaterManagars { get; set; } = null!;
+        public DbSet<TheaterManager> TheaterManagars { get; set; } = null!;
 
         public DbSet<ActorMovie> ActorsMovies { get; set; } = null!;
         public DbSet<GenreMovie> GenresMovies { get; set; } = null!;

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SherplexTickets.Infrastructure.Data.Models.MovieTheaters
 {
-    public class ТheaterМanager
+    public class TheaterManager
     {
         [Key]
         [Comment("The current ТheaterМanager's Identifier")]

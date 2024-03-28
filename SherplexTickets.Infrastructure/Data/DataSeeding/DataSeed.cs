@@ -33,7 +33,7 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
         public IEnumerable<GenreMovie> GenresGenreOfMovies { get; set; }
 
         public IEnumerable<MovieTheater> MovieTheaters { get; set; }
-        public IEnumerable<ТheaterМanager> ТheaterМanagers { get; set; }
+        public IEnumerable<TheaterManager> ТheaterМanagers { get; set; }
         public IEnumerable<MovieTheaterDailyScheduleForMovie> MovieTheatersDailyScheduleForMovies { get; set; }
 
 
@@ -232,11 +232,11 @@ namespace SherplexTickets.Infrastructure.Data.DataSeeding
             };
         }
 
-        private IEnumerable<ТheaterМanager> SeedТheaterМanagers()
+        private IEnumerable<TheaterManager> SeedТheaterМanagers()
         {
-            return new List<ТheaterМanager>()
+            return new List<TheaterManager>()
             {
-                new ТheaterМanager
+                new TheaterManager
                 {
                     Id = 1,
                     UserId = "18702015-42e4-46a9-93db-2dcca0e37703",

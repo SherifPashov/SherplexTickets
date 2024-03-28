@@ -41,6 +41,7 @@ namespace SherplexTickets.Extensions
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IMovieTheaterService, MovieTheaterService>();
             services.AddScoped<IMovieTheaterMovieLink, MovieTheaterMovieLinkService>();
+            services.AddScoped<ITheaterManagerService, TheaterManagerService>();
 
             return services;
         }

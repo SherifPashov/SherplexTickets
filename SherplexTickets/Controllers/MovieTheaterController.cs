@@ -11,22 +11,20 @@ namespace SherplexTickets.Controllers
     {
 
         private readonly IMovieTheaterService movieTheaterService;
-        private readonly ITheaterManagerService theaterManagerService;
+        private readonly ITheaterManagerService theaterManager;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public MovieTheaterController(IMovieTheaterService movieTheaterService, ITheaterManagerService theaterManagerService)
+        public MovieTheaterController(
+            IMovieTheaterService movieTheaterService,
+            ITheaterManagerService theaterManager,
+            UserManager<IdentityUser> _userManager)
         {
             this.movieTheaterService = movieTheaterService;
-            this.theaterManagerService = theaterManagerService;
+            this.theaterManager = theaterManager;
+            this.userManager = _userManager; 
         }
 
-        public async Task<bool> CheckIfUserExistsAsync(string username)
-        {
-            return await theaterManagerService
-                .ExistsByIdAsync(username);
-
-             
-        }
-
+        
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> All()
@@ -57,14 +55,23 @@ namespace SherplexTickets.Controllers
 
         [HttpPost]
         //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Add(MovieTheaterAddViewModel movieForm)
+        public async Task<IActionResult> Add(MovieTheaterAddViewModel movieTheaterForm)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            int newBookId = await movieTheaterService.AddAsync(movieForm);
+            var user = userManager
+                .FindByEmailAsync(movieTheaterForm.TheaterManagerEmail).Result;
+
+            if (user == null)
+            {
+                ModelState.AddModelError(nameof(movieTheaterForm.TheaterManagerEmail), "Потребителят с посочения имейл адрес не съществува.");
+                return View();
+            }
+
+            int newBookId = await movieTheaterService.AddAsync(movieTheaterForm);
             return RedirectToAction(nameof(All));
         }
 

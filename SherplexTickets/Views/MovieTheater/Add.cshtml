@@ -18,6 +18,11 @@
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label asp-for="@Model.TheaterManagerEmail" class="form-label-add-edit"><strong>Директор на киносалона(Email): </strong></label>
+                <input asp-for="@Model.TheaterManagerEmail" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.TheaterManagerEmail" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <label asp-for="@Model.Location" class="form-label-add-edit"><strong>Локация: </strong></label>
                 <input asp-for="@Model.Location" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Location" class="text-danger"></span>

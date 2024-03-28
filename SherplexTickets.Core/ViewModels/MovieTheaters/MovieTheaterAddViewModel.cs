@@ -34,7 +34,7 @@ namespace SherplexTickets.Core.ViewModels.MovieTheater
 
         [Required]
         [RegularExpression(MovieTheaterManagerEmailRegex, ErrorMessage = AddresErrorMessage)]
-        public string TheaterManagerEmailName { get; set; } = string.Empty;
+        public string TheaterManagerEmail { get; set; } = string.Empty;
 
     }
 }

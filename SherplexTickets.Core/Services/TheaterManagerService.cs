@@ -12,7 +12,9 @@ namespace SherplexTickets.Core.Services
         private readonly IRepository repository;
         private readonly UserManager<IdentityUser> userManager;
 
-        public TheaterManagerService(IRepository repository, UserManager<IdentityUser> userManager)
+        public TheaterManagerService(
+            IRepository repository, 
+            UserManager<IdentityUser> userManager)
         {
             this.repository = repository;
             this.userManager = userManager;
@@ -23,7 +25,7 @@ namespace SherplexTickets.Core.Services
         {
             
             return await repository
-                .AllReadonly<ТheaterМanager>()
+                .AllReadonly<TheaterManager>()
                 .AnyAsync(tm => tm.UserId == userId);
             
         }
@@ -31,13 +33,15 @@ namespace SherplexTickets.Core.Services
         public async Task<int?> GetТheaterМanagerIdAsync(string userId)
         {
             return (await repository
-                .AllReadonly<ТheaterМanager>()
+                .AllReadonly<TheaterManager>()
                 .FirstOrDefaultAsync(p => p.UserId == userId))?.Id;
         }
 
-        public async Task<bool> ExistsUserByIdAsync(string userName)
+
+        public async Task<string?> GetUserIdTheaterManagerByEmailAsync(string emailManager)
         {
-            return await userManager.FindByEmailAsync(userName) != null;
+            var user = await userManager.FindByEmailAsync(emailManager);
+            return user?.Id;
         }
     }
 }

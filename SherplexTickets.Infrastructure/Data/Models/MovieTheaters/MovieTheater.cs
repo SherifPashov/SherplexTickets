@@ -51,7 +51,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.MovieTheaters
         [ForeignKey(nameof(TheaterManagerId))]
         [Comment("The current TheaterManager")]
 
-        public ТheaterМanager TheaterManager { get; set; } = null!;
+        public TheaterManager TheaterManager { get; set; } = null!;
 
         public ICollection<MovieTheaterDailyScheduleForMovie> MovieTheatersMovies { get; set; } = new List<MovieTheaterDailyScheduleForMovie>();
     }

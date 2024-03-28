@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SherplexTickets.Infrastructure.Data.Models.IdentityModels;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,7 +18,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.MovieTheaters
 
         [ForeignKey(nameof(UserId))]
         [Comment("The current User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         public IEnumerable<MovieTheater> Theaters { get; set; } = new List<MovieTheater>();
     }

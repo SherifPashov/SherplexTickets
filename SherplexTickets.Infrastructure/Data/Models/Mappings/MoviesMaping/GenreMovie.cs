@@ -14,7 +14,7 @@ namespace SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping
         [Required]
         [ForeignKey(nameof(GenreId))]
         [Comment("The current Genre")]
-        public Movies.Genre Genre { get; set; } = null!;
+        public Genre Genre { get; set; } = null!;
 
         [Required]
         [Comment("The current Movie's Identifier")]

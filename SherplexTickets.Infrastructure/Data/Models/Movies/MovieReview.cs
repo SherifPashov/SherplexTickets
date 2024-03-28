@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using static SherplexTickets.Infrastructure.Data.DataConstants.DataConstants.MovieReviewConstants;
+using SherplexTickets.Infrastructure.Data.Models.IdentityModels;
 namespace SherplexTickets.Infrastructure.Data.Models.Movies
 {
     public class MovieReview
@@ -38,6 +39,6 @@ namespace SherplexTickets.Infrastructure.Data.Models.Movies
 
         [ForeignKey(nameof(UserId))]
         [Comment("The current User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
     }
 }

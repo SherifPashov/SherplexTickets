@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Infrastructure.Common;
+using SherplexTickets.Infrastructure.Data.Models.IdentityModels;
 using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
 
 namespace SherplexTickets.Core.Services
@@ -10,11 +11,11 @@ namespace SherplexTickets.Core.Services
     {
 
         private readonly IRepository repository;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public TheaterManagerService(
             IRepository repository, 
-            UserManager<IdentityUser> userManager)
+            UserManager<ApplicationUser> userManager)
         {
             this.repository = repository;
             this.userManager = userManager;

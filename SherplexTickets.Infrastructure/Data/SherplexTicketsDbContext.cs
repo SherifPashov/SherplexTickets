@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using SherplexTickets.Infrastructure.Data.DataSeeding;
 using SherplexTickets.Infrastructure.Data.DataSeeding.Confogurations;
 using SherplexTickets.Infrastructure.Data.DataSeeding.Confogurations.MovieTheater;
+using SherplexTickets.Infrastructure.Data.Models.IdentityModels;
 using SherplexTickets.Infrastructure.Data.Models.Mappings.MoviesMaping;
 using SherplexTickets.Infrastructure.Data.Models.Movies;
 using SherplexTickets.Infrastructure.Data.Models.MovieTheaters;
 
 namespace SherplexTickets.Infrastructure.Data
 {
-    public class SherplexTicketsDbContext : IdentityDbContext
+    public class SherplexTicketsDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public SherplexTicketsDbContext(DbContextOptions options) : base(options)
         {

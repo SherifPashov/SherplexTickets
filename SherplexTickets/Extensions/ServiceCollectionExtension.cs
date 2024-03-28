@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SherplexTickets.Core.Contracts;
 using SherplexTickets.Core.Services;
 using SherplexTickets.Infrastructure.Common;
 using SherplexTickets.Infrastructure.Data;
+using SherplexTickets.Infrastructure.Data.Models.IdentityModels;
 
 namespace SherplexTickets.Extensions
 {
@@ -24,7 +26,7 @@ namespace SherplexTickets.Extensions
         }
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireNonAlphanumeric = false;
